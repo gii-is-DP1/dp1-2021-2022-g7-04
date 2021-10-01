@@ -255,6 +255,15 @@
         </license>
     </licenses>
 
-
+	<developers>
+ 		<developer>
+ 			<id>joslobtro</id>
+ 			<name>José Manuel Lobato Troncoso</name>
+ 			<email>joslobtro@alum.us.es</email>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 	</developers>
 
 </project>
