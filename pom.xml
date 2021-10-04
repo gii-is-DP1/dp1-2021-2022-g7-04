@@ -32,23 +32,6 @@
 
     </properties>
 	
-	<developers>
- 		<developer>
- 			<id>luicersan	</id>
- 			<name>Luis</name>
- 			<email>luicersan@us.es</email>
- 			<url>https://github.com/luicersan</url>
- 			<roles>
- 				<role>leader</role>
- 			</roles>
- 			<properties>
- 				<picUrl>
-				https://pbs.twimg.com/media/Eh4n9GhUMAAdO8x?format=jpg&name=large
-				</picUrl>
- 			</properties>
- 		</developer>
- 	</developers>
-
 
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
@@ -272,6 +255,18 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
+    
+    <developers>
+ 		<developer>
+ 			<id>luicersan</id>
+ 			<name>Luis Cerrato Sánchez</name>
+ 			<email>luicersan@us.es</email>
+ 			<url>https://github.com/luicersan</url>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 	</developers>
 
 	<developers>
  		<developer>
