@@ -31,6 +31,7 @@
         <spring-format.version>0.0.19</spring-format.version>
 
     </properties>
+	
 
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
@@ -254,8 +255,18 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
-
+    
     <developers>
+ 		<developer>
+ 			<id>luicersan</id>
+ 			<name>Luis Cerrato Sánchez</name>
+ 			<email>luicersan@us.es</email>
+ 			<url>https://github.com/luicersan</url>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+
  		<developer>
  			<id>bogdanstefan</id>
  			<name>Bogdan Marian Stefan</name>
@@ -265,6 +276,15 @@
  				<role>developer</role>
  			</roles>
  		</developer>
-    </developers>
+ 		
+ 		<developer>
+ 			<id>joslobtro</id>
+ 			<name>José Manuel Lobato Troncoso</name>
+ 			<email>joslobtro@alum.us.es</email>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 	</developers>
 
 </project>
