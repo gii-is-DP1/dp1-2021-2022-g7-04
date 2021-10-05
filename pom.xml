@@ -17,7 +17,7 @@
     <properties>
 
         <!-- Generic properties -->
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -32,21 +32,6 @@
 
     </properties>
 
-	<developers>
-		<developer>
-			<id>regescmar1</id>
-			<name>Regina</name>	
-			<email>regescmar1@alum.us.es</email>
-			<url></url>
-			<roles>
-				<role></role>
-			</roles>
-			<properties>
-				<picUrl></picUrl>
-			</properties>
-		</developer>
-	</developers>
-	
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
@@ -65,24 +50,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <dependency> 
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId> 
-		</dependency>
-        <dependency>
-        	<groupId>org.hibernate</groupId>
-        	<artifactId>hibernate-envers</artifactId>
-        </dependency>
         <dependency>  
             <groupId>org.springframework.security</groupId>  
             <artifactId>spring-security-taglibs</artifactId>  
         </dependency>
-        <dependency>
-    		<groupId>org.springframework.security</groupId>
-    		<artifactId>spring-security-test</artifactId>
-    		<scope>test</scope>
-		</dependency>
-        
         <!-- Databases - Uses H2 by default -->
         <!-- dependency>
                 <groupId>org.hsqldb</groupId>
@@ -142,11 +113,6 @@
             <artifactId>bootstrap</artifactId>
             <version>${webjars-bootstrap.version}</version>
         </dependency>
-		<dependency>
-    		<groupId>org.webjars</groupId>
-    		<artifactId>ckeditor</artifactId>
-    		<version>4.14.0</version>
-		</dependency>
 
         <!-- Testing -->
         <dependency>
@@ -182,7 +148,6 @@
     </dependencies>
 
     <build>
-  
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -246,7 +211,7 @@
                     <failOnNoGitDirectory>false</failOnNoGitDirectory>
                 </configuration>
             </plugin>
-		
+
             <plugin>
                 <groupId>ro.isdc.wro4j</groupId>
                 <artifactId>wro4j-maven-plugin</artifactId>
@@ -279,9 +244,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-             
         </plugins>
-      
     </build>
 
     <!-- Apache 2 license -->
@@ -291,7 +254,56 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
+    
+    <developers>
+ 		<developer>
+ 			<id>luicersan</id>
+ 			<name>Luis Cerrato Sánchez</name>
+ 			<email>luicersan@us.es</email>
+ 			<url>https://github.com/luicersan</url>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
 
+ 		<developer>
+ 			<id>bogdanstefan</id>
+ 			<name>Bogdan Marian Stefan</name>
+ 			<email>bogste@alum.us.es</email>
+ 			<url>https://github.com/bogdanstefan</url>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
 
+        <developer>
+ 			<id>joslobtro</id>
+ 			<name>José Manuel Lobato Troncoso</name>
+ 			<email>joslobtro@alum.us.es</email>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 		
+ 		<developer>
+ 			<id>danmarsua1</id>
+ 			<name>Daniel Jesús Martínez Suárez</name>
+ 			<email>danmarsua1@alum.us.es</email>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 		
+ 		<developer>
+ 			<id>regescmar1</id>
+ 			<name>Regina</name>
+ 			<email>regescmar1@alum.us.es</email>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 		
+ 		
+ 	</developers>
 
 </project>
