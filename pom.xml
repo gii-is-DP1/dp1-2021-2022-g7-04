@@ -255,6 +255,16 @@
         </license>
     </licenses>
 
-
+    <developers>
+ 		<developer>
+ 			<id>bogdanstefan</id>
+ 			<name>Bogdan Marian Stefan</name>
+ 			<email>bogste@alum.us.es</email>
+ 			<url>https://github.com/bogdanstefan</url>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+    </developers>
 
 </project>
