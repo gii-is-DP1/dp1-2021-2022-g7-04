@@ -31,7 +31,6 @@
         <spring-format.version>0.0.19</spring-format.version>
 
     </properties>
-	
 
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
@@ -276,11 +275,20 @@
  				<role>developer</role>
  			</roles>
  		</developer>
- 		
- 		<developer>
+      
+    <developer>
  			<id>joslobtro</id>
  			<name>José Manuel Lobato Troncoso</name>
  			<email>joslobtro@alum.us.es</email>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 		
+ 		<developer>
+ 			<id>danmarsua1</id>
+ 			<name>Daniel Jesús Martínez Suárez</name>
+ 			<email>danmarsua1@alum.us.es</email>
  			<roles>
  				<role>developer</role>
  			</roles>
