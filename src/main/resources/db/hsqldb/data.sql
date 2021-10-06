@@ -9,7 +9,7 @@ INSERT INTO authorities(id,username,authority) VALUES (7,'bogste','owner');
 INSERT INTO users(username,password,enabled) VALUES ('danmarsua1','danmarsua1',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (4,'danmarsua1','owner');
 INSERT INTO users(username,password,enabled) VALUES ('regescmar1','regescmar1',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (6,'regescmar11','owner');
+INSERT INTO authorities(id,username,authority) VALUES (6,'regescmar1','owner');
 -- One owner user, named luicersan with passwor 0wn3r
 INSERT INTO users(username,password,enabled) VALUES ('luicersan','0wn3r',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'luicersan','owner');
