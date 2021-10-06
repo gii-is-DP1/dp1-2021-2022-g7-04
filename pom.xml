@@ -145,21 +145,6 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-<developers>
-	<developer>
- <id>erngutcon</id>
- <name>Ernesto</name>
- <email>erngutcon@alum.us.es</email>
- <url>https://github.com/erngutcon</url>
- <roles>
- <role>leader</role>
- </roles>
- <properties>
- <picUrl>
-</picUrl>
- </properties>
- </developer>
-	</developers>
     <build>
         <plugins>
             <plugin>
@@ -267,6 +252,70 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
- 
+
+    <developers>
+ 		<developer>
+ 			<id>luicersan</id>
+ 			<name>Luis Cerrato Sánchez</name>
+ 			<email>luicersan@us.es</email>
+ 			<url>https://github.com/luicersan</url>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+
+ 		<developer>
+ 			<id>bogdanstefan</id>
+ 			<name>Bogdan Marian Stefan</name>
+ 			<email>bogste@alum.us.es</email>
+ 			<url>https://github.com/bogdanstefan</url>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+
+        <developer>
+ 			<id>joslobtro</id>
+ 			<name>José Manuel Lobato Troncoso</name>
+ 			<email>joslobtro@alum.us.es</email>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 		
+ 		<developer>
+ 			<id>danmarsua1</id>
+ 			<name>Daniel Jesús Martínez Suárez</name>
+ 			<email>danmarsua1@alum.us.es</email>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 		
+ 		<developer>
+ 			<id>regescmar1</id>
+ 			<name>Regina</name>
+ 			<email>regescmar1@alum.us.es</email>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 		
+ 		<developer>
+			<id>erngutcon</id>
+			<name>Ernesto</name>
+			<email>erngutcon@alum.us.es</email>
+			<url>https://github.com/erngutcon</url>
+			<roles>
+		 		<role>leader</role>
+			</roles>
+			<properties>
+			<picUrl>
+			</picUrl>
+			</properties>
+ 		</developer>
+ 		
+ 	</developers>
+
 
 </project>
