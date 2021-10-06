@@ -13,7 +13,7 @@
         </div>
         
         <div class="col-md-12">
-            <spring:url value="/resources/images/Logo_US.png" htmlEscape="true" var="petsImage"/>
+            <spring:url value="/resources/images/Logo_US.png" htmlEscape="true" var="logoUS"/>
             <img class="img-responsive" src="${logoUS}"/>
         </div>
     </div>
