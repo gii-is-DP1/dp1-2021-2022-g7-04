@@ -8,7 +8,7 @@ INSERT INTO users(username,password,enabled) VALUES ('danmarsua1','danmarsua1',T
 INSERT INTO authorities(id,username,authority) VALUES (4,'danmarsua1','owner');
 -- One owner user, named luicersan with passwor 0wn3r
 INSERT INTO users(username,password,enabled) VALUES ('luicersan','0wn3r',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (4,'luicersan','owner');
+INSERT INTO authorities(id,username,authority) VALUES (5,'luicersan','owner');
 -- One vet user, named vet1 with passwor v3t
 INSERT INTO users(username,password,enabled) VALUES ('vet1','v3t',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (3,'vet1','veterinarian');
