@@ -12,7 +12,6 @@
             <img class="img-responsive" src="${petsImage}"/>
         </div>
         
-        <div class="row">
         <div class="col-md-12">
             <spring:url value="/resources/images/Logo_US.png" htmlEscape="true" var="petsImage"/>
             <img class="img-responsive" src="${logoUS}"/>
