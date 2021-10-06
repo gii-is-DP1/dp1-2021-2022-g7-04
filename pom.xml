@@ -31,23 +31,6 @@
         <spring-format.version>0.0.19</spring-format.version>
  </properties>
  
-	<developers>
-	<developer>
- <id>erngutcon</id>
- <name>Ernesto</name>
- <email>erngutcon@alum.us.es</email>
- <url>https://github.com/erngutcon</url>
- <roles>
- <role>leader</role>
- </roles>
- <properties>
- <picUrl>
-</picUrl>
- </properties>
- </developer>
-	</developers>
- 
-
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
@@ -162,7 +145,21 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-
+<developers>
+	<developer>
+ <id>erngutcon</id>
+ <name>Ernesto</name>
+ <email>erngutcon@alum.us.es</email>
+ <url>https://github.com/erngutcon</url>
+ <roles>
+ <role>leader</role>
+ </roles>
+ <properties>
+ <picUrl>
+</picUrl>
+ </properties>
+ </developer>
+	</developers>
     <build>
         <plugins>
             <plugin>
