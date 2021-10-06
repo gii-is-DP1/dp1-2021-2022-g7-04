@@ -14,7 +14,6 @@ public class WelcomeController {
 	
 	  @GetMapping({"/","/welcome"})
 	  public String welcome(Map<String, Object> model) {	    
-		  
 		  List<Person> persons = new ArrayList<Person>();
 		  
 		  String[] developers = new String[] {
@@ -38,6 +37,6 @@ public class WelcomeController {
 		  model.put("title", "Design & Testing I - Pet Clinic");
 		  model.put("group", "G7-04");
 		  
-	    return "welcome";
+		  return "welcome";
 	  }
 }
