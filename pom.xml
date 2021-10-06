@@ -29,9 +29,8 @@
 
         <jacoco.version>0.8.5</jacoco.version>
         <spring-format.version>0.0.19</spring-format.version>
-
-    </properties>
-
+ </properties>
+ 
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
@@ -146,7 +145,6 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -254,7 +252,7 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
-    
+
     <developers>
  		<developer>
  			<id>luicersan</id>
@@ -303,7 +301,21 @@
  			</roles>
  		</developer>
  		
+ 		<developer>
+			<id>erngutcon</id>
+			<name>Ernesto</name>
+			<email>erngutcon@alum.us.es</email>
+			<url>https://github.com/erngutcon</url>
+			<roles>
+		 		<role>leader</role>
+			</roles>
+			<properties>
+			<picUrl>
+			</picUrl>
+			</properties>
+ 		</developer>
  		
  	</developers>
+
 
 </project>
