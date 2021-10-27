@@ -16,7 +16,7 @@ INSERT INTO authorities(id,username,authority) VALUES (8,'erngutcon','owner');
 -- One owner user, named luicersan with passwor 0wn3r
 INSERT INTO users(username,password,enabled) VALUES ('luicersan','0wn3r',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'luicersan','owner');
-
+INSERT INTO usuarios(nombre,email,contraseña) VALUES ('juan','juan@mail.com','juanito');
 -- One vet user, named vet1 with passwor v3t
 INSERT INTO users(username,password,enabled) VALUES ('vet1','v3t',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (3,'vet1','veterinarian');
