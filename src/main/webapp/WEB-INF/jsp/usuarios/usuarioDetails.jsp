@@ -15,12 +15,12 @@
 			<td><b><c:out value="${usuario.nombre}" /></b></td>
 		</tr>
 		<tr>
-			<th>Email</th>
-			<td><c:out value="${usuario.email}" /></td>
+			<th>Last Name</th>
+			<td><c:out value="${usuario.lastName}" /></td>
 		</tr>
 		<tr>
-			<th>Contraseña</th>
-			<td><c:out value="${usuario.contraseña}" /></td>
+			<th>Password</th>
+			<td><c:out value="${usuario.password}" /></td>
 		</tr>
 
 	</table>

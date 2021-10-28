@@ -14,8 +14,8 @@
         <thead>
         <tr>
             <th style="width: 150px;">Nombre</th>
-            <th style="width: 150px;">Email</th>
-            <th style="width: 150px;">Contraseña</th>
+            <th style="width: 150px;">Last Name</th>
+            <th style="width: 150px;">Password</th>
 
         </tr>
         </thead>
@@ -29,10 +29,10 @@
                     <a href="${fn:escapeXml(usuarioUrl)}"><c:out value="${usuario.nombre}"/></a>
                 </td>
                 <td>
-                    <c:out value="${usuario.email}"/>
+                    <c:out value="${usuario.lastName}"/>
                 </td>
                 <td>
-                    <c:out value="${usuario.contraseña}"/>
+                    <c:out value="${usuario.password}"/>
                 </td>
              
              

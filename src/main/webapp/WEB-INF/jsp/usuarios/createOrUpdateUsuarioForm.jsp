@@ -14,9 +14,9 @@
 	<form:form modelAttribute="usuario" class="form-horizontal"
 		id="add-usuario-form">
 		<div class="form-group has-feedback">
-			<petclinic:inputField label="Nombre" name="nombre" />
-			<petclinic:inputField label="Email" name="email" />
-			<petclinic:inputField label="Contraseña" name="contraseña" />
+			<petclinic:inputField label="Nombre" name="Nombre" />
+			<petclinic:inputField label="Last Name" name="lastName" />
+			<petclinic:inputField label="Password" name="password" />
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
