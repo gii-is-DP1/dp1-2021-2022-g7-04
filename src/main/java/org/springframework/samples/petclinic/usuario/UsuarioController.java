@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.usuario;
 import java.util.Collection;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -11,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -52,6 +52,24 @@ public class UsuarioController {
 			usuario.setId(usuarioId);
 			this.usuarioService.saveUsuario(usuario);
 			return "redirect:/usuarios/{usuarioId}";
+		}
+	}
+	
+	@GetMapping(value = "/usuarios/new")
+	public String crearUsuario(Map<String, Object> model) {
+		Usuario usuario = new Usuario();
+		model.put("usuario", usuario);
+		return VIEWS_USUARIO_CREATE_OR_UPDATE_FORM;
+	}
+	
+	@PostMapping(value = "/usuarios/new")
+	public String processCreationForm(@Valid Usuario usuario, BindingResult result) {
+		if (result.hasErrors()) {
+			return VIEWS_USUARIO_CREATE_OR_UPDATE_FORM;
+		}
+		else {
+			this.usuarioService.saveUsuario(usuario);
+			return "redirect:/";
 		}
 	}
 

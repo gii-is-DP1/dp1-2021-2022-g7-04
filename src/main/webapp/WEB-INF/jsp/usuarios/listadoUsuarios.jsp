@@ -12,6 +12,7 @@
 
     <table id="usuariosTable" class="table table-striped">
         <thead>
+        
         <tr>
             <th style="width: 150px;">Nombre</th>
             <th style="width: 150px;">Last Name</th>
@@ -34,10 +35,20 @@
                 <td>
                     <c:out value="${usuario.password}"/>
                 </td>
+                
              
              
                </tr>
+               
         </c:forEach>
+        <tr>
+               <td>
+                <spring:url value="/usuarios/new" var="usuarioUrl">
+                        <spring:param name="userId" value="${user.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(usuarioUrl)}">New Usuario</a>
+                </td>
+               </tr>
         </tbody>
     </table>
 </petclinic:layout>
