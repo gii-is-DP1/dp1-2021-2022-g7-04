@@ -36,7 +36,7 @@ public class AuthoritiesService {
 	private UserService userService;
 
 	@Autowired
-	public AuthoritiesService(AuthoritiesRepository authoritiesRepository,UserService userService) {
+	public AuthoritiesService(AuthoritiesRepository authoritiesRepository, UserService userService) {
 		this.authoritiesRepository = authoritiesRepository;
 		this.userService = userService;
 	}
@@ -55,9 +55,7 @@ public class AuthoritiesService {
 			authority.setAuthority(role);
 			//user.get().getAuthorities().add(authority);
 			authoritiesRepository.save(authority);
-		}else
-			throw new DataAccessException("User '"+username+"' not found!") {};
+		} else
+			throw new DataAccessException("User '" + username + "' not found!") {};
 	}
-
-
 }

@@ -1,4 +1,4 @@
-package org.springframework.samples.buscaminas.usuario;
+package org.springframework.samples.buscaminas.jugador;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,8 +13,8 @@ import org.springframework.samples.buscaminas.model.NamedEntity;
 @Getter
 @Setter
 @Entity
-@Table(name = "usuarios")
-public class Usuario extends BaseEntity {
+@Table(name = "jugadores")
+public class Jugador extends BaseEntity {
 	@Column(name = "nombre")
 	private String nombre;
 	@Column(name = "last_name")
