@@ -28,10 +28,10 @@
 					<span>Home</span>
 				</buscaminas:menuItem>
 
-				<buscaminas:menuItem active="${name eq 'users'}" url="/usuarios"
+				<buscaminas:menuItem active="${name eq 'jugadores'}" url="/jugadores"
 					title="find users">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>List users</span>
+					<span>List players</span>
 				</buscaminas:menuItem>
 
 				<buscaminas:menuItem active="${name eq 'error'}" url="/oups"
