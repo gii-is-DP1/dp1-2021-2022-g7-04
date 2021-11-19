@@ -1,5 +1,6 @@
 package org.springframework.samples.buscaminas.jugador;
 import java.util.Collection;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -20,14 +21,48 @@ public class JugadorController {
 	@Autowired
 	private JugadorService jugadorService;
 	
-	@GetMapping("/jugadores")
-	public String jugadoresList(ModelMap modelMap) {
-		String vista = "jugadores/jugadoresList";
-		Iterable<Jugador> jugadores = jugadorService.findAll();
-		System.out.println(jugadores);
-		modelMap.addAttribute("jugadores",jugadores);
-		return vista;
+	@GetMapping(value = "/jugadores/buscar")
+	public String initFindForm(Map<String, Object> model) {
+		model.put("jugador", new Jugador());
+		return "jugadores/findJugadores";
 	}
+	
+
+	@GetMapping(value = "/jugadores/list")
+	public String processFindForm(Jugador jugador, BindingResult result, Map<String, Object> model) {
+
+		// allow parameterless GET request for /owners to return all records
+		if (jugador.getNombre() == null) {
+			jugador.setNombre(""); // empty string signifies broadest possible search
+		}
+
+		// find owners by last name
+		Collection<Jugador> results = this.jugadorService.findJugadorByName(jugador.getNombre());
+		if (results.isEmpty()) {
+			// no owners found
+			result.rejectValue("nombre", "notFound", "not found");
+			return "jugadores/findJugadores";
+		}
+		else if (results.size() == 1) {
+			// 1 owner found
+			jugador = results.iterator().next();
+			return "redirect:/jugadores/" + jugador.getId();
+		}
+		else {
+			// multiple owners found
+			model.put("selections", results);
+			return "jugadores/jugadoresList";
+		}
+	}
+	
+	//@GetMapping("/jugadores/list")
+	//public String jugadoresList(ModelMap modelMap) {
+		//String vista = "jugadores/jugadoresList";
+		//Iterable<Jugador> jugadores = jugadorService.findAll();
+		//System.out.println(jugadores);
+		//modelMap.addAttribute("jugadores",jugadores);
+		//return vista;
+	//}
 	
 	@GetMapping("/jugadores/{jugadorId}")
 	public ModelAndView showJugador(@PathVariable("jugadorId") int jugadorId) {

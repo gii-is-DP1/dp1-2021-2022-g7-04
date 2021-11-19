@@ -28,8 +28,8 @@
 					<span>Home</span>
 				</buscaminas:menuItem>
 
-				<buscaminas:menuItem active="${name eq 'jugadores'}" url="/jugadores"
-					title="find users">
+				<buscaminas:menuItem active="${name eq 'jugadores'}" url="/jugadores/buscar"
+					title="find players">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					<span>List players</span>
 				</buscaminas:menuItem>
