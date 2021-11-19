@@ -18,7 +18,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${jugadores}" var="jugador">
+        <c:forEach items="${selections}" var="jugador">
             <tr>
                 <td>
                     <spring:url value="/jugadores/{jugadorId}" var="jugadorUrl">

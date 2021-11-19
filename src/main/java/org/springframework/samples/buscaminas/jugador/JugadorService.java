@@ -1,5 +1,7 @@
 package org.springframework.samples.buscaminas.jugador;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +37,10 @@ public class JugadorService {
 	@Transactional
 	public void saveJugador(Jugador jugador) throws DataAccessException {
 		jugadorRepository.save(jugador);
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Jugador> findJugadorByName(String name) throws DataAccessException {
+		return jugadorRepository.findByName(name);
 	}
 }
