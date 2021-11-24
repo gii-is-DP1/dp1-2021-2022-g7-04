@@ -9,17 +9,17 @@
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 
 
-<buscaminas:layout pageName="jugadores">
+<buscaminas:layout pageName="users">
 
 	<h2>Buscar Jugadores</h2>
 
 
-	<form:form modelAttribute="jugador" action="/jugadores/list" method="get" class="form-horizontal" id="search-jugador-form">
+	<form:form modelAttribute="user" action="/players/list" method="get" class="form-horizontal" id="search-jugador-form">
 		<div class="form-group">
-			<div class="control-group" id="nombre">
-				<label class="col-sm-2 control-label">Nombre </label>
+			<div class="control-group" id="username">
+				<label class="col-sm-2 control-label">Username </label>
 				<div class="col-sm-10">
-					<form:input class="form-control" path="nombre" size="30" maxlength="80" />
+					<form:input class="form-control" path="username" size="30" maxlength="80" />
 					<span class="help-inline"><form:errors path="*" /></span>
 				</div>
 			</div>

@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags"%>
 
-<buscaminas:layout pageName="jugadores">
+<buscaminas:layout pageName="users">
 
 	<h2>Información Jugador</h2>
 
