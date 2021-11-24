@@ -5,7 +5,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 <%@ attribute name="name" required="true" rtexprvalue="true"
-	description="Name of the active menu: home, jugadores, tutorial or error"%>
+	description="Name of the active menu: home, players, tutorial or error"%>
 
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container">
@@ -28,10 +28,10 @@
 					<span>Home</span>
 				</buscaminas:menuItem>
 
-				<buscaminas:menuItem active="${name eq 'jugadores'}"
-					url="/jugadores/buscar" title="find players">
+				<buscaminas:menuItem active="${name eq 'players'}"
+					url="/players/find" title="find players">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>List players</span>
+					<span>Players</span>
 				</buscaminas:menuItem>
 
 				<buscaminas:menuItem active="${name eq 'tutorial'}"
