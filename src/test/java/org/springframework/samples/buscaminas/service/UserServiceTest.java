@@ -12,20 +12,22 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.buscaminas.jugador.Jugador;
 import org.springframework.samples.buscaminas.jugador.JugadorService;
+import org.springframework.samples.buscaminas.user.User;
+import org.springframework.samples.buscaminas.user.UserService;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-public class JugadorServiceTest {
+public class UserServiceTest {
 	@Autowired
-	private JugadorService jugadorService;
+	private UserService userService;
 	
 	@Test
-	void shouldFindJugadoresByName() {
-		Collection<Jugador> jugadores = this.jugadorService.findJugadorByName("jugador1");
-		assertThat(jugadores.size()).isEqualTo(2);
+	void shouldFindPlayersByUserName() {
+		Collection<User> jugadores = this.userService.findPlayersByUsername("jugador1");
+		assertThat(jugadores.size()).isEqualTo(1);
 		
 
-		jugadores = this.jugadorService.findJugadorByName("jugador0");
+		jugadores = this.userService.findPlayersByUsername("jugador0");
 		assertThat(jugadores.isEmpty()).isTrue();
 	}
 
