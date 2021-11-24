@@ -55,14 +55,6 @@ public class JugadorController {
 		}
 	}
 	
-	//@GetMapping("/jugadores/list")
-	//public String jugadoresList(ModelMap modelMap) {
-		//String vista = "jugadores/jugadoresList";
-		//Iterable<Jugador> jugadores = jugadorService.findAll();
-		//System.out.println(jugadores);
-		//modelMap.addAttribute("jugadores",jugadores);
-		//return vista;
-	//}
 	
 	@GetMapping("/jugadores/{jugadorId}")
 	public ModelAndView showJugador(@PathVariable("jugadorId") int jugadorId) {

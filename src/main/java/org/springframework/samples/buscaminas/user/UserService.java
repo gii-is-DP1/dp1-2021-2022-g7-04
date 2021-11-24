@@ -16,10 +16,12 @@
 package org.springframework.samples.buscaminas.user;
 
 
+import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.buscaminas.jugador.Jugador;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,5 +49,10 @@ public class UserService {
 	
 	public Optional<User> findUser(String username) {
 		return userRepository.findById(username);
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<User> findUserByUsername(String username) throws DataAccessException {
+		return userRepository.findByUsername(username);
 	}
 }

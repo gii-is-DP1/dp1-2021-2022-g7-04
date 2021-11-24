@@ -8,7 +8,7 @@
 
 <buscaminas:layout pageName="users">
     <h2>
-        User
+        <c:if test="${user['new']}">New </c:if>User
     </h2>
     <form:form modelAttribute="user" class="form-horizontal" id="add-user-form">
         <div class="form-group has-feedback">
@@ -17,7 +17,14 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-            	<button class="btn btn-default" type="submit">Add User</button>
+            <c:choose>
+					<c:when test="${user['new']}">
+						<button class="btn btn-default" type="submit">Add User</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btn btn-default" type="submit">Update User</button>
+					</c:otherwise>
+				</c:choose>
             </div>
         </div>
     </form:form>
