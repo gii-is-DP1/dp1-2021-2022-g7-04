@@ -55,33 +55,7 @@ public class UserController {
 		dataBinder.setDisallowedFields("id");
 	}
 	
-	@GetMapping(value = "/users/list")
-	public String processFindForm(User user, BindingResult result, Map<String, Object> model) {
-
-		// allow parameterless GET request for /owners to return all records
-		if (user.getUsername() == null) {
-			user.setUsername(""); // empty string signifies broadest possible search
-		}
-
-		// find user by username
-		Collection<User> results = this.userService.findUserByUsername(user.getUsername());
-		if (results.isEmpty()) {
-			// no users found
-			result.rejectValue("username", "notFound", "not found");
-			return "users";
-		}
-		else if (results.size() == 1) {
-			// 1 user found
-			user = results.iterator().next();
-			return "redirect:/users/" + user.getUsername();
-		}
-		else {
-			// multiple users found
-			model.put("selections", results);
-			return "users/usersList";
-		}
-	}
-
+	
 	@GetMapping(value = "/users/new")
 	public String initCreationForm(Map<String, Object> model) {
 		User user = new User();
@@ -110,7 +84,7 @@ public class UserController {
 	
 	@GetMapping(value = "/users/{username}/edit")
 	public String initUpdateOwnerForm(@PathVariable("username") String username, Model model) {
-		Collection<User> user = this.userService.findUserByUsername(username);
+		User user = this.userService.findUserByUsername(username);
 		model.addAttribute(user);
 		return VIEWS_SERVICE_CREATE_OR_UPDATE_FORM;
 	}

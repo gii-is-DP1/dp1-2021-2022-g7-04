@@ -52,7 +52,7 @@ public class UserService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<User> findUserByUsername(String username) throws DataAccessException {
+	public User findUserByUsername(String username) throws DataAccessException {
 		return userRepository.findByUsername(username);
 	}
 }
