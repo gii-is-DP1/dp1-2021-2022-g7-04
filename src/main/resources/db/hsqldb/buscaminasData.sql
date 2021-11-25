@@ -7,3 +7,7 @@ INSERT INTO authorities(id,username,authority) VALUES (2,'jugador1','jugador');
 
 INSERT INTO users(username,password,enabled) VALUES ('jugador2','jugador2',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (3,'jugador2','jugador');
+
+INSERT INTO users(username,password,enabled) VALUES ('jugador3','jugador3',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (4,'jugador3','jugador');
+

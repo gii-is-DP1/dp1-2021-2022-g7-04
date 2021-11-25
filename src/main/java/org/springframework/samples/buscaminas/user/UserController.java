@@ -115,4 +115,11 @@ public class UserController {
 		mav.addObject(this.userService.findByUsername(username));
 		return mav;
 	}
+	
+	@GetMapping("/{username}/delete")
+	public String delete(@PathVariable("username") String username) {
+		userService.deleteUser(username);
+		return "redirect:/players/find";
+	}
+	
 }
