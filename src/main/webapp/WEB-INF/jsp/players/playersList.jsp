@@ -9,7 +9,7 @@
 
 <buscaminas:layout pageName="users">
 	<h2>Jugadores</h2>
-	<spring:url value="user/new" var="newUrl"></spring:url>
+	<spring:url value="/users/new" var="newUrl"></spring:url>
 	<a href="${fn:escapeXml(newUrl)}" class="btn btn-default">Add
 		Player</a>
 	<table id="jugadoresTable" class="table table-striped">

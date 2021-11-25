@@ -67,13 +67,16 @@ public class UserController {
 
 	@PostMapping(value = "/users/new")
 	public String processCreationForm(@Valid User user, BindingResult result) {
+		
 		if (result.hasErrors()) {
 			return VIEWS_SERVICE_CREATE_FORM;
 		}
 		else {
 			//creating user, and authority
+			
 			this.userService.saveUser(user);
-			return "redirect:/owners/" + user.getUsername();
+			
+			return "redirect:/users/" + user.getUsername();
 		}
 	}
 	
