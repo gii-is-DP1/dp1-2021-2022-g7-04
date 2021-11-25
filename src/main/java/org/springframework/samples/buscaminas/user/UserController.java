@@ -28,7 +28,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author Juergen Hoeller
@@ -103,5 +105,14 @@ public class UserController {
 			model.put("selections", results);
 			return "players/playersList";
 		}
+	}
+	
+
+	@GetMapping("/users/{username}")
+	public ModelAndView showUser(@PathVariable("username") String username) {
+		//comprobar que solo pueda ver estos detalles un admin o el user que se haya logueado
+		ModelAndView mav = new ModelAndView("users/userDetails");
+		mav.addObject(this.userService.findByUsername(username));
+		return mav;
 	}
 }
