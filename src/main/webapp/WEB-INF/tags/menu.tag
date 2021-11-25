@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
@@ -37,12 +38,16 @@
 						<span>My Profile</span>
 					</buscaminas:menuItem>
 				</sec:authorize>
-
-				<buscaminas:menuItem active="${name eq 'players'}"
-					url="/players/find" title="find players">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Players</span>
-				</buscaminas:menuItem>
+				
+				<sec:authorize access="isAuthenticated()">
+					<c:if test = "${fn:contains(principal.authorities, 'admin')}">
+						<buscaminas:menuItem active="${name eq 'players'}"
+							url="/players/find" title="find players">
+							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							<span>Players</span>
+						</buscaminas:menuItem>
+					</c:if>
+				</sec:authorize>
 
 				<buscaminas:menuItem active="${name eq 'tutorial'}"
 					url="/tutorial" title="tutorial">
