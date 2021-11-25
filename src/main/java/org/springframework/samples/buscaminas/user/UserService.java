@@ -60,4 +60,7 @@ public class UserService {
 		return userRepository.findByUsername(username);
 	}
 	
+	public void deleteUser(String username) {
+		userRepository.deleteById(username);
+	}
 }
