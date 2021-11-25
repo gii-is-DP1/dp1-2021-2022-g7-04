@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.springframework.samples</groupId>
-    <artifactId>spring-petclinic</artifactId>
+    <artifactId>L7-4</artifactId>
     <version>2.2.0.BUILD-SNAPSHOT</version>
 
     <parent>
@@ -12,7 +12,7 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.4.RELEASE</version>
     </parent>
-    <name>petclinic</name>
+    <name>L7-4</name>
 
     <properties>
 
@@ -29,9 +29,8 @@
 
         <jacoco.version>0.8.5</jacoco.version>
         <spring-format.version>0.0.19</spring-format.version>
-
-    </properties>
-
+ </properties>
+ 
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
@@ -146,12 +145,14 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                	<mainClass>org.springframework.samples.buscaminas.BuscaminasApplication</mainClass>
+                </configuration>
                 <executions>
                     <execution>
                         <!-- Spring Boot Actuator displays build-related information if a META-INF/build-info.properties 
@@ -255,8 +256,28 @@
         </license>
     </licenses>
 
-	<developers>
+    <developers>
  		<developer>
+ 			<id>luicersan</id>
+ 			<name>Luis Cerrato Sánchez</name>
+ 			<email>luicersan@us.es</email>
+ 			<url>https://github.com/luicersan</url>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+
+ 		<developer>
+ 			<id>bogdanstefan</id>
+ 			<name>Bogdan Marian Stefan</name>
+ 			<email>bogste@alum.us.es</email>
+ 			<url>https://github.com/bogdanstefan</url>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+
+        <developer>
  			<id>joslobtro</id>
  			<name>José Manuel Lobato Troncoso</name>
  			<email>joslobtro@alum.us.es</email>
@@ -264,6 +285,40 @@
  				<role>developer</role>
  			</roles>
  		</developer>
+ 		
+ 		<developer>
+ 			<id>danmarsua1</id>
+ 			<name>Daniel Jesús Martínez Suárez</name>
+ 			<email>danmarsua1@alum.us.es</email>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 		
+ 		<developer>
+ 			<id>regescmar1</id>
+ 			<name>Regina</name>
+ 			<email>regescmar1@alum.us.es</email>
+ 			<roles>
+ 				<role>developer</role>
+ 			</roles>
+ 		</developer>
+ 		
+ 		<developer>
+			<id>erngutcon</id>
+			<name>Ernesto</name>
+			<email>erngutcon@alum.us.es</email>
+			<url>https://github.com/erngutcon</url>
+			<roles>
+		 		<role>leader</role>
+			</roles>
+			<properties>
+			<picUrl>
+			</picUrl>
+			</properties>
+ 		</developer>
+ 		
  	</developers>
+
 
 </project>
