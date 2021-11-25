@@ -51,10 +51,11 @@ public class UserService {
 		return userRepository.findById(username);
 	}
 
-	@Transactional(readOnly = true)
+	/*@Transactional(readOnly = true)
 	public User findUserByUsername(String username) throws DataAccessException {
 		return userRepository.findByUsername(username);
-	}
+	
+	}*/
 	public Collection<User> findPlayersByUsername(String username){
 		return userRepository.findPlayersByUsername(username);
 

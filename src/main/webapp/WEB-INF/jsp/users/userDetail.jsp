@@ -22,7 +22,7 @@
 
 	</table>
 
-	<spring:url value="{username}/edit" var="editUrl">
+	<spring:url value="/users/{username}/edit" var="editUrl">
 		<spring:param name="username" value="${user.username}" />
 	</spring:url>
 	<a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Edit User</a>

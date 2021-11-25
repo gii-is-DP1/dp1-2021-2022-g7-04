@@ -6,9 +6,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags" %>
 
-<buscaminas:layout pageName="users">
+<buscaminas:layout pageName="user">
     <h2>
-        <c:if test="${user['new']}">New </c:if>User
+        User
     </h2>
     <form:form modelAttribute="user" class="form-horizontal" id="add-user-form">
         <div class="form-group has-feedback">
@@ -17,15 +17,9 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-            <c:choose>
-					<c:when test="${user['new']}">
-						<button class="btn btn-default" type="submit">Add User</button>
-					</c:when>
-					<c:otherwise>
-						<button class="btn btn-default" type="submit">Update User</button>
-					</c:otherwise>
-				</c:choose>
+            	<button class="btn btn-default" type="submit">Add User</button>
             </div>
         </div>
     </form:form>
+            
 </buscaminas:layout>
