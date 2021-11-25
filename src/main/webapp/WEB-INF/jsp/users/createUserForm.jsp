@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags" %>
 
-<buscaminas:layout pageName="users">
+<buscaminas:layout pageName="user">
     <h2>
         User
     </h2>
@@ -21,4 +21,5 @@
             </div>
         </div>
     </form:form>
+            
 </buscaminas:layout>
