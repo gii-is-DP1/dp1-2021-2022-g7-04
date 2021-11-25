@@ -7,28 +7,28 @@
 
 <buscaminas:layout pageName="users">
 
-	<h2>Información Jugador</h2>
+	<h2>Información User</h2>
 
 
 	<table class="table table-striped">
 		<tr>
-			<th>Nombre</th>
-			<td><b><c:out value="${jugador.nombre}" /></b></td>
-		</tr>
-		<tr>
-			<th>Last Name</th>
-			<td><c:out value="${jugador.lastName}" /></td>
+			<th>Username</th>
+			<td><c:out value="${user.username}" /></td>
 		</tr>
 		<tr>
 			<th>Password</th>
-			<td><c:out value="${jugador.password}" /></td>
+			<td><c:out value="${user.password}" /></td>
+		</tr>
+		<tr>
+			<th>Authorities</th>
+			<td><c:out value="${user.password}" /></td>
 		</tr>
 
 	</table>
 
-	<spring:url value="{jugadorId}/edit" var="editUrl">
-		<spring:param name="jugadorId" value="${jugador.id}" />
+	<spring:url value="{username}/edit" var="editUrl">
+		<spring:param name="username" value="${user.username}" />
 	</spring:url>
-	<a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Editar Jugador</a>
+	<a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Edit User</a>
 
 </buscaminas:layout>

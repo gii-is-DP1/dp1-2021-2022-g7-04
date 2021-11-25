@@ -76,14 +76,6 @@ public class UserController {
 		}
 	}
 	
-
-	@GetMapping("/users/{username}")
-	public ModelAndView showUser(@PathVariable("username") String username) {
-		ModelAndView mav = new ModelAndView("users/userDetails");
-		mav.addObject(this.userService.findUserByUsername(username));
-		return mav;
-	}
-	
 	@GetMapping(value = "/users/{username}/edit")
 	public String initUpdateOwnerForm(@PathVariable("username") String username, Model model) {
 		User user = this.userService.findUserByUsername(username);
@@ -135,5 +127,14 @@ public class UserController {
 			return "players/playersList";
 
 		}
+	}
+	
+
+	@GetMapping("/users/{username}")
+	public ModelAndView showUser(@PathVariable("username") String username) {
+		//comprobar que solo pueda ver estos detalles un admin o el user que se haya logueado
+		ModelAndView mav = new ModelAndView("users/userDetails");
+		mav.addObject(this.userService.findByUsername(username));
+		return mav;
 	}
 }

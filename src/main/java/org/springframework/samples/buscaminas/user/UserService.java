@@ -59,4 +59,10 @@ public class UserService {
 		return userRepository.findPlayersByUsername(username);
 
 	}
+	
+	
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+	
 }
