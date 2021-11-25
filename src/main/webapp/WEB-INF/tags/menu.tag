@@ -6,6 +6,8 @@
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Name of the active menu: home, players, tutorial or error"%>
+	
+<sec:authentication var="principal" property="principal" />
 
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container">
@@ -27,6 +29,14 @@
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<span>Home</span>
 				</buscaminas:menuItem>
+				
+				<sec:authorize access="isAuthenticated()">
+					<buscaminas:menuItem active="${name eq 'profile'}"
+						url="/users/${principal.username}" title="profile">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						<span>My Profile</span>
+					</buscaminas:menuItem>
+				</sec:authorize>
 
 				<buscaminas:menuItem active="${name eq 'players'}"
 					url="/players/find" title="find players">
