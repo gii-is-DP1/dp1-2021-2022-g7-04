@@ -7,22 +7,16 @@
 
 <buscaminas:layout pageName="users">
 
-	<h2>Información User</h2>
+	<h2>Informaciï¿½n User</h2>
 
 
 	<table class="table table-striped">
-		<tr>
-			<th>Username</th>
-			<td><c:out value="${user.username}" /></td>
-		</tr>
+		
 		<tr>
 			<th>Password</th>
 			<td><c:out value="${user.password}" /></td>
 		</tr>
-		<tr>
-			<th>Authorities</th>
-			<td><c:out value="${user.password}" /></td>
-		</tr>
+		
 
 	</table>
 

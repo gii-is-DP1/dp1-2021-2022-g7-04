@@ -12,7 +12,6 @@
     </h2>
     <form:form modelAttribute="user" class="form-horizontal" id="add-user-form">
         <div class="form-group has-feedback">
-        	<buscaminas:inputField label="Username" name="username"/>
         	<buscaminas:inputField label="Password" name="password"/>
         </div>
         <div class="form-group">
