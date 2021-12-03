@@ -5,29 +5,36 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags"%>
 
-<buscaminas:layout pageName="users">
-	<h2>Jugadores</h2>
-	<spring:url value="/users/new" var="newUrl"></spring:url>
+<minesweeper:layout pageName="players">
+	<h2>Players</h2>
+	<spring:url value="/players/new" var="newUrl"></spring:url>
 	<a href="${fn:escapeXml(newUrl)}" class="btn btn-default">Add
 		Player</a>
-	<table id="jugadoresTable" class="table table-striped">
+	<table id="playersTable" class="table table-striped">
 		<thead>
 			<tr>
+				<th style="width: 150px;">Username</th>
+				<th style="width: 150px;">Password</th>
+				<th style="width: 150px;">First name</th>
+				<th style="width: 150px;">Last name</th>
+				<th style="width: 150px;">Username</th>
+				<th style="width: 150px;">Password</th>
 				<th style="width: 150px;">Username</th>
 				<th style="width: 150px;">Password</th>
 				<th style="width: 150px;"></th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${selections}" var="user">
+			<c:forEach items="${selections}" var="player">
 				<tr>
-					<td><spring:url value="/users/{username}" var="userUrl">
-							<spring:param name="username" value="${user.username}" />
-						</spring:url> <a href="${fn:escapeXml(userUrl)}"><c:out
-								value="${user.username}" /></a></td>
-					<td><c:out value="${user.password}" /></td>
+					<td><spring:url value="/players/{username}" var="playerUrl">
+							<spring:param name="player" value="${player.username}" />
+						</spring:url> <a href="${fn:escapeXml(playerUrl)}"><c:out
+								value="${player.username}" /></a></td>
+					<td><c:out value="${player.password}" /></td>
+					<td><c:out value="${player.city}" /></td>
 
 					<td><spring:url value="/{username}/delete" var="deleteUrl">
 							<spring:param name="username" value="${user.username}" />
@@ -37,4 +44,4 @@
 			</c:forEach>
 		</tbody>
 	</table>
-</buscaminas:layout>
+</minesweeper:layout>

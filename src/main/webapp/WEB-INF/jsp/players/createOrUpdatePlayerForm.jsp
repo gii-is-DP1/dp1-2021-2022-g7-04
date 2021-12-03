@@ -5,27 +5,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags"%>
 
-<buscaminas:layout pageName="jugadores">
+<buscaminas:layout pageName="players">
 	<h2>
-		<c:if test="${jugador['new']}">Nuevo </c:if>Jugador
+		<c:if test="${player['new']}">New </c:if>player
 	</h2>
-	<form:form modelAttribute="jugador" class="form-horizontal"
-		id="add-jugador-form">
+	<form:form modelAttribute="player" class="form-horizontal"
+		id="add-player-form">
 		<div class="form-group has-feedback">
-			<buscaminas:inputField label="Nombre" name="Nombre" />
+			<buscaminas:inputField label="First Name" name="firstNamw" />
 			<buscaminas:inputField label="Last Name" name="lastName" />
 			<buscaminas:inputField label="Password" name="password" />
+			<buscaminas:inputField label="Username" name="username" />
+			<buscaminas:inputField label="City" name="city" />
+			<buscaminas:inputField label="Address" name="address" />
+			<buscaminas:inputField label="Telephone" name="telephone" />
+			<buscaminas:inputField label="Email" name="email" />
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<c:choose>
-					<c:when test="${jugador['new']}">
-						<button class="btn btn-default" type="submit">Añadir Jugador</button>
+					<c:when test="${player['new']}">
+						<button class="btn btn-default" type="submit">Add player</button>
 					</c:when>
 					<c:otherwise>
-						<button class="btn btn-default" type="submit">Actualizar Jugador</button>
+						<button class="btn btn-default" type="submit">Update player</button>
 					</c:otherwise>
 				</c:choose>
 			</div>

@@ -3,18 +3,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 
 
-<buscaminas:layout pageName="users">
+<minesweeper:layout pageName="players">
 
-	<h2>Buscar Jugadores</h2>
+	<h2>Search Players</h2>
 
 
-	<form:form modelAttribute="user" action="/players/list" method="get" class="form-horizontal" id="search-jugador-form">
+	<form:form modelAttribute="user" action="/players/list" method="get" class="form-horizontal" id="search-player-form">
 		<div class="form-group">
 			<div class="control-group" id="username">
 				<label class="col-sm-2 control-label">Username </label>
@@ -27,7 +27,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Buscar Jugador</button>
+				<button type="submit" class="btn btn-default">Search player</button>
 			</div>
 		</div>
 
@@ -40,4 +40,4 @@
 			Owner</a>
 	</sec:authorize>-->
 
-</buscaminas:layout>
+</minesweeper:layout>
