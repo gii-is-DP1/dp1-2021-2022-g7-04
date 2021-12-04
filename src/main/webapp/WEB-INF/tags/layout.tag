@@ -1,16 +1,15 @@
 <%@ tag trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@ attribute name="pageName" required="true" %>
 <%@ attribute name="customScript" required="false" fragment="true"%>
 
 <!doctype html>
 <html>
-<buscaminas:htmlHeader/>
+<minesweeper:htmlHeader/>
 
 <body>
-<buscaminas:bodyHeader menuName="${pageName}"/>
+<minesweeper:bodyHeader menuName="${pageName}"/>
 
 <div class="container-fluid">
     <div class="container xd-container">
@@ -25,10 +24,10 @@
 
         <jsp:doBody/>
 
-        <buscaminas:pivotal/>
+        <minesweeper:pivotal/>
     </div>
 </div>
-<buscaminas:footer/>
+<minesweeper:footer/>
 <jsp:invoke fragment="customScript" />
 
 </body>

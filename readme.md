@@ -105,9 +105,9 @@ For pull requests, editor preferences are available in the [editor config](.edit
 
 The Spring PetClinic sample application is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
 
-#Video explicativo
+#Explanatory video of minesweeper
 
-El siguiente enlace, le llevara al video dónde explicamos el juego del buscaminas: [Video explicativo](https://drive.google.com/file/d/19J89twzviXi9anL07TUCkzafZ6qcyW1G/view?usp=sharing)
+The following link will take you to the video where we explain the minesweeper game: [Explanatory video](https://drive.google.com/file/d/19J89twzviXi9anL07TUCkzafZ6qcyW1G/view?usp=sharing)
 
 
 [spring-petclinic]: https://github.com/spring-projects/spring-petclinic

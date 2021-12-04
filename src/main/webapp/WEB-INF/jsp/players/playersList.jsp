@@ -5,9 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags"%>
 
-<buscaminas:layout pageName="users">
+<minesweeper:layout pageName="users">
 	<h2>Jugadores</h2>
 	<spring:url value="/users/new" var="newUrl"></spring:url>
 	<a href="${fn:escapeXml(newUrl)}" class="btn btn-default">Add
@@ -37,4 +37,4 @@
 			</c:forEach>
 		</tbody>
 	</table>
-</buscaminas:layout>
+</minesweeper:layout>

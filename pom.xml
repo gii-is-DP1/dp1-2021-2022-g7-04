@@ -151,7 +151,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                	<mainClass>org.springframework.samples.buscaminas.BuscaminasApplication</mainClass>
+                	<mainClass>org.springframework.samples.minesweeper.MinesweeperApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -319,6 +319,5 @@
  		</developer>
  		
  	</developers>
-
 
 </project>
