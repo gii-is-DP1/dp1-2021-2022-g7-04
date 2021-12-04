@@ -3,13 +3,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 
 
-<buscaminas:layout pageName="users">
+<minesweeper:layout pageName="users">
 
 	<h2>Buscar Jugadores</h2>
 
@@ -40,4 +40,4 @@
 			Owner</a>
 	</sec:authorize>-->
 
-</buscaminas:layout>
+</minesweeper:layout>

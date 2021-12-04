@@ -1,10 +1,10 @@
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags" %>
 <!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->  
 
-<buscaminas:layout pageName="home">
+<minesweeper:layout pageName="home">
 	<div class="row text-center">
     	<h2>${title} (${group})</h2>
     </div>
@@ -18,4 +18,4 @@
             <img src="${logoImage}"/>
         </div>
     </div>
-</buscaminas:layout>
+</minesweeper:layout>
