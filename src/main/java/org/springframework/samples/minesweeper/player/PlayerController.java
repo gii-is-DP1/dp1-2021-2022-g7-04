@@ -21,7 +21,7 @@ public class PlayerController {
 	@Autowired
 	private PlayerService playerService;
 	
-	@GetMapping(value = "/players/buscar")
+	@GetMapping(value = "/players/find")
 	public String initFindForm(Map<String, Object> model) {
 		model.put("player", new Player());
 		return "players/findPlayers";

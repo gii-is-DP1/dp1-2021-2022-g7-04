@@ -12,20 +12,17 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.samples.buscaminas.model.BaseEntity;
 import org.springframework.samples.buscaminas.model.NamedEntity;
+import org.springframework.samples.buscaminas.model.Person;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "players")
-public class Player extends BaseEntity {
-	@Column(name = "first_name")
-	private String firstName;
-	@Column(name = "last_name")
-	private String lastName;
-	@Column(name = "password")
-	private String password;
+public class Player extends Person {
 	@Column(name = "username")
 	private String username;
+	@Column(name = "password")
+	private String password;
 	@Column(name = "city")
 	private String city;
 	@Column(name = "address")
