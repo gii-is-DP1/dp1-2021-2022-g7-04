@@ -10,9 +10,9 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import org.springframework.samples.buscaminas.model.BaseEntity;
-import org.springframework.samples.buscaminas.model.NamedEntity;
-import org.springframework.samples.buscaminas.model.Person;
+import org.springframework.samples.minesweeper.model.BaseEntity;
+import org.springframework.samples.minesweeper.model.NamedEntity;
+import org.springframework.samples.minesweeper.model.Person;
 
 @Getter
 @Setter
