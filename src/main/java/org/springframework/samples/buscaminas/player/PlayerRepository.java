@@ -1,4 +1,4 @@
-package org.springframework.samples.minesweeper.player;
+package org.springframework.samples.buscaminas.player;
 
 import java.util.Collection;
 
@@ -19,5 +19,8 @@ public interface PlayerRepository extends Repository<Player, Integer> {
 	Iterable<Player> findAll();
 
 	@Query("SELECT player FROM Player player WHERE player.username LIKE :username%")
-	public Collection<Player> findByUsername(@Param("username") String username);
+	public Collection<Player> findPlayers(@Param("username") String username);
+	
+	@Query("SELECT player FROM Player player WHERE player.username LIKE :username%")
+	public Player findPlayerByUsername(@Param("username") String username);
 }

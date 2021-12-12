@@ -1,4 +1,4 @@
-package org.springframework.samples.minesweeper.player;
+package org.springframework.samples.buscaminas.player;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +21,7 @@ import org.springframework.samples.buscaminas.model.Person;
 public class Player extends Person {
 	@Column(name = "username")
 	private String username;
-	@Column(name = "password")
-	private String password;
-	@Column(name = "city")
+	@Column(name = "city") 
 	private String city;
 	@Column(name = "address")
 	private String address;

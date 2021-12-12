@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags"%>
 
 <buscaminas:layout pageName="players">
 	<h2>
@@ -14,9 +14,8 @@
 	<form:form modelAttribute="player" class="form-horizontal"
 		id="add-player-form">
 		<div class="form-group has-feedback">
-			<buscaminas:inputField label="First Name" name="firstNamw" />
+			<buscaminas:inputField label="First Name" name="firstName" />
 			<buscaminas:inputField label="Last Name" name="lastName" />
-			<buscaminas:inputField label="Password" name="password" />
 			<buscaminas:inputField label="Username" name="username" />
 			<buscaminas:inputField label="City" name="city" />
 			<buscaminas:inputField label="Address" name="address" />

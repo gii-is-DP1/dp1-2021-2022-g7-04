@@ -1,4 +1,4 @@
-package org.springframework.samples.minesweeper.player;
+package org.springframework.samples.buscaminas.player;
 
 import java.util.Collection;
 
@@ -40,7 +40,12 @@ public class PlayerService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<Player> findPlayerByUsername(String username) throws DataAccessException {
-		return playerRepository.findByUsername(username);
+	public Collection<Player> findPlayers(String username) throws DataAccessException {
+		return playerRepository.findPlayers(username);
+	}
+	
+	@Transactional(readOnly = true)
+	public Player findPlayerByUsername(String username) throws DataAccessException {
+		return playerRepository.findPlayerByUsername(username);
 	}
 }

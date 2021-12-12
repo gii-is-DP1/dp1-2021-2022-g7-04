@@ -1,4 +1,4 @@
-package org.springframework.samples.minesweeper.player;
+package org.springframework.samples.buscaminas.player;
 import java.util.Collection;
 import java.util.Map;
 
@@ -17,7 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PlayerController {
-	private static final String VIEWS_PLAYER_CREATE_OR_UPDATE_FORM = "players/createOrUpdatePlayerForm";
+	
+	private static final String VIEWS_PLAYER_CREATE_FORM = "players/createPlayerForm";
+	private static final String VIEWS_PLAYER_UPDATE_FORM = "players/updatePlayerForm";
+	
 	@Autowired
 	private PlayerService playerService;
 	
@@ -37,7 +40,7 @@ public class PlayerController {
 		}
 
 		// find owners by username
-		Collection<Player> results = this.playerService.findPlayerByUsername(player.getUsername());
+		Collection<Player> results = this.playerService.findPlayers(player.getUsername());
 		if (results.isEmpty()) {
 			// no owners found
 			result.rejectValue("username", "notFound", "not found");
@@ -50,29 +53,45 @@ public class PlayerController {
 	}
 	
 	
-	@GetMapping("/players/{playersId}")
-	public ModelAndView showPlayer(@PathVariable("playerId") int playerId) {
+	@GetMapping("/players/{username}")
+	public ModelAndView showPlayer(@PathVariable("username") String username) {
 		ModelAndView mav = new ModelAndView("players/playerDetails");
-		mav.addObject(this.playerService.findPlayerById(playerId));
+		mav.addObject(this.playerService.findPlayerByUsername(username));
 		return mav;
 	}
 	
-	@GetMapping(value = "/players/{playerId}/edit")
-	public String initUpdatePlayerForm(@PathVariable("playerId") int playerId, Model model) {
-		Player player = this.playerService.findPlayerById(playerId);
+	@GetMapping(value = "/players/{username}/edit")
+	public String initUpdatePlayerForm(@PathVariable("username") String username, Model model) {
+		Player player = this.playerService.findPlayerByUsername(username);
 		model.addAttribute(player);
-		return VIEWS_PLAYER_CREATE_OR_UPDATE_FORM;
+		return VIEWS_PLAYER_UPDATE_FORM;
 	}
 	
-	@PostMapping(value = "/players/{playerId}/edit")
+	@PostMapping(value = "/players/{username}/edit")
 	public String processUpdatePlayerForm(@Valid Player player, BindingResult result,
-			@PathVariable("playerId") int playerId) {
+			@PathVariable("username") String username) {
+		if (result.hasErrors()) {
+			return VIEWS_PLAYER_UPDATE_FORM;
+		}
+		else {
+			player.setUsername(username);
+			this.playerService.saveplayer(player);
+			return "redirect:/players/{username}";
+		}
+	}
+	/*
+	@PostMapping(value = "/players/{username}/edit")
+	public String processUpdatePlayerForm(@Valid Player player, BindingResult result,
+			@PathVariable("username") String username) {
 		if (result.hasErrors()) {
 			return VIEWS_PLAYER_CREATE_OR_UPDATE_FORM;
 		} else {
-			player.setId(playerId);
+			
 			this.playerService.saveplayer(player);
-			return "redirect:/players/{playerId}";
+			return "redirect:/players/{username}";
 		}
-	}
+		
+		*/
+	
+	
 }

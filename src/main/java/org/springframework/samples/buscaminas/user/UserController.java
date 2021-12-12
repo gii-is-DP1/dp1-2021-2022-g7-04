@@ -22,7 +22,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.minesweeper.player.Player;
+import org.springframework.samples.buscaminas.player.Player;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -99,6 +99,7 @@ public class UserController {
 			return "redirect:/users/{username}";
 		}
 		}
+	/*
 	@GetMapping(value = "/players/find")
 	public String initFindForm(Map<String, Object> model) {
 		model.put("user", new User());
@@ -132,7 +133,7 @@ public class UserController {
 
 		}
 	}
-	
+	*/
 
 	@GetMapping("/users/{username}")
 	public ModelAndView showUser(@PathVariable("username") String username) {

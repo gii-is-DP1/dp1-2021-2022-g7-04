@@ -14,7 +14,7 @@
 	<h2>Search Players</h2>
 
 
-	<form:form modelAttribute="user" action="/players/list" method="get" class="form-horizontal" id="search-player-form">
+	<form:form modelAttribute="player" action="/players/list" method="get" class="form-horizontal" id="search-player-form">
 		<div class="form-group">
 			<div class="control-group" id="username">
 				<label class="col-sm-2 control-label">Username </label>

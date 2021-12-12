@@ -16,30 +16,33 @@
 		<thead>
 			<tr>
 				<th style="width: 150px;">Username</th>
-				<th style="width: 150px;">Password</th>
 				<th style="width: 150px;">First name</th>
 				<th style="width: 150px;">Last name</th>
-				<th style="width: 150px;">Username</th>
-				<th style="width: 150px;">Password</th>
-				<th style="width: 150px;">Username</th>
-				<th style="width: 150px;">Password</th>
-				<th style="width: 150px;"></th>
+				<th style="width: 150px;">City</th>
+				<th style="width: 150px;">Address</th>
+				<th style="width: 150px;">Telephone</th>
+				<th style="width: 150px;">Email</th>
+				<th style="width: 150px;"> </th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${selections}" var="player">
 				<tr>
 					<td><spring:url value="/players/{username}" var="playerUrl">
-							<spring:param name="player" value="${player.username}" />
+							<spring:param name="username" value="${player.username}" />
 						</spring:url> <a href="${fn:escapeXml(playerUrl)}"><c:out
 								value="${player.username}" /></a></td>
-					<td><c:out value="${player.password}" /></td>
+					<td><c:out value="${player.firstName}" /></td>
+					<td><c:out value="${player.lastName}" /></td>
 					<td><c:out value="${player.city}" /></td>
+					<td><c:out value="${player.address}" /></td>
+					<td><c:out value="${player.telephone}" /></td>
+					<td><c:out value="${player.email}" /></td>
 
 					<td><spring:url value="/{username}/delete" var="deleteUrl">
-							<spring:param name="username" value="${user.username}" />
+							<spring:param name="username" value="${player.username}" />
 						</spring:url> <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Delete
-							User</a></td>
+							Player</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
