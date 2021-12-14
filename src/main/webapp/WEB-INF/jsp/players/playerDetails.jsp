@@ -19,9 +19,8 @@
 		
 
 	</table>
-
-	<spring:url value="{username}/edit" var="editUrl">
-		<spring:param name="username" value="${player.username}" />
+	<spring:url value="{playerId}/edit" var="editUrl">
+		<spring:param name="playerId" value="${player.id}" />
 	</spring:url>
 	<a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Edit Player</a>
 

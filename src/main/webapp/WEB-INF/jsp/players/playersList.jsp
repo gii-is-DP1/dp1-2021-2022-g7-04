@@ -28,10 +28,10 @@
 		<tbody>
 			<c:forEach items="${selections}" var="player">
 				<tr>
-					<td><spring:url value="/players/{username}" var="playerUrl">
-							<spring:param name="username" value="${player.username}" />
+					<td><spring:url value="/players/{playerId}" var="playerUrl">
+							<spring:param name="playerId" value="${player.id}" />
 						</spring:url> <a href="${fn:escapeXml(playerUrl)}"><c:out
-								value="${player.username}" /></a></td>
+								value="${player.user.username}" /></a></td>
 					<td><c:out value="${player.firstName}" /></td>
 					<td><c:out value="${player.lastName}" /></td>
 					<td><c:out value="${player.city}" /></td>
@@ -40,7 +40,7 @@
 					<td><c:out value="${player.email}" /></td>
 
 					<td><spring:url value="/{username}/delete" var="deleteUrl">
-							<spring:param name="username" value="${player.username}" />
+							<spring:param name="username" value="${player.user.username}" />
 						</spring:url> <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Delete
 							Player</a></td>
 				</tr>

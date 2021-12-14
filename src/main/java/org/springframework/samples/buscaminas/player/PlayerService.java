@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.buscaminas.user.AuthoritiesService;
+import org.springframework.samples.buscaminas.user.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,16 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class PlayerService {
 	@Autowired
 	private PlayerRepository playerRepository;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private AuthoritiesService authoritiesService;
 
 	@Autowired
 	public PlayerService(PlayerRepository playerRepository) {
 		this.playerRepository = playerRepository;
 	}
 
-//	@Transactional
-//  public int playerCount() {
-//  return (int) playerRepository.count();
-//  }
 
 	@Transactional
 	public Iterable<Player> findAll() {
@@ -35,13 +37,15 @@ public class PlayerService {
 	}
 
 	@Transactional
-	public void saveplayer(Player player) throws DataAccessException {
+	public void savePlayer(Player player) throws DataAccessException {
 		playerRepository.save(player);
+		userService.saveUser(player.getUser());
+		authoritiesService.saveAuthorities(player.getUser().getUsername(), "player");
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<Player> findPlayers(String username) throws DataAccessException {
-		return playerRepository.findPlayers(username);
+	public Collection<Player> findPlayers(String firstName) throws DataAccessException {
+		return playerRepository.findPlayers(firstName);
 	}
 	
 	@Transactional(readOnly = true)

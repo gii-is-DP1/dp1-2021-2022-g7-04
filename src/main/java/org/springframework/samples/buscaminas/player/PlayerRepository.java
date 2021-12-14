@@ -18,9 +18,9 @@ public interface PlayerRepository extends Repository<Player, Integer> {
 	@Query("SELECT player FROM Player player")
 	Iterable<Player> findAll();
 
-	@Query("SELECT player FROM Player player WHERE player.username LIKE :username%")
-	public Collection<Player> findPlayers(@Param("username") String username);
+	@Query("SELECT player FROM Player player WHERE player.firstName LIKE :firstName%")
+	public Collection<Player> findPlayers(@Param("firstName") String firstName);
 	
-	@Query("SELECT player FROM Player player WHERE player.username LIKE :username%")
+	@Query("SELECT player FROM Player player WHERE player.user.username LIKE :username%")
 	public Player findPlayerByUsername(@Param("username") String username);
 }

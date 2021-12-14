@@ -13,4 +13,5 @@ INSERT INTO authorities(id,username,authority) VALUES (4,'jugador3','jugador');
 
 INSERT INTO users(username,password,enabled) VALUES ('player','player',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'player','player');
-INSERT INTO players(id,first_name,last_name,username,city,address,telephone,email) VALUES (6,'Nombre','Apellido','player','Seville','Reina Mercedes','12345678','player@player.com');
+INSERT INTO players(id,first_name,last_name,city,address,telephone,email,username) 
+VALUES (6,'Nombre','Apellido','Seville','Reina Mercedes','12345678','player@player.com','player');

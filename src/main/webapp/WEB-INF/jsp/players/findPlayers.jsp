@@ -19,7 +19,7 @@
 			<div class="control-group" id="username">
 				<label class="col-sm-2 control-label">Username </label>
 				<div class="col-sm-10">
-					<form:input class="form-control" path="username" size="30" maxlength="80" />
+					<form:input class="form-control" path="firstName" size="30" maxlength="80" />
 					<span class="help-inline"><form:errors path="*" /></span>
 				</div>
 			</div>

@@ -99,41 +99,6 @@ public class UserController {
 			return "redirect:/users/{username}";
 		}
 		}
-	/*
-	@GetMapping(value = "/players/find")
-	public String initFindForm(Map<String, Object> model) {
-		model.put("user", new User());
-		return "players/findPlayers";
-	}
-	
-	@GetMapping(value = "/players/list")
-	public String processFindForm(User user, BindingResult result, Map<String, Object> model) {
-
-		// allow parameterless GET request for /owners to return all records
-		if (user.getUsername() == null) {
-			user.setUsername(""); // empty string signifies broadest possible search
-		}
-
-		// find owners by last name
-		Collection<User> results = this.userService.findPlayersByUsername(user.getUsername());
-		if (results.isEmpty()) {
-			// no owners found
-			result.rejectValue("username", "notFound", "not found");
-			return "players/findPlayers";
-		}
-		else if (results.size() == 1) {
-			// 1 owner found
-			user = results.iterator().next();
-			return "redirect:/users/" + user.getUsername();
-		}
-		else {
-			// multiple owners found
-			model.put("selections", results);
-			return "players/playersList";
-
-		}
-	}
-	*/
 
 	@GetMapping("/users/{username}")
 	public ModelAndView showUser(@PathVariable("username") String username) {
