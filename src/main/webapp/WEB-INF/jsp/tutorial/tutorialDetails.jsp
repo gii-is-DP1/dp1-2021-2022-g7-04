@@ -3,11 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags" %>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 
 
-<buscaminas:layout pageName="tutorial">
+<minesweeper:layout pageName="tutorial">
 	<h1>Tutorial</h1>
 	</br>
 	<h2>Objetivo:</h2>
@@ -50,4 +50,4 @@
 	que haya unas mina, para no descubrir esas casillas. Una vez hayamos descubierto todas aquellas casillas
 	 que no contienen minas, la partida habra finalizado y el jugador habrá ganado. En el momento en que se 
 	 descubra una casilla con mina, la partida habra finalizado y el jugador habrá perdido.</p>
-</buscaminas:layout>
+</minesweeper:layout>

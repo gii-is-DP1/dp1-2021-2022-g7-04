@@ -1,8 +1,8 @@
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags" %>
 
-<buscaminas:layout pageName="error">
+<minesweeper:layout pageName="error">
 
     <spring:url value="/resources/images/mine.png" var="mine"/>
     <img width="150px" src="${mine}"/>
@@ -11,4 +11,4 @@
 
     <p>${exception.message}</p>
 
-</buscaminas:layout>
+</minesweeper:layout>

@@ -1,7 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%--
-Buscaminas :: a Spring Framework demonstration
+Minesweeper :: a Spring Framework demonstration
 --%>
 
 <head>

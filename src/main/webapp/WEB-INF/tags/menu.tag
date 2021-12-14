@@ -1,7 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
-<%@ taglib prefix="buscaminas" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
@@ -25,41 +25,41 @@
 		<div class="navbar-collapse collapse" id="main-navbar">
 			<ul class="nav navbar-nav">
 
-				<buscaminas:menuItem active="${name eq 'home'}" url="/"
+				<minesweeper:menuItem active="${name eq 'home'}" url="/"
 					title="home page">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<span>Home</span>
-				</buscaminas:menuItem>
+				</minesweeper:menuItem>
 				
 				<sec:authorize access="isAuthenticated()">
-					<buscaminas:menuItem active="${name eq 'profile'}"
+					<minesweeper:menuItem active="${name eq 'profile'}"
 						url="/users/${principal.username}" title="profile">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						<span>My Profile</span>
-					</buscaminas:menuItem>
+					</minesweeper:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="isAuthenticated()">
 					<c:if test = "${fn:contains(principal.authorities, 'admin')}">
-						<buscaminas:menuItem active="${name eq 'players'}"
+						<minesweeper:menuItem active="${name eq 'players'}"
 							url="/players/find" title="find players">
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							<span>Players</span>
-						</buscaminas:menuItem>
+						</minesweeper:menuItem>
 					</c:if>
 				</sec:authorize>
 
-				<buscaminas:menuItem active="${name eq 'tutorial'}"
+				<minesweeper:menuItem active="${name eq 'tutorial'}"
 					url="/tutorial" title="tutorial">
 					<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
 					<span>Tutorial</span>
-				</buscaminas:menuItem>
+				</minesweeper:menuItem>
 
-				<buscaminas:menuItem active="${name eq 'error'}" url="/oups"
+				<minesweeper:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
-				</buscaminas:menuItem>
+				</minesweeper:menuItem>
 
 			</ul>
 
