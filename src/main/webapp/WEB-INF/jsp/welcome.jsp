@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->  
 
 <minesweeper:layout pageName="home">
@@ -16,6 +17,21 @@
         <div class="col-md-6 text-right">
             <spring:url value="/resources/images/logoPNG_3.png" htmlEscape="true" var="logoImage"/>
             <img src="${logoImage}"/>
+        </div>
+    </div>
+    
+    <h2><fmt:message key="welcome"/></h2>
+    
+    <p>	
+    <h2><c:out value="${now}"/></h2>
+
+    <div class="row">
+        <div class="col-md-12">
+        <minesweeper:board minesweeperBoard="${minesweeperBoard}"/>
+            <c:forEach items="${minesweeperBoard.cells}" var="cell">
+            	<minesweeper:cell size="100" cell="${cell}"/>
+            	
+            </c:forEach> 
         </div>
     </div>
 </minesweeper:layout>
