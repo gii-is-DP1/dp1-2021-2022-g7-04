@@ -8,6 +8,12 @@
 
 
 <minesweeper:layout pageName="tutorial">
+
+	
+	
+
+
+
 	<h1>Tutorial Minesweeper</h1>
 	</br>
 	<h2>Goal:</h2>

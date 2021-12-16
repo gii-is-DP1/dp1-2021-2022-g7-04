@@ -16,7 +16,7 @@ INSERT INTO authorities(id,username,authority) VALUES (5,'player','player');
 INSERT INTO players(id,first_name,last_name,city,address,telephone,email,username) 
 VALUES (6,'Nombre','Apellido','Seville','Reina Mercedes','12345678','player@player.com','player');
 
-INSERT INTO minesweeper_board(id,background,height,width) VALUES (1,null,450,800);
+INSERT INTO minesweeper_board(id,background,height,width) VALUES (1,null,250,250);
 
 INSERT INTO cells(id,covered,flagged,has_mine,mines_around,type,x_position,y_position,minesweeper_board_id) VALUES
 (7,null,null,null,0,'UNPRESSED',0,0,1);
@@ -42,8 +42,6 @@ INSERT INTO cells(id,covered,flagged,has_mine,mines_around,type,x_position,y_pos
 (22,null,null,null,0,'UNPRESSED',3,2,1);
 INSERT INTO cells(id,covered,flagged,has_mine,mines_around,type,x_position,y_position,minesweeper_board_id) VALUES
 (23,null,null,null,0,'UNPRESSED',3,3,1);
-INSERT INTO cells(id,covered,flagged,has_mine,mines_around,type,x_position,y_position,minesweeper_board_id) VALUES
-(24,null,null,null,0,'UNPRESSED',2,3,1);
 INSERT INTO cells(id,covered,flagged,has_mine,mines_around,type,x_position,y_position,minesweeper_board_id) VALUES
 (8,null,null,null,0,'FLAG',1,0,1);
 INSERT INTO cells(id,covered,flagged,has_mine,mines_around,type,x_position,y_position,minesweeper_board_id) VALUES

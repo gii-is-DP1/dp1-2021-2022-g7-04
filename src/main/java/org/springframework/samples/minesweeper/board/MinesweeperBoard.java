@@ -27,7 +27,7 @@ public class MinesweeperBoard extends BaseEntity {
     public MinesweeperBoard(){
     	this.background="resources/images/minesweeper.jpg";
         this.width=800;
-        this.height=800;
+        this.height=400;
     }
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "minesweeperBoard",fetch = FetchType.EAGER)
