@@ -39,10 +39,9 @@
 					<td><c:out value="${player.telephone}" /></td>
 					<td><c:out value="${player.email}" /></td>
 
-					<td><spring:url value="/{username}/delete" var="deleteUrl">
-							<spring:param name="username" value="${player.user.username}" />
-						</spring:url> <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Delete
-							Player</a></td>
+					<td><spring:url value="/{playerId}/delete" var="deleteUrl">
+							<spring:param name="playerId" value="${player.id}" />
+						</spring:url> <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Delete Player</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

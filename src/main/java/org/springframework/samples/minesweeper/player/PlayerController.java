@@ -108,5 +108,13 @@ public class PlayerController {
 		}
 	}
 	
+	@PostMapping(value="/{playerId}/delete")
+	public String deletePlayer(@PathVariable("playerId") int playerId) {
+		playerService.deletePlayer(playerId);
+		return "redirect:/";
+	}
+	
+
+	
 	
 }

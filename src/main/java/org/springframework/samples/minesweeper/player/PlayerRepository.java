@@ -15,7 +15,8 @@ public interface PlayerRepository extends Repository<Player, Integer> {
 
 	void save(Player player) throws DataAccessException;
 
-	@Query("SELECT player FROM Player player")
+	
+	@Query("SELECT player FROM Player player WHERE player.user.enabled LIKE true")
 	Iterable<Player> findAll();
 
 	@Query("SELECT player FROM Player player WHERE player.firstName LIKE :firstName%")
@@ -23,4 +24,8 @@ public interface PlayerRepository extends Repository<Player, Integer> {
 	
 	@Query("SELECT player FROM Player player WHERE player.user.username LIKE :username%")
 	public Player findPlayerByUsername(@Param("username") String username);
+
+	@Query("UPDATE player SET player.user.enabled=false  WHERE player.id=:id")
+	public Player deletePlayer(@Param("id") int id) throws DataAccessException;
+	
 }
