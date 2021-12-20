@@ -1,6 +1,7 @@
 package org.springframework.samples.minesweeper.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.Collection;
 
@@ -23,27 +24,18 @@ public class PlayerServiceTest {
 	@Autowired
 	private PlayerService playerService;
 	
-	/*@Test
+	@Test
 	void shouldFindPlayersByUserName() {
 		Collection<Player> players = this.playerService.findPlayers("Nombre");
 		assertThat(players.size()).isEqualTo(1);
 
 		players = this.playerService.findPlayers("player0");
 		assertThat(players.isEmpty()).isTrue();
-	}*/
-	/*
-	@Test
-	void shouldDeletePlayer() {
-		Collection<Player> players = this.playerService.findPlayers("");
-		int size1 = players.size();
-		this.playerService.deletePlayer("player1");
-		
-		Collection<User> players2 = this.playerService.findPlayersByUsername("");
-		assertThat(players2.size()).isNotEqualTo(size1);
 	}
-	*/
 	
-/*	@Test
+	
+	
+	@Test
 	void shouldCreatePlayer() {
 		Collection<Player> players = this.playerService.findPlayers("jose");
 		int found = players.size();
@@ -67,8 +59,8 @@ public class PlayerServiceTest {
 		players = this.playerService.findPlayers("jose");
 		assertThat(players.size()).isEqualTo(found + 1);
 	}
-	*/
-/*	@Test
+	
+	@Test
 	@Transactional
 	void shouldUpdatePlayer() {
 		Player player = this.playerService.findPlayerById(6);
@@ -81,5 +73,5 @@ public class PlayerServiceTest {
 		// retrieving new name from database
 		player = this.playerService.findPlayerById(6);
 		assertThat(player.getLastName()).isEqualTo(newLastName);
-	}*/
+	}
 }
