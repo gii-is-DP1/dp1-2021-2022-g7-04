@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.samples.minesweeper.user.User;
 import org.springframework.samples.minesweeper.user.UserService;
 import org.springframework.stereotype.Controller;
@@ -107,6 +108,11 @@ public class PlayerController {
 			return "redirect:/players/{playerId}";
 		}
 	}
+	
+
+
+	
+
 	
 	
 }

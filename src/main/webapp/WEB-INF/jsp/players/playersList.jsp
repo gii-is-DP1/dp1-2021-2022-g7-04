@@ -28,6 +28,7 @@
 		<tbody>
 			<c:forEach items="${selections}" var="player">
 				<tr>
+				<c:if test = "${player.user.enabled}">
 					<td><spring:url value="/players/{playerId}" var="playerUrl">
 							<spring:param name="playerId" value="${player.id}" />
 						</spring:url> <a href="${fn:escapeXml(playerUrl)}"><c:out
@@ -41,8 +42,8 @@
 
 					<td><spring:url value="/{username}/delete" var="deleteUrl">
 							<spring:param name="username" value="${player.user.username}" />
-						</spring:url> <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Delete
-							Player</a></td>
+						</spring:url> <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Delete Player</a></td>
+				</c:if>
 				</tr>
 			</c:forEach>
 		</tbody>

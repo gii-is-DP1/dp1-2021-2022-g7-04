@@ -64,7 +64,14 @@ public class UserService {
 		return userRepository.findByUsername(username);
 	}
 	
+	@Transactional
 	public void deleteUser(String username) {
 		userRepository.deleteById(username);
 	}
+	
+	@Transactional
+	public void logicDeleteUser(String username) {
+		userRepository.logicDeleteUser(username);
+	}
+	
 }
