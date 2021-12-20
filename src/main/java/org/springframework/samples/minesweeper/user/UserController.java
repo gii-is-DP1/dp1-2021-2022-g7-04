@@ -108,10 +108,17 @@ public class UserController {
 		return mav;
 	}
 	
-	@GetMapping("/{username}/delete")
+	/*@GetMapping("/{username}/delete")
 	public String delete(@PathVariable("username") String username) {
 		userService.deleteUser(username);
 		return "redirect:/players/find";
+	}*/
+	
+	@GetMapping(value="/{username}/delete")
+	public String logicDeleteuser(@PathVariable("username") String username) {
+		userService.logicDeleteUser(username);
+		return "users/userLogicDelete";
 	}
+	
 	
 }

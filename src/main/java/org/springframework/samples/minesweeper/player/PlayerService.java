@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.minesweeper.user.AuthoritiesService;
+import org.springframework.samples.minesweeper.user.User;
 import org.springframework.samples.minesweeper.user.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,9 +53,5 @@ public class PlayerService {
 	public Player findPlayerByUsername(String username) throws DataAccessException {
 		return playerRepository.findPlayerByUsername(username);
 	}
-	
-	@Transactional
-	public void deletePlayer(int playerId)  throws DataAccessException {
-		playerRepository.deletePlayer(playerId);
-	}
+
 }
