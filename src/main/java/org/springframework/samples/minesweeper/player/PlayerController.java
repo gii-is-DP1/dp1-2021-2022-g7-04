@@ -85,7 +85,7 @@ public class PlayerController {
 			
 			this.playerService.savePlayer(player);
 			
-			return "redirect:/players/" + player.getId();
+			return "redirect:/players/list";
 		}
 	}
 	
