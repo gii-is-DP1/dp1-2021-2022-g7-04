@@ -133,4 +133,15 @@ public class MinesweeperBoardService {
 		boardRepo.save(minesweeperBoard);
 	}
 	
+	public boolean existsBoardForPlayer(String playerName){
+		boolean res = false;
+		if(this.findByPlayer(playerName)!=null)
+			res = true;
+		return res;
+	}
+	
+	public MinesweeperBoard findByPlayer(String playerName){
+		return boardRepo.findByPlayer(playerName);
+	}
+	
 }

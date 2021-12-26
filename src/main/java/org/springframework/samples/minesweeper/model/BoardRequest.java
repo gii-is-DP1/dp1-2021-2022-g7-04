@@ -1,6 +1,7 @@
 package org.springframework.samples.minesweeper.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -23,7 +24,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BoardRequest {
+@Entity
+@Table(name = "board_requests")
+public class BoardRequest extends BaseEntity {
 	@NotEmpty
 	private String playerName;
 
@@ -42,8 +45,10 @@ public class BoardRequest {
 	@Max(99)
 	private int mines;
 
-	@NotEmpty
 	private DifficultyLevel level;
+	
+	public BoardRequest() {
+	}
 	
 	/**
 	 * Set a board request by difficulty (For Beginner, Medium and Ace levels)
@@ -75,8 +80,7 @@ public class BoardRequest {
 				this.mines = 10;
 		}
 		this.level = level;
-		this.playerName = "player";
-		//this.playerName = username;
+		this.playerName = username;
 	}
 	
 	/**
@@ -93,6 +97,7 @@ public class BoardRequest {
 		this.columns = cols;
 		this.mines = mines;
 		this.playerName = username;		
+		this.level = DifficultyLevel.CUSTOM;
 	}
 
 }

@@ -23,10 +23,7 @@ public class WelcomeController {
 	MinesweeperBoardService minesweeperService;
 	
 	@GetMapping({"/","/welcome"})
-	public String welcome(Map<String, Object> model, HttpServletResponse response) {
-		//response.addHeader("Refresh","100000"); 
-		model.put("now", new Date());
-		//model.put("minesweeperBoard",minesweeperService.findById(1).get());
+	public String welcome(Map<String, Object> model) {
 		List<Person> persons = new ArrayList<Person>();
 
 		String[] developers = new String[] {
