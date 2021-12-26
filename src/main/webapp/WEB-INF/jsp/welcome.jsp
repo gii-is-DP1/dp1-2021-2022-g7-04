@@ -30,8 +30,7 @@
         <div class="col-md-12">
         <minesweeper:board minesweeperBoard="${minesweeperBoard}"/>
             <c:forEach items="${minesweeperBoard.cells}" var="cell">
-            	<minesweeper:cell size="50" cell="${cell}"/>
-            	
+            	<minesweeper:cell size="24" cell="${cell}"/>
             </c:forEach> 
         </div>
     </div>
@@ -39,13 +38,13 @@
 
     <form action="/cells/update" method="get" class="form-horizontal" id="select-cell-form">
         <div class="form-group has-feedback">
-            <label class="col-sm-2 control-label">Column (1-4)</label>
-            <input min="1" size="1" max="4" value="2" type="number" name="xPosition" id="xPosition"/>
+            <label class="col-sm-2 control-label">Column (1-${boardRequest.columns})</label>
+            <input min="1" size="5" max="${boardRequest.columns}" value="1" type="number" name="xPosition" id="xPosition"/>
         </div>
 
         <div class="form-group has-feedback">
-            <label class="col-sm-2 control-label">Row (1-4) </label>
-            <input min="1" size="1" max="4" value="2" type="number" name="yPosition" id="yPosition"/>
+            <label class="col-sm-2 control-label">Row (1-${boardRequest.rows}) </label>
+            <input min="1" size="5" max="${boardRequest.rows}" value="1" type="number" name="yPosition" id="yPosition"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

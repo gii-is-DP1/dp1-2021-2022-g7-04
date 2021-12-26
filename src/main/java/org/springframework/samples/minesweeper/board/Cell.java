@@ -1,10 +1,8 @@
 package org.springframework.samples.minesweeper.board;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Positive;
 
 import org.hibernate.validator.constraints.Range;
 import org.springframework.samples.minesweeper.model.BaseEntity;
@@ -17,16 +15,14 @@ import lombok.Setter;
 @Setter
 @Table(name = "cells")
 public class Cell extends BaseEntity {
-	@Column
-	Boolean covered;
-	Boolean flagged;
-	Boolean hasMine;
+	@Range(min=0,max=8)
 	int minesAround;
     String type;
-    @Range(min=0,max=16)
+    @Range(min=0,max=29) // 30 columns
     int xPosition;
-    @Range(min=0,max=30)
+    @Range(min=0,max=29) // 16 rows
     int yPosition;
+    boolean isMine;
     
     @ManyToOne
     MinesweeperBoard minesweeperBoard;

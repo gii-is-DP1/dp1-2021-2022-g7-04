@@ -25,7 +25,7 @@ public class MinesweeperBoard extends BaseEntity {
     int height;
 
     public MinesweeperBoard(){
-    	this.background="resources/images/minesweeper.jpg";
+    	this.background=null;
         this.width=800;
         this.height=400;
     }
