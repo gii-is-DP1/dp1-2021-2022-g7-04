@@ -26,7 +26,7 @@
     <p>	
     <h2><c:out value="${now}"/></h2>
 
-    <div class="row">
+<div class="row">
         <div class="col-md-12">
         <minesweeper:board minesweeperBoard="${minesweeperBoard}"/>
             <c:forEach items="${minesweeperBoard.cells}" var="cell">
@@ -35,27 +35,7 @@
             </c:forEach> 
         </div>
     </div>
-
-
-    <form action="/cells/update" method="get" class="form-horizontal" id="select-cell-form">
-        <div class="form-group has-feedback">
-            <label class="col-sm-2 control-label">Column (1-4)</label>
-            <input min="1" size="1" max="4" value="2" type="number" name="xPosition" id="xPosition"/>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="col-sm-2 control-label">Row (1-4) </label>
-            <input min="1" size="1" max="4" value="2" type="number" name="yPosition" id="yPosition"/>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                
-                        <button class="btn btn-default" type="submit">Select cell</button>
-                    
-                
-            </div>
-        </div>
-    </form>
+   
 
     
 </minesweeper:layout>
