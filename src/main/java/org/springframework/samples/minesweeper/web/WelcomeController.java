@@ -1,20 +1,14 @@
 package org.springframework.samples.minesweeper.web;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.minesweeper.board.Cell;
-import org.springframework.samples.minesweeper.board.DifficultyLevel;
-import org.springframework.samples.minesweeper.board.MinesweeperBoard;
 import org.springframework.samples.minesweeper.board.MinesweeperBoardService;
-import org.springframework.samples.minesweeper.model.BoardRequest;
 import org.springframework.samples.minesweeper.model.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,17 +23,10 @@ public class WelcomeController {
 	MinesweeperBoardService minesweeperService;
 	
 	@GetMapping({"/","/welcome"})
-	public String welcome(Map<String, Object> model, HttpServletRequest request) {
-		MinesweeperBoard board = new MinesweeperBoard();
-		minesweeperService.saveBoard(board);
-		//BoardRequest boardRequest = new BoardRequest(DifficultyLevel.BEGINNER,request.getUserPrincipal().getName());
-		BoardRequest boardRequest = new BoardRequest(DifficultyLevel.ACE,null);
-		Cell [][] matrixBoard = minesweeperService.initializeGame(boardRequest, board);
-		minesweeperService.saveBoard(board);
-		model.put("minesweeperBoard",board);
-		model.put("boardRequest",boardRequest);
-		
-		System.out.println(board.getCells());
+	public String welcome(Map<String, Object> model, HttpServletResponse response) {
+		//response.addHeader("Refresh","100000"); 
+		model.put("now", new Date());
+		//model.put("minesweeperBoard",minesweeperService.findById(1).get());
 		List<Person> persons = new ArrayList<Person>();
 
 		String[] developers = new String[] {

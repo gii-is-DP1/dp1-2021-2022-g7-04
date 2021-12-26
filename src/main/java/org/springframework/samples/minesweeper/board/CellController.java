@@ -32,13 +32,30 @@ public class CellController {
 	
 	
 	@GetMapping(value = "/cells/update")
-	public String initUpdateCellForm(@RequestParam("xPosition") int xPosition, @RequestParam("yPosition") int yPosition , Model model) {
+	public String initUpdateCellForm(@RequestParam("xPosition") int xPosition, @RequestParam("yPosition") int yPosition,
+			@RequestParam("move") String move , Model model) {
 		Cell cell = this.cellService.findCellByPosition(xPosition-1, yPosition-1);
-		cell.setType("PRESSED");
+		if(!cell.getType().equals("PRESSED")) {
+			if(move.equals("uncover")) {
+				if(!cell.getType().equals("FLAG")) {
+					cell.setType("PRESSED");
+				}
+			} else if(move.equals("flag")) {
+				if(cell.getType().equals("FLAG")) {
+					cell.setType("UNPRESSED");
+				}else {
+					cell.setType("FLAG");
+				}
+			} else {
+				if(cell.type.equals("UNPRESSED")) {
+					cell.setType("FLAG");
+				}
+			}
+		}
 		this.cellService.saveCell(cell);
 		model.addAttribute(cell);
 		model.addAttribute("minesweeperBoard", cell.getMinesweeperBoard());
-		return "redirect:/";
+		return "redirect:/newGame";
 	}
 
 	
