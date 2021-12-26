@@ -24,9 +24,9 @@ public class WelcomeController {
 	
 	@GetMapping({"/","/welcome"})
 	public String welcome(Map<String, Object> model, HttpServletResponse response) {
-		response.addHeader("Refresh","100000"); 
+		//response.addHeader("Refresh","100000"); 
 		model.put("now", new Date());
-		model.put("minesweeperBoard",minesweeperService.findById(1).get());
+		//model.put("minesweeperBoard",minesweeperService.findById(1).get());
 		List<Person> persons = new ArrayList<Person>();
 
 		String[] developers = new String[] {

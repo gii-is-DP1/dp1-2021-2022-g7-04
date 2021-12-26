@@ -6,7 +6,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 <%@ attribute name="name" required="true" rtexprvalue="true"
-	description="Name of the active menu: home, players, tutorial or error"%>
+	description="Name of the active menu: players, tutorial, new game"%>
 	
 <sec:authentication var="principal" property="principal" />
 
@@ -25,20 +25,14 @@
 		<div class="navbar-collapse collapse" id="main-navbar">
 			<ul class="nav navbar-nav">
 
-				<minesweeper:menuItem active="${name eq 'home'}" url="/"
-					title="home page">
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-					<span>Home</span>
-				</minesweeper:menuItem>
-				
 				<sec:authorize access="isAuthenticated()">
-					<minesweeper:menuItem active="${name eq 'profile'}"
-						url="/users/${principal.username}" title="profile">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						<span>My Profile</span>
+					<minesweeper:menuItem active="${name eq 'new game'}"
+						url="/selectGame" title="new-game">
+						<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+						<span>New Game</span>
 					</minesweeper:menuItem>
 				</sec:authorize>
-				
+
 				<sec:authorize access="isAuthenticated()">
 					<c:if test = "${fn:contains(principal.authorities, 'admin')}">
 						<minesweeper:menuItem active="${name eq 'players'}"
@@ -54,13 +48,7 @@
 					<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
 					<span>Tutorial</span>
 				</minesweeper:menuItem>
-
-				<minesweeper:menuItem active="${name eq 'error'}" url="/oups"
-					title="trigger a RuntimeException to see how it is handled">
-					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-					<span>Error</span>
-				</minesweeper:menuItem>
-
+				
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
@@ -78,15 +66,30 @@
 							<li>
 								<div class="navbar-login">
 									<div class="row">
-										<div class="col-lg-4">
+									<div class="col-lg-4">
 											<p class="text-center">
-												<span class="glyphicon glyphicon-user icon-size"></span>
+												<span class="glyphicon glyphicon-user"></span>
 											</p>
 										</div>
 										<div class="col-lg-8">
-											<p class="text-left">
-												<strong><sec:authentication property="name" /></strong>
+											<p class="text-center">
+												<a href="<c:url value="/users/${principal.username}" />"
+													class="btn btn-primary btn-block btn-sm">My profile</a>
 											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<div class="navbar-login">
+									<div class="row">
+										<div class="col-lg-4">
+											<p class="text-center">
+												<span class="glyphicon glyphicon-log-out"></span>
+											</p>
+										</div>
+										<div class="col-lg-8">
 											<p class="text-left">
 												<a href="<c:url value="/logout" />"
 													class="btn btn-primary btn-block btn-sm">Logout</a>
@@ -95,7 +98,7 @@
 									</div>
 								</div>
 							</li>
-							<li class="divider"></li>
+							
 							<!-- 							
                             <li> 
 								<div class="navbar-login navbar-login-session">
