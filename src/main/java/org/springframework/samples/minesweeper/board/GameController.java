@@ -1,5 +1,7 @@
 package org.springframework.samples.minesweeper.board;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -28,7 +30,14 @@ public class GameController {
 	BoardRequestService boardRequestService;
 	
 	@GetMapping(value = "/selectGame")
-	public String selectGame(Map<String, Object> model, BoardRequest boardRequest) {
+	public String selectGame(Map<String, Object> model, BoardRequest boardRequest,HttpServletRequest request) {
+		
+		Principal player = request.getUserPrincipal();
+		if(minesweeperService.existsBoardForPlayer(player.getName())) {
+			BoardRequest request2 = boardRequestService.findByPlayer(player.getName());
+			boardRequestService.deleteRequest(request2);
+			
+		}
 		return "selectGame";
 	}
 	
@@ -41,6 +50,11 @@ public class GameController {
 		MinesweeperBoard board = null;
 		if(!minesweeperService.existsBoardForPlayer(player.getName())) {
 			board = new MinesweeperBoard(player.getName());
+			
+			
+			
+			
+			
 			minesweeperService.saveBoard(board);
 		}else {
 			board = minesweeperService.findByPlayer(player.getName());
@@ -75,6 +89,7 @@ public class GameController {
 		
 		if(!existPlayRequest) {
 			Cell [][] matrixBoard = minesweeperService.initializeGame(boardRequest, board);
+			
 			// TODO Mines generation ETC
 		}	
 		model.put("minesweeperBoard",board);

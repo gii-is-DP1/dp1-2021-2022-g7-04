@@ -30,6 +30,7 @@ public class MinesweeperBoardService {
 		Cell matrix[][];
 		matrix = new Cell[boardRequest.getRows()][];
 		List<Cell> cells = new ArrayList<Cell>();
+		
 		for (int i=0 ; i < boardRequest.getRows(); i++) {
 			matrix[i] = new Cell[boardRequest.getColumns()];
 			for (int j = 0; j < boardRequest.getColumns(); j++) {
@@ -37,18 +38,48 @@ public class MinesweeperBoardService {
 				matrix[i][j].setMinesweeperBoard(board);
 				matrix[i][j].setXPosition(i);
 				matrix[i][j].setYPosition(j);
+				
 				cells.add(matrix[i][j]);
 				cellService.saveCell(matrix[i][j]);
 			}
 		}
+		
+		int minas=0;
+		int totalMinas = boardRequest.getMines();
+		Cell celdaEx = null;
+		int i=0;
+		
+		while(minas<totalMinas) {
+			 double valor = Math.floor(Math.random()*cells.size());
+			 int random = (int) valor;
+			 
+			 if(!cells.get(random).isMine) {
+				celdaEx= cells.get(random);
+				celdaEx.setMine(true);
+				cells.remove(random);
+				cells.add(celdaEx);
+				cellService.saveCell(celdaEx);
+				minas++;
+			 }
+			
+		}
+		
+		
+		
+		
+		
 		board.setCells(cells);
 		System.out.format("[MinesweeperService] - A new game was initialized with rows=%d, columns=%d, mines=%d for usaername=%s - Level: %s",
 			boardRequest.getRows(), boardRequest.getColumns(), boardRequest.getMines(), boardRequest.getPlayerName(), boardRequest.getLevel());
 		return matrix;
 	}
 	
+	 
+	
+	
+	
 	// Randomly install all mines in the board of the minesweeper game
-	public void randomlyLocaleMines(BoardRequest boardRequest, Cell[][] matrix) {
+ 	public void randomlyLocaleMines(BoardRequest boardRequest, Cell[][] matrix) {
 		int minesPlaced = 0;
 		Random random = new Random();
 		while(minesPlaced < boardRequest.getMines()) {
@@ -132,6 +163,8 @@ public class MinesweeperBoardService {
 	public void saveBoard(MinesweeperBoard minesweeperBoard) throws DataAccessException {
 		boardRepo.save(minesweeperBoard);
 	}
+	
+	
 	
 	public boolean existsBoardForPlayer(String playerName){
 		boolean res = false;

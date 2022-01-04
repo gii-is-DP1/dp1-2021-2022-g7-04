@@ -28,4 +28,9 @@ public class BoardRequestService {
 		boardRequestRepo.save(boardRequest);
 	}
 	
+	@Transactional
+	public void deleteRequest(BoardRequest boardRequest) throws DataAccessException {
+		boardRequestRepo.delete(boardRequest);
+	}
+	
 }
