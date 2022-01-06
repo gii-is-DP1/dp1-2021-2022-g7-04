@@ -11,6 +11,8 @@
 <sec:authentication var="principal" property="principal" />
 
 <minesweeper:layout pageName="selectDifficulty">
+	<c:choose>
+	<c:when test="${gameStarted eq false}">
 	<h2>Select a difficulty level</h2>
 
 	<form method="get" action="/newGame" class="form-horizontal"
@@ -26,12 +28,12 @@
 					<form:hidden path="id" />
 					<form:hidden path="playerName" value="${principal.username}" />
 					<label>Rows: </label>
-					<form:input path="rows" value="1" type="number" min="1" max="16" size="5" name="rows" />
+					<form:input path="rows" value="8" type="number" min="8" max="16" size="5" name="rows" />
 					&nbsp;&nbsp;&nbsp; <label>Columns: </label>
-					<form:input path="columns" value="1" type="number" min="1" max="30" size="5"
+					<form:input path="columns" value="8" type="number" min="8" max="30" size="5"
 						name="columns" />
 					&nbsp;&nbsp;&nbsp; <label>Mines: </label>
-					<form:input path="mines" value="1" type="number" min="1" max="99" size="5"
+					<form:input path="mines" value="10" type="number" min="10" max="99" size="5"
 						name="mines" />
 				</div>
 			</form:form>
@@ -39,7 +41,18 @@
 			<button class="btn btn-default" type="submit">Submit</button>
 		</div>
 	</form>
-
+	</c:when>
+	<c:otherwise>
+		<form method="get" action="/continueGame" class="form-horizontal"
+		id="continue-game-form">
+		<h2>Continue your current game</h2>
+		<button class="btn btn-default" type="submit">Submit</button>
+		
+		</form>
+		
+	</c:otherwise>
+	</c:choose>
+	
 </minesweeper:layout>
 
 <script>

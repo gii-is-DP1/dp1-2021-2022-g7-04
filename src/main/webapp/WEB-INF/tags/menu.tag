@@ -26,11 +26,13 @@
 			<ul class="nav navbar-nav">
 
 				<sec:authorize access="isAuthenticated()">
-					<minesweeper:menuItem active="${name eq 'new game'}"
-						url="/selectGame" title="new-game">
-						<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-						<span>New Game</span>
-					</minesweeper:menuItem>
+					<c:if test = "${fn:contains(principal.authorities, 'player')}">
+						<minesweeper:menuItem active="${name eq 'new game'}"
+							url="/selectGame" title="new-game">
+							<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+							<span>New Game</span>
+						</minesweeper:menuItem>
+					</c:if>
 				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">

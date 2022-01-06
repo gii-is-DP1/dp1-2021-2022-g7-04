@@ -25,6 +25,10 @@ public class MinesweeperBoardService {
 		return boardRepo.findById(id);
 	}
 	
+	public MinesweeperBoard findBoardById(int id){
+		return boardRepo.findBoardById(id);
+	}
+	
 	// Initialize new game by num of rows and columns
 	public Cell[][] initializeGame(BoardRequest boardRequest, MinesweeperBoard board) {
 		Cell matrix[][];
@@ -175,6 +179,11 @@ public class MinesweeperBoardService {
 	
 	public MinesweeperBoard findByPlayer(String playerName){
 		return boardRepo.findByPlayer(playerName);
+	}
+	
+	@Transactional
+	public void deleteMinesweeperBoard(MinesweeperBoard board) throws DataAccessException {
+		boardRepo.delete(board);
 	}
 	
 }

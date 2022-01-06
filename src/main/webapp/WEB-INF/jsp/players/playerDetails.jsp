@@ -12,15 +12,42 @@
 
 <minesweeper:layout pageName="players">
 
-	<c:if test="${player.user.username eq principal.username}">
+	<c:if test="${player.user.username eq principal.username or fn:contains(principal.authorities, 'admin')}">
+	
 		<h2>Player information</h2>
-
-
 		<table class="table table-striped">
 
 			<tr>
+				<th>First name</th>
+				<td><c:out value="${player.firstName}" /></td>
+			</tr>
+			<tr>
+				<th>Last name</th>
+				<td><c:out value="${player.lastName}" /></td>
+			</tr>
+			<tr>
+				<th>Address</th>
+				<td><c:out value="${player.address}" /></td>
+			</tr>
+			<tr>
 				<th>City</th>
 				<td><c:out value="${player.city}" /></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><c:out value="${player.email}" /></td>
+			</tr>
+			<tr>
+				<th>Telephone</th>
+				<td><c:out value="${player.telephone}" /></td>
+			</tr>
+			<tr>
+				<th>Username</th>
+				<td><c:out value="${player.user.username}" /></td>
+			</tr>
+			<tr>
+				<th>Password</th>
+				<td><c:out value="${player.user.password}" /></td>
 			</tr>
 
 

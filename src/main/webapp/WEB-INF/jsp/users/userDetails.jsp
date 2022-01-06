@@ -12,6 +12,18 @@
 
 	<table class="table table-striped">
 		
+		<c:if test = "${fn:contains(principal.authorities, 'player')}">
+			<tr>
+				<th>First Name</th>
+				<td><c:out value="${user.username}" /></td>
+			</tr>
+		
+		</c:if>
+		
+		<tr>
+			<th>Username</th>
+			<td><c:out value="${user.username}" /></td>
+		</tr>
 		<tr>
 			<th>Password</th>
 			<td><c:out value="${user.password}" /></td>

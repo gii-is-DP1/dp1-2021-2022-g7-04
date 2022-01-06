@@ -33,12 +33,35 @@ public class GameController {
 	public String selectGame(Map<String, Object> model, BoardRequest boardRequest,HttpServletRequest request) {
 		
 		Principal player = request.getUserPrincipal();
+		BoardRequest boardRequest2 = boardRequestService.findByPlayer(player.getName());
+		
+		if(boardRequest2 != null) {
+			model.put("gameStarted", true);
+		} else {
+			model.put("gameStarted", false);
+		}
+		/*
 		if(minesweeperService.existsBoardForPlayer(player.getName())) {
 			BoardRequest request2 = boardRequestService.findByPlayer(player.getName());
 			boardRequestService.deleteRequest(request2);
 			
+		} else {
+			
 		}
+		*/
 		return "selectGame";
+	}
+	
+	@GetMapping(value = "/finishGame")
+	public String finishGame(Map<String, Object> model, HttpServletRequest request) {
+		Principal player = request.getUserPrincipal();
+		
+		MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
+		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
+		
+		this.minesweeperService.deleteMinesweeperBoard(board);
+		boardRequestService.deleteRequest(boardRequest);
+		return "redirect:/";
 	}
 	
 	@GetMapping(value = "/newGame")
@@ -98,6 +121,34 @@ public class GameController {
 		return "newGame";
 	}
 	
+	@GetMapping(value = "/continueGame")
+	public String continueGame(Map<String, Object> model, HttpServletRequest request) {
+		Principal player = request.getUserPrincipal();
+		
+		MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
+		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
+		
+		model.put("minesweeperBoard",board);
+		model.put("boardRequest",boardRequest);
+		return "newGame";
+	}
+	
+	@GetMapping(value = "/restartGame")
+	public String restartGame(Map<String, Object> model, HttpServletRequest request) {
+		Principal player = request.getUserPrincipal();
+		
+		MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
+		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
+		this.minesweeperService.deleteMinesweeperBoard(board);
+		board = new MinesweeperBoard(player.getName());
+		minesweeperService.saveBoard(board);
+		Cell [][] matrixBoard = minesweeperService.initializeGame(boardRequest, board);
+		
+		
+		model.put("minesweeperBoard",board);
+		model.put("boardRequest",boardRequest);
+		return "newGame";
+	}
 
 
 	

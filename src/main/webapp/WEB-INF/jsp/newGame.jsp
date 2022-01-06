@@ -1,6 +1,7 @@
 <%@ page session="false" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -11,6 +12,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<minesweeper:board minesweeperBoard="${minesweeperBoard}" />
+			<c:set value="${minesweeperBoard.id}" var="boardId"/>
 			<c:forEach items="${minesweeperBoard.cells}" var="cell">
 				<minesweeper:cell size="24" cell="${cell}" />
 			</c:forEach>
@@ -42,9 +44,38 @@
 				</fieldset>
 				<br>
 				<button class="btn btn-default" type="submit">Submit</button>
+				
+				
+				
 			</div>
 		</div>
-	</form>
+		
+		</form>
+		
+		<form action="/restartGame" method="get" class="form-horizontal"
+		id="finish-game-form">
+			<div class="form-group">
+				<div class="text-left col-sm-10">
+		
+				<button class="btn btn-default" type="submit">Restart game</button>
+			
+				</div>
+			</div>
+		</form>
+		
+		<form action="/finishGame" method="get" class="form-horizontal"
+		id="finish-game-form">
+			<div class="form-group">
+				<div class="text-left col-sm-10">
+		
+				<button class="btn btn-default" type="submit">Finish game</button>
+			
+				</div>
+			</div>
+		</form>
+		
+		
+	
 
 
 </minesweeper:layout>
