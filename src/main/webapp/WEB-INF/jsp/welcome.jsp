@@ -20,22 +20,5 @@
             <img src="${logoImage}"/>
         </div>
     </div>
-    
-    <h2><fmt:message key="welcome"/></h2>
-    
-    <p>	
-    <h2><c:out value="${now}"/></h2>
-
-<div class="row">
-        <div class="col-md-12">
-        <minesweeper:board minesweeperBoard="${minesweeperBoard}"/>
-            <c:forEach items="${minesweeperBoard.cells}" var="cell">
-            	<minesweeper:cell size="50" cell="${cell}"/>
-            	
-            </c:forEach> 
-        </div>
-    </div>
-   
-
-    
+    <h2><fmt:message key="welcome"/></h2>    
 </minesweeper:layout>

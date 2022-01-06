@@ -6,5 +6,5 @@
  var canvas = document.getElementById("canvas");
  var ctx = canvas.getContext("2d");
  var image = document.getElementById('${cell.type}');
- ctx.drawImage(image,${cell.getPositionXInPixels(size)},${cell.getPositionYInPixels(size)},${size},${size});
+ ctx.drawImage(image,${cell.getPositionYInPixels(size)},${cell.getPositionXInPixels(size)},${size},${size});
  </script>
