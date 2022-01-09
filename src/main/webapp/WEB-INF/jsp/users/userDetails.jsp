@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ page session="false" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -9,17 +10,14 @@
 
 	<h2>User Information</h2>
 
-
 	<table class="table table-striped">
-		
-		<c:if test = "${fn:contains(principal.authorities, 'player')}">
+		<c:if test="${fn:contains(principal.authorities, 'player')}">
 			<tr>
 				<th>First Name</th>
 				<td><c:out value="${user.username}" /></td>
 			</tr>
-		
 		</c:if>
-		
+
 		<tr>
 			<th>Username</th>
 			<td><c:out value="${user.username}" /></td>
@@ -28,13 +26,10 @@
 			<th>Password</th>
 			<td><c:out value="${user.password}" /></td>
 		</tr>
-		
-
 	</table>
 
 	<spring:url value="{username}/edit" var="editUrl">
 		<spring:param name="username" value="${user.username}" />
 	</spring:url>
 	<a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Edit User</a>
-
 </minesweeper:layout>

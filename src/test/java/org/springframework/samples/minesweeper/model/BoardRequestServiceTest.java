@@ -1,4 +1,4 @@
-package org.springframework.samples.minesweeper.service;
+package org.springframework.samples.minesweeper.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
@@ -30,7 +30,7 @@ public class BoardRequestServiceTest {
 	private BoardRequestService boardRequestService;
 	@Autowired
 	private PlayerService playerService;
-	
+
 	@Test
 	void shouldExistRequestBoardForPlayer() {
 		Player p = this.playerService.findPlayerById(6);
@@ -39,18 +39,15 @@ public class BoardRequestServiceTest {
 		Boolean bol = this.boardRequestService.existsRequestBoardForPlayer(p.getFirstName());
 		assertThat(bol);
 	}
-	
 
 	@Test
 	void shouldSaveRequestBoard() {
 		Player p = this.playerService.findPlayerById(6);
 		BoardRequest boardRequest = new BoardRequest(DifficultyLevel.BEGINNER, p.getFirstName());
 		this.boardRequestService.saveRequest(boardRequest);
-		
 		assertNotNull(boardRequest.getId());
 	}
-	
-	
+
 	@Test
 	void shouldFindRequestBoardByPlayer() {
 		Player p = this.playerService.findPlayerById(6);
@@ -59,7 +56,7 @@ public class BoardRequestServiceTest {
 		BoardRequest boardRequest2 = this.boardRequestService.findByPlayer(p.getFirstName());
 		assertThat(boardRequest.getId().equals(boardRequest2.getId()));
 	}
-	
+
 	@Test
 	void shouldDeleteBoardRequest() {
 		Player p = this.playerService.findPlayerById(6);
@@ -69,6 +66,4 @@ public class BoardRequestServiceTest {
 		BoardRequest boardRequest2 = this.boardRequestService.findByPlayer(p.getFirstName());
 		assertThat(!boardRequest.equals(boardRequest2));
 	}
-	
-	
 }

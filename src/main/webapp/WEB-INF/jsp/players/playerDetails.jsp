@@ -12,8 +12,9 @@
 
 <minesweeper:layout pageName="players">
 
-	<c:if test="${player.user.username eq principal.username or fn:contains(principal.authorities, 'admin')}">
-	
+	<c:if
+		test="${player.user.username eq principal.username or fn:contains(principal.authorities, 'admin')}">
+
 		<h2>Player information</h2>
 		<table class="table table-striped">
 
@@ -55,7 +56,6 @@
 		<spring:url value="{playerId}/edit" var="editUrl">
 			<spring:param name="playerId" value="${player.id}" />
 		</spring:url>
-		<a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Edit
-			Player</a>
+		<a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Edit Player</a>
 	</c:if>
 </minesweeper:layout>

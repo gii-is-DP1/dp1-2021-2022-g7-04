@@ -1,6 +1,5 @@
 package org.springframework.samples.minesweeper.tutorial;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 

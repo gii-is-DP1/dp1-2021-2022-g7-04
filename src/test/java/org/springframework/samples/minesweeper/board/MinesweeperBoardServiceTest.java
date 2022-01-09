@@ -1,4 +1,4 @@
-package org.springframework.samples.minesweeper.service;
+package org.springframework.samples.minesweeper.board;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
@@ -27,7 +27,7 @@ public class MinesweeperBoardServiceTest {
 	private MinesweeperBoardService minesweeperBoardService;
 	@Autowired
 	private PlayerService playerService;
-	
+
 	@Test
 	void shouldFindBoardById() {
 		Player p = this.playerService.findPlayerById(6);
@@ -37,7 +37,6 @@ public class MinesweeperBoardServiceTest {
 		MinesweeperBoard board2 = minesweeperBoardService.findBoardById(boardId);
 		assertNotNull(board2.getId());
 	}
-	
 
 	@Test
 	void shouldSaveBoard() {
@@ -46,7 +45,7 @@ public class MinesweeperBoardServiceTest {
 		this.minesweeperBoardService.saveBoard(board);
 		assertNotNull(board.getId());
 	}
-	
+
 	@Test
 	void shouldExistBoardForPlayer() {
 		Player p = this.playerService.findPlayerById(6);
@@ -55,16 +54,16 @@ public class MinesweeperBoardServiceTest {
 		Boolean bol = this.minesweeperBoardService.existsBoardForPlayer(p.getFirstName());
 		assertThat(bol);
 	}
-	
+
 	@Test
 	void shouldFindByPlayer() {
 		Player p = this.playerService.findPlayerById(6);
 		MinesweeperBoard board = new MinesweeperBoard(p.getFirstName());
 		this.minesweeperBoardService.saveBoard(board);
-		MinesweeperBoard board2 = this.minesweeperBoardService.findByPlayer(p.getFirstName()); 
+		MinesweeperBoard board2 = this.minesweeperBoardService.findByPlayer(p.getFirstName());
 		assertThat(board.getId().equals(board2.getId()));
 	}
-	
+
 	@Test
 	void shouldDeleteBoard() {
 		Player p = this.playerService.findPlayerById(6);
@@ -75,6 +74,4 @@ public class MinesweeperBoardServiceTest {
 		Optional<MinesweeperBoard> board2 = this.minesweeperBoardService.findById(boardId);
 		assertThat(!board.equals(board2));
 	}
-	
-	
 }

@@ -15,14 +15,11 @@
  */
 package org.springframework.samples.minesweeper.user;
 
-import java.util.Collection;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.minesweeper.player.Player;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,8 +53,7 @@ public class UserController {
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
-	
-	
+
 	@GetMapping(value = "/users/new")
 	public String initCreationForm(Map<String, Object> model) {
 		User user = new User();
@@ -67,19 +63,18 @@ public class UserController {
 
 	@PostMapping(value = "/users/new")
 	public String processCreationForm(@Valid User user, BindingResult result) {
-		
+
 		if (result.hasErrors()) {
 			return VIEWS_SERVICE_CREATE_FORM;
-		}
-		else {
-			//creating user, and authority
-			
+		} else {
+			// creating user, and authority
+
 			this.userService.saveUser(user);
-			
+
 			return "redirect:/users/" + user.getUsername();
 		}
 	}
-	
+
 	@GetMapping(value = "/users/{username}/edit")
 	public String initUpdateUserForm(@PathVariable("username") String username, Model model) {
 		User user = this.userService.findByUsername(username);
@@ -92,33 +87,31 @@ public class UserController {
 			@PathVariable("username") String username) {
 		if (result.hasErrors()) {
 			return VIEWS_SERVICE_UPDATE_FORM;
-		}
-		else {
+		} else {
 			user.setUsername(username);
 			this.userService.saveUser(user);
 			return "redirect:/users/{username}";
 		}
-		}
+	}
 
 	@GetMapping("/users/{username}")
 	public ModelAndView showUser(@PathVariable("username") String username) {
-		//comprobar que solo pueda ver estos detalles un admin o el user que se haya logueado
+		// comprobar que solo pueda ver estos detalles un admin o el user que se haya
+		// logueado
 		ModelAndView mav = new ModelAndView("users/userDetails");
 		mav.addObject(this.userService.findByUsername(username));
 		return mav;
 	}
-	
-	/*@GetMapping("/{username}/delete")
-	public String delete(@PathVariable("username") String username) {
-		userService.deleteUser(username);
-		return "redirect:/players/find";
-	}*/
-	
-	@GetMapping(value="/{username}/delete")
+
+	/*
+	 * @GetMapping("/{username}/delete") public String
+	 * delete(@PathVariable("username") String username) {
+	 * userService.deleteUser(username); return "redirect:/players/find"; }
+	 */
+
+	@GetMapping(value = "/{username}/delete")
 	public String logicDeleteuser(@PathVariable("username") String username) {
 		userService.logicDeleteUser(username);
 		return "users/userLogicDelete";
 	}
-	
-	
 }

@@ -1,4 +1,4 @@
-package org.springframework.samples.minesweeper.service;
+package org.springframework.samples.minesweeper.user;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -15,15 +15,12 @@ public class UserServiceTest {
 	@Autowired
 	private UserService userService;
 
-
 	@Test
 	void shouldLogicDeleteUser() {
-		Boolean isEnabled=true;
+		Boolean isEnabled = true;
 		this.userService.logicDeleteUser("player");
-		User user=userService.findByUsername("player");
-		isEnabled=user.isEnabled();
+		User user = userService.findByUsername("player");
+		isEnabled = user.isEnabled();
 		assertFalse(isEnabled);
-
 	}
 }
-

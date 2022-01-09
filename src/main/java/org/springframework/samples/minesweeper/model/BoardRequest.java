@@ -46,49 +46,50 @@ public class BoardRequest extends BaseEntity {
 	private int mines;
 
 	private DifficultyLevel level;
-	
+
 	public BoardRequest() {
 	}
-	
+
 	/**
 	 * Set a board request by difficulty (For Beginner, Medium and Ace levels)
 	 *
-	 * @param level must not be {@literal null}.
+	 * @param level    must not be {@literal null}.
 	 * @param username must not be {@literal null}.
 	 * @return a board request entity for initialize a game.
 	 */
 	public BoardRequest(DifficultyLevel level, String username) {
 		switch (level) {
-			case BEGINNER:
-				this.rows = 8;
-				this.columns = 8;
-				this.mines = 10;
-				break;
-			case MEDIUM:
-				this.rows = 16;
-				this.columns = 16;
-				this.mines = 40;
-				break;
-			case ACE:
-				this.rows = 16;
-				this.columns = 30;
-				mines = 99;
-				break;
-			default:
-				this.rows = 8;
-				this.columns = 8;
-				this.mines = 10;
+		case BEGINNER:
+			this.rows = 8;
+			this.columns = 8;
+			this.mines = 10;
+			break;
+		case MEDIUM:
+			this.rows = 16;
+			this.columns = 16;
+			this.mines = 40;
+			break;
+		case ACE:
+			this.rows = 16;
+			this.columns = 30;
+			mines = 99;
+			break;
+		default:
+			this.rows = 8;
+			this.columns = 8;
+			this.mines = 10;
 		}
 		this.level = level;
 		this.playerName = username;
 	}
-	
+
 	/**
-	 * Set a board request by rows, columns and number of mines (Only for Custom level)
+	 * Set a board request by rows, columns and number of mines (Only for Custom
+	 * level)
 	 *
-	 * @param rows must not be {@literal null}.
-	 * @param cols must not be {@literal null}.
-	 * @param mines must not be {@literal null}.
+	 * @param rows     must not be {@literal null}.
+	 * @param cols     must not be {@literal null}.
+	 * @param mines    must not be {@literal null}.
 	 * @param username must not be {@literal null}.
 	 * @return a board request entity for initialize a game.
 	 */
@@ -96,8 +97,7 @@ public class BoardRequest extends BaseEntity {
 		this.rows = rows;
 		this.columns = cols;
 		this.mines = mines;
-		this.playerName = username;		
+		this.playerName = username;
 		this.level = DifficultyLevel.CUSTOM;
 	}
-
 }

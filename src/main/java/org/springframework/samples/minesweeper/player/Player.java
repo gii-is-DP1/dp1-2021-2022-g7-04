@@ -1,8 +1,5 @@
 package org.springframework.samples.minesweeper.player;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,10 +10,11 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import org.springframework.samples.minesweeper.model.BaseEntity;
-import org.springframework.samples.minesweeper.model.NamedEntity;
 import org.springframework.samples.minesweeper.model.Person;
 import org.springframework.samples.minesweeper.user.User;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
