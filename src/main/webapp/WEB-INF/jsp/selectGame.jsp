@@ -11,48 +11,52 @@
 <sec:authentication var="principal" property="principal" />
 
 <minesweeper:layout pageName="selectDifficulty">
-	<c:choose>
-	<c:when test="${gameStarted eq false}">
-	<h2>Select a difficulty level</h2>
 
-	<form method="get" action="/newGame" class="form-horizontal"
-		id="select-game-form">
-		<div class="form-group has-feedback">
-			<input type="radio" name="difficulty" value="Beginner" checked /> Beginner<br>
-			<input type="radio" name="difficulty" value="Medium" /> Medium<br>
-			<input type="radio" name="difficulty" value="Ace" /> Ace<br> <input
-				type="radio" name="difficulty" value="Custom" /> Custom<br> <br>
-			<div style="display:none" id="CustomRequest">
-			<form:form modelAttribute="boardRequest" class="form-horizontal">
+	<c:choose>
+		<c:when test="${gameStarted eq false}">
+		
+			<h2>Select a difficulty level</h2>
+
+			<form method="get" action="/newGame" class="form-horizontal" id="select-game-form">
+			
 				<div class="form-group has-feedback">
-					<form:hidden path="id" />
-					<form:hidden path="playerName" value="${principal.username}" />
-					<label>Rows: </label>
-					<form:input path="rows" value="8" type="number" min="8" max="16" size="5" name="rows" />
-					&nbsp;&nbsp;&nbsp; <label>Columns: </label>
-					<form:input path="columns" value="8" type="number" min="8" max="30" size="5"
-						name="columns" />
-					&nbsp;&nbsp;&nbsp; <label>Mines: </label>
-					<form:input path="mines" value="10" type="number" min="10" max="99" size="5"
-						name="mines" />
+					<input type="radio" name="difficulty" value="Beginner" checked /> Beginner<br> 
+					<input type="radio" name="difficulty" value="Medium" /> Medium<br> 
+					<input type="radio" name="difficulty" value="Ace" /> Ace<br> 
+					<input type="radio" name="difficulty" value="Custom" /> Custom<br> <br>
+					
+					<div style="display: none" id="CustomRequest">
+						<form:form modelAttribute="boardRequest" class="form-horizontal">
+						
+							<div class="form-group has-feedback">
+								<form:hidden path="id" />
+								<form:hidden path="playerName" value="${principal.username}" />
+								<label>Rows: </label>
+								<form:input path="rows" value="8" type="number" min="8" max="16" size="5" name="rows" />
+								&nbsp;&nbsp;&nbsp; 
+								<label>Columns: </label>
+								<form:input path="columns" value="8" type="number" min="8" max="30" size="5" name="columns" />
+								&nbsp;&nbsp;&nbsp; 
+								<label>Mines: </label>
+								<form:input path="mines" value="10" type="number" min="10" max="99" size="5" name="mines" />
+							</div>
+						</form:form>
+					</div>
+					<button class="btn btn-default" type="submit">Submit</button>
 				</div>
-			</form:form>
-			</div>
-			<button class="btn btn-default" type="submit">Submit</button>
-		</div>
-	</form>
-	</c:when>
-	<c:otherwise>
-		<form method="get" action="/continueGame" class="form-horizontal"
-		id="continue-game-form">
-		<h2>Continue your current game</h2>
-		<button class="btn btn-default" type="submit">Submit</button>
+			</form>
+		</c:when>
 		
-		</form>
-		
-	</c:otherwise>
+		<c:otherwise>
+			<form method="get" action="/continueGame" class="form-horizontal"
+				id="continue-game-form">
+				<h2>Continue your current game</h2>
+				<button class="btn btn-default" type="submit">Yes</button>
+				<button class="btn btn-default" type="submit">No</button>
+			</form>
+		</c:otherwise>
 	</c:choose>
-	
+
 </minesweeper:layout>
 
 <script>

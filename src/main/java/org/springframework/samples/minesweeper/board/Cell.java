@@ -15,28 +15,27 @@ import lombok.Setter;
 @Setter
 @Table(name = "cells")
 public class Cell extends BaseEntity {
-	@Range(min=0,max=8)
+	@Range(min = 0, max = 8)
 	int minesAround;
-    String type;
-    @Range(min=0,max=29) // 30 columns
-    int xPosition;
-    @Range(min=0,max=29) // 16 rows
-    int yPosition;
-    boolean isMine;
-    
-    @ManyToOne
-    MinesweeperBoard minesweeperBoard;
-    
-    public Cell() {
-    	this.type = "UNPRESSED";
-    }
-    
-    public Integer getPositionXInPixels(Integer size) {
-    	return (xPosition)*size;
-    }
-    
-    public Integer getPositionYInPixels(Integer size) {
-    	return (yPosition)*size;
-    }
-    
+	String type;
+	@Range(min = 0, max = 29) // 30 columns
+	int xPosition;
+	@Range(min = 0, max = 29) // 16 rows
+	int yPosition;
+	boolean isMine;
+
+	@ManyToOne
+	MinesweeperBoard minesweeperBoard;
+
+	public Cell() {
+		this.type = "UNPRESSED";
+	}
+
+	public Integer getPositionXInPixels(Integer size) {
+		return (xPosition) * size;
+	}
+
+	public Integer getPositionYInPixels(Integer size) {
+		return (yPosition) * size;
+	}
 }

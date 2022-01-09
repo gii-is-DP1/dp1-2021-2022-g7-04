@@ -15,13 +15,11 @@
  */
 package org.springframework.samples.minesweeper.user;
 
-
 import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.minesweeper.player.Player;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,32 +44,33 @@ public class UserService {
 		user.setEnabled(true);
 		userRepository.save(user);
 	}
-	
+
 	public Optional<User> findUser(String username) {
 		return userRepository.findById(username);
 	}
 
-	/*@Transactional(readOnly = true)
-	public User findUserByUsername(String username) throws DataAccessException {
-		return userRepository.findByUsername(username);
-	
-	}*/
-	public Collection<User> findPlayersByUsername(String username){
+	/*
+	 * @Transactional(readOnly = true) public User findUserByUsername(String
+	 * username) throws DataAccessException { return
+	 * userRepository.findByUsername(username);
+	 * 
+	 * }
+	 */
+	public Collection<User> findPlayersByUsername(String username) {
 		return userRepository.findPlayersByUsername(username);
 	}
-	
+
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
-	
+
 	@Transactional
 	public void deleteUser(String username) {
 		userRepository.deleteById(username);
 	}
-	
+
 	@Transactional
 	public void logicDeleteUser(String username) {
 		userRepository.logicDeleteUser(username);
 	}
-	
 }

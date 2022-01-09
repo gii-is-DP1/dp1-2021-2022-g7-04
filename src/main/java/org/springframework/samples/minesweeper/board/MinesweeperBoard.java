@@ -21,22 +21,22 @@ import lombok.Setter;
 public class MinesweeperBoard extends BaseEntity {
 	@NotEmpty
 	private String playerName;
-    String background;
-    @Positive
-    int width;
-    @Positive
-    int height;
-    
-    public MinesweeperBoard(){
-    }
+	String background;
+	@Positive
+	int width;
+	@Positive
+	int height;
 
-    public MinesweeperBoard(String playerName){
-    	this.background=null;
-        this.width=800;
-        this.height=400;
-        this.playerName = playerName;
-    }
+	public MinesweeperBoard() {
+	}
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "minesweeperBoard",fetch = FetchType.EAGER)
-    List<Cell> cells; 
+	public MinesweeperBoard(String playerName) {
+		this.background = null;
+		this.width = 800;
+		this.height = 400;
+		this.playerName = playerName;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "minesweeperBoard", fetch = FetchType.EAGER)
+	List<Cell> cells;
 }
