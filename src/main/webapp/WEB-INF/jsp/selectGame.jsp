@@ -20,10 +20,10 @@
 			<form method="get" action="/newGame" class="form-horizontal" id="select-game-form">
 			
 				<div class="form-group has-feedback">
-					<input type="radio" name="difficulty" value="Beginner" checked /> Beginner<br> 
-					<input type="radio" name="difficulty" value="Medium" /> Medium<br> 
-					<input type="radio" name="difficulty" value="Ace" /> Ace<br> 
-					<input type="radio" name="difficulty" value="Custom" /> Custom<br> <br>
+					<input type="radio" id="beginner" name="difficulty" value="Beginner" checked /> <label for="beginner">Beginner</label><br>
+					<input type="radio" id="medium" name="difficulty" value="Medium" /> <label for="medium">Medium</label><br>
+					<input type="radio" id="ace" name="difficulty" value="Ace" /> <label for="ace">Ace</label><br>
+					<input type="radio" id="custom" name="difficulty" value="Custom" /> <label for="custom">Custom</label><br> <br>
 					
 					<div style="display: none" id="CustomRequest">
 						<form:form modelAttribute="boardRequest" class="form-horizontal">
