@@ -39,9 +39,8 @@
 		<div class="form-group">
 			<div class="text-left col-sm-10">
 				<fieldset>
-					<input type="radio" name="move" value="uncover" checked="checked" />
-					Uncover cell<br> <input type="radio" name="move" value="flag" />
-					Toggle flag
+					<input type="radio" id="uncover" name="move" value="uncover" checked="checked" /><label for="uncover">Uncover cell</label><br> 
+					<input type="radio" id="flag" name="move" value="flag" /><label for="flag">Toggle flag</label>
 				</fieldset>
 				<br>
 				<button class="btn btn-default" type="submit">Submit</button>
