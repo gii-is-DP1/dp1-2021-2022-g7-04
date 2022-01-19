@@ -14,7 +14,7 @@ INSERT INTO authorities(id,username,authority) VALUES (4,'jugador3','jugador');
 INSERT INTO users(username,password,enabled) VALUES ('player','player',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'player','player');
 
-INSERT INTO users(username,password,enabled) VALUES ('luis','luis',FALSE);
+INSERT INTO users(username,password,enabled) VALUES ('luis','luis',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (7,'luis','player');
 
 INSERT INTO players(id,first_name,last_name,city,address,telephone,email,username) 

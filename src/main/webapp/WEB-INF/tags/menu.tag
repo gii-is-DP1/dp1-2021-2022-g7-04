@@ -42,6 +42,12 @@
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							<span>Players</span>
 						</minesweeper:menuItem>
+						
+						<minesweeper:menuItem active="${name eq 'audits'}"
+							url="/audits" title="audits">
+							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+							<span>Audits</span>
+						</minesweeper:menuItem>
 					</c:if>
 				</sec:authorize>
 
