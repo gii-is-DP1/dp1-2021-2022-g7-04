@@ -47,7 +47,9 @@
 			</div>
 		</div>
 	</form>
-
+	
+	<br/><br/>
+	<legend>Options</legend>
 	<form action="/restartGame" method="get" class="form-horizontal"
 		id="finish-game-form">
 		<div class="form-group">

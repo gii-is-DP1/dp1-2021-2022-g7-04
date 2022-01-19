@@ -123,10 +123,12 @@ public class MinesweeperBoardService {
 		return matrix[row][column].isMine();
 	}
 
-	public boolean alreadyWon(Cell[][] matrix) {
+	public boolean alreadyWon(BoardRequest boardRequest) {
+		Cell[][] matrix = new Cell[boardRequest.getRows()][boardRequest.getColumns()];
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix[0].length; j++) {
-				if (!matrix[i][j].isMine() && !matrix[i][j].getType().equals("PRESSED")) {
+				Cell current = this.cellService.findCellByPosition(i, j);
+				if (!current.isMine() && !current.getType().equals("PRESSED")) {
 					return false;
 				}
 			}

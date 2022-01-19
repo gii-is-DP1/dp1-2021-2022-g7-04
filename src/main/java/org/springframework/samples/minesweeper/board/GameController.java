@@ -11,6 +11,7 @@ import org.springframework.samples.minesweeper.model.BoardRequestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class GameController {
@@ -45,7 +46,8 @@ public class GameController {
 	}
 
 	@GetMapping(value = "/finishGame")
-	public String finishGame(Map<String, Object> model, HttpServletRequest request) {
+	public String finishGame(@RequestParam(required=false) boolean alreadyWon,
+			Map<String, Object> model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		Principal player = request.getUserPrincipal();
 
 		MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
@@ -53,7 +55,11 @@ public class GameController {
 
 		this.minesweeperService.deleteMinesweeperBoard(board);
 		boardRequestService.deleteRequest(boardRequest);
-		return "redirect:/";
+		
+		if(alreadyWon) {
+			redirectAttributes.addAttribute("winner", true);
+		}
+		return "redirect:/welcome";
 	}
 
 	@GetMapping(value = "/newGame")

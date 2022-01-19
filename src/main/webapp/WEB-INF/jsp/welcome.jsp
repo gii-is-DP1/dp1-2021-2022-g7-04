@@ -9,8 +9,14 @@
 <minesweeper:layout pageName="home">
 
 	<div class="row text-center">
-		<h2>${title}(${group})</h2>
+		<h2>${title} (${group})</h2>
 	</div>
+	
+	<c:if test="${winnerMessage != ''}">
+		<div class="row text-center">
+			<br/><br/><h1 style="color:green"><c:out value="${winnerMessage}"></c:out></h1>
+		</div>
+	</c:if>
 
 	<div class="row">
 		<div class="col-md-6 text-left">
@@ -24,9 +30,5 @@
 			<img src="${logoImage}" />
 		</div>
 	</div>
-
-	<h2>
-		<fmt:message key="welcome" />
-	</h2>
 
 </minesweeper:layout>
