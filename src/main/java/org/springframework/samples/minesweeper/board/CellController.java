@@ -56,7 +56,8 @@ public class CellController {
 			model.addAttribute("minesweeperBoard", cell.getMinesweeperBoard());
 			return "redirect:/newGame";
 		}else {
-			return "redirect:/finishGame?alreadyWon=true";
+			redirectAttributes.addAttribute("gameStatus", "WON");
+			return "redirect:/finishGame";
 		}
 	}
 }

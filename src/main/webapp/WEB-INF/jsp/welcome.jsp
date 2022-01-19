@@ -17,6 +17,11 @@
 			<br/><br/><h1 style="color:green"><c:out value="${winnerMessage}"></c:out></h1>
 		</div>
 	</c:if>
+	<c:if test="${loserMessage != ''}">
+		<div class="row text-center">
+			<br/><br/><h1 style="color:red"><c:out value="${loserMessage}"></c:out></h1>
+		</div>
+	</c:if>
 
 	<div class="row">
 		<div class="col-md-6 text-left">

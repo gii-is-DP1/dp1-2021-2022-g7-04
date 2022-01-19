@@ -46,7 +46,7 @@ public class GameController {
 	}
 
 	@GetMapping(value = "/finishGame")
-	public String finishGame(@RequestParam(required=false) boolean alreadyWon,
+	public String finishGame(@RequestParam(required=false) String gameStatus,
 			Map<String, Object> model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		Principal player = request.getUserPrincipal();
 
@@ -56,8 +56,8 @@ public class GameController {
 		this.minesweeperService.deleteMinesweeperBoard(board);
 		boardRequestService.deleteRequest(boardRequest);
 		
-		if(alreadyWon) {
-			redirectAttributes.addAttribute("winner", true);
+		if(gameStatus!="") {
+			redirectAttributes.addAttribute("gameStatus", gameStatus);
 		}
 		return "redirect:/welcome";
 	}

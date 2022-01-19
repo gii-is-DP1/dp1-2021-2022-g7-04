@@ -20,7 +20,7 @@ public class WelcomeController {
 	MinesweeperBoardService minesweeperService;
 
 	@GetMapping({ "/", "/welcome" })
-	public String welcome(@RequestParam(required=false) boolean winner, Map<String, Object> model, HttpServletRequest request) {
+	public String welcome(@RequestParam(required=false) String gameStatus, Map<String, Object> model, HttpServletRequest request) {
 		List<Person> persons = new ArrayList<Person>();
 
 		String[] developers = new String[] { "José Manuel.Lobato Troncoso", "Daniel Jesús.Martínez Suárez",
@@ -38,8 +38,11 @@ public class WelcomeController {
 		model.put("persons", persons);
 		model.put("title", "Design & Testing I - Minesweeper");
 		model.put("group", "G7-04");
-		if(winner) {
+		
+		if(gameStatus!=null && gameStatus.equals("WON")) {
 			model.put("winnerMessage", "Congratulations, you win a game!");
+		}else if(gameStatus!=null &&  gameStatus.equals("LOST")){
+			model.put("loserMessage", "Sorry, you've lost...");
 		}
 
 		return "welcome";
