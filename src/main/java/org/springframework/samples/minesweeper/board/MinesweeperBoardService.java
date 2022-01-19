@@ -1,6 +1,10 @@
 package org.springframework.samples.minesweeper.board;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -41,7 +45,7 @@ public class MinesweeperBoardService {
 				matrix[i][j].setMinesweeperBoard(board);
 				matrix[i][j].setXPosition(i);
 				matrix[i][j].setYPosition(j);
-				
+
 				cells.add(matrix[i][j]);
 				cellService.saveCell(matrix[i][j]);
 			}
@@ -177,5 +181,27 @@ public class MinesweeperBoardService {
 	@Transactional
 	public void deleteMinesweeperBoard(MinesweeperBoard board) throws DataAccessException {
 		boardRepo.delete(board);
+	}
+
+	public Date getFormattedDate() {
+		Calendar date = Calendar.getInstance();
+		String y = String.valueOf(date.get(Calendar.YEAR));
+		String m = String.valueOf(date.get(Calendar.MONTH+1));
+		String d = String.valueOf(date.get(Calendar.DAY_OF_MONTH)); 
+
+		String hh = String.valueOf(date.get(Calendar.HOUR_OF_DAY));
+		String mm = String.valueOf(date.get(Calendar.MINUTE));
+		String ss = String.valueOf(date.get(Calendar.SECOND));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String dateInString = String.format("%s/%s/%s %s:%s:%s",y,m,d,hh,mm,ss);
+		Date res = new Date();
+		try {
+			res = sdf.parse(dateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 }

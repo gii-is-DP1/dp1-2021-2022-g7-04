@@ -1,11 +1,18 @@
 package org.springframework.samples.minesweeper.board;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.minesweeper.audit.Audit;
+import org.springframework.samples.minesweeper.audit.AuditService;
 import org.springframework.samples.minesweeper.model.BoardRequest;
 import org.springframework.samples.minesweeper.model.BoardRequestService;
 import org.springframework.stereotype.Controller;
@@ -20,9 +27,11 @@ public class GameController {
 	MinesweeperBoardService minesweeperService;
 
 	@Autowired
-	BoardRequestService boardRequestService;
+	private BoardRequestService boardRequestService;
 	@Autowired
 	private CellService cellService;
+	@Autowired
+	private AuditService auditService;
 
 	@GetMapping(value = "/selectGame")
 	public String selectGame(Map<String, Object> model, BoardRequest boardRequest, HttpServletRequest request) {
@@ -54,13 +63,36 @@ public class GameController {
 
 		MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
 		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
+		boolean foundAnyMine = this.cellService.findAnyMine(board.getId());
 
 		this.minesweeperService.deleteMinesweeperBoard(board);
 		boardRequestService.deleteRequest(boardRequest);
 		
+		// WIN GAME
 		if(winner) {
 			redirectAttributes.addAttribute("winner", true);
+			
+			// End audit game (WIN GAME)
+			Date date = this.minesweeperService.getFormattedDate();
+			Audit gameAudit = this.auditService.findByActiveBoard(board.getId());
+			gameAudit.setEndDate(date);
+			gameAudit.setPlayer(player.getName());
+			gameAudit.setGameStatus("WON");
+			gameAudit.setDifficulty(boardRequest.getLevel().name());
+			gameAudit.setFinished(true);
+			this.auditService.saveAudit(gameAudit);
+		}else if(!foundAnyMine) {
+			// End audit game (CANCELLED GAME)
+			Date date = this.minesweeperService.getFormattedDate();
+			Audit gameAudit = this.auditService.findByActiveBoard(board.getId());
+			gameAudit.setEndDate(date);
+			gameAudit.setPlayer(player.getName());
+			gameAudit.setGameStatus("CANCELLED");
+			gameAudit.setDifficulty(boardRequest.getLevel().name());
+			gameAudit.setFinished(true);
+			this.auditService.saveAudit(gameAudit);
 		}
+		
 		return "redirect:/welcome";
 	}
 
@@ -110,7 +142,18 @@ public class GameController {
 		boolean foundAnyMine = false;
 		if (!existPlayRequest) {
 			Cell[][] matrixBoard = minesweeperService.initializeGame(boardRequest, board);
-
+			
+			// Start audit game (STARTED GAME)
+			Date date = this.minesweeperService.getFormattedDate();
+			Audit gameAudit = new Audit();
+			gameAudit.setStartDate(date);
+			gameAudit.setPlayer(player.getName());
+			gameAudit.setGameStatus("STARTED");
+			gameAudit.setDifficulty(boardRequest.getLevel().name());
+			gameAudit.setFinished(false);
+			gameAudit.setMinesweeperBoardId(board.getId());
+			this.auditService.saveAudit(gameAudit);
+			
 			// TODO Mines generation ETC
 		}else {
 			foundAnyMine = this.cellService.findAnyMine(board.getId());
@@ -119,6 +162,16 @@ public class GameController {
 		// LOSE GAME
 		if(foundAnyMine) {
 			model.put("loserMessage", "Sorry, you've lost...");
+			
+			// End audit game (LOSE GAME)
+			Date date = this.minesweeperService.getFormattedDate();
+			Audit gameAudit = this.auditService.findByActiveBoard(board.getId());
+			gameAudit.setEndDate(date);
+			gameAudit.setPlayer(player.getName());
+			gameAudit.setGameStatus("LOST");
+			gameAudit.setDifficulty(boardRequest.getLevel().name());
+			gameAudit.setFinished(true);
+			this.auditService.saveAudit(gameAudit);
 		}
 		
 		model.put("minesweeperBoard", board);
@@ -145,10 +198,35 @@ public class GameController {
 
 		MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
 		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
+		boolean foundAnyMine = this.cellService.findAnyMine(board.getId());
+		
+		if(!foundAnyMine) {
+			// End audit game (CANCELLED GAME)
+			Date date = this.minesweeperService.getFormattedDate();
+			Audit gameAudit = this.auditService.findByActiveBoard(board.getId());
+			gameAudit.setEndDate(date);
+			gameAudit.setPlayer(player.getName());
+			gameAudit.setGameStatus("CANCELLED");
+			gameAudit.setDifficulty(boardRequest.getLevel().name());
+			gameAudit.setFinished(true);
+			this.auditService.saveAudit(gameAudit);
+		}
+				
 		this.minesweeperService.deleteMinesweeperBoard(board);
 		board = new MinesweeperBoard(player.getName());
 		minesweeperService.saveBoard(board);
 		Cell[][] matrixBoard = minesweeperService.initializeGame(boardRequest, board);
+		
+		// Start audit game (STARTED GAME)
+		Date newDate = this.minesweeperService.getFormattedDate();
+		Audit newGameAudit = new Audit();
+		newGameAudit.setStartDate(newDate);
+		newGameAudit.setPlayer(player.getName());
+		newGameAudit.setGameStatus("STARTED");
+		newGameAudit.setDifficulty(boardRequest.getLevel().name());
+		newGameAudit.setFinished(false);
+		newGameAudit.setMinesweeperBoardId(board.getId());
+		this.auditService.saveAudit(newGameAudit);
 
 		model.put("minesweeperBoard", board);
 		model.put("boardRequest", boardRequest);
