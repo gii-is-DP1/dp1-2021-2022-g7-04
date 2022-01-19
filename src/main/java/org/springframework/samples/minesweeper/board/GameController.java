@@ -116,6 +116,7 @@ public class GameController {
 			foundAnyMine = this.cellService.findAnyMine(board.getId());
 		}
 		
+		// LOSE GAME
 		if(foundAnyMine) {
 			model.put("loserMessage", "Sorry, you've lost...");
 		}
