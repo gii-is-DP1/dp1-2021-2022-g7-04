@@ -5,7 +5,7 @@
 <img id="FLAG" src="resources/images/flag.png" style="display:none">
 <img id="UNPRESSED" src="resources/images/unpressed.png" style="display:none">
 <img id="PRESSED" src="resources/images/pressed2.png" style="display:none">
-
+<img id="MINE" src="resources/images/boom.png" style="display:none">
 
 
 <script>

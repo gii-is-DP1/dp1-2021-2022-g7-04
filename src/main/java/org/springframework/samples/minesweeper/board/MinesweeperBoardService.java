@@ -119,8 +119,9 @@ public class MinesweeperBoardService {
 		}
 	}
 
-	public boolean mineFound(Cell[][] matrix, int row, int column) {
-		return matrix[row][column].isMine();
+	public boolean mineFound(int row, int column) {
+		Cell current = this.cellService.findCellByPosition(row, column);
+		return current.isMine();
 	}
 
 	public boolean alreadyWon(BoardRequest boardRequest) {

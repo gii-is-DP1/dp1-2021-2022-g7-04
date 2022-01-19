@@ -21,6 +21,8 @@ public class GameController {
 
 	@Autowired
 	BoardRequestService boardRequestService;
+	@Autowired
+	private CellService cellService;
 
 	@GetMapping(value = "/selectGame")
 	public String selectGame(Map<String, Object> model, BoardRequest boardRequest, HttpServletRequest request) {
@@ -46,7 +48,7 @@ public class GameController {
 	}
 
 	@GetMapping(value = "/finishGame")
-	public String finishGame(@RequestParam(required=false) String gameStatus,
+	public String finishGame(@RequestParam(required=false) boolean winner,
 			Map<String, Object> model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		Principal player = request.getUserPrincipal();
 
@@ -56,8 +58,8 @@ public class GameController {
 		this.minesweeperService.deleteMinesweeperBoard(board);
 		boardRequestService.deleteRequest(boardRequest);
 		
-		if(gameStatus!="") {
-			redirectAttributes.addAttribute("gameStatus", gameStatus);
+		if(winner) {
+			redirectAttributes.addAttribute("winner", true);
 		}
 		return "redirect:/welcome";
 	}
@@ -104,11 +106,20 @@ public class GameController {
 			existPlayRequest = true;
 		}
 
+		// Manage the miscellanious
+		boolean foundAnyMine = false;
 		if (!existPlayRequest) {
 			Cell[][] matrixBoard = minesweeperService.initializeGame(boardRequest, board);
 
 			// TODO Mines generation ETC
+		}else {
+			foundAnyMine = this.cellService.findAnyMine(board.getId());
 		}
+		
+		if(foundAnyMine) {
+			model.put("loserMessage", "Sorry, you've lost...");
+		}
+		
 		model.put("minesweeperBoard", board);
 		model.put("boardRequest", boardRequest);
 		model.put("difficulty", difficulty);

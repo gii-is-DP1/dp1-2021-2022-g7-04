@@ -12,14 +12,9 @@
 		<h2>${title} (${group})</h2>
 	</div>
 	
-	<c:if test="${winnerMessage != ''}">
+	<c:if test="${winnerMessage != null}">
 		<div class="row text-center">
 			<br/><br/><h1 style="color:green"><c:out value="${winnerMessage}"></c:out></h1>
-		</div>
-	</c:if>
-	<c:if test="${loserMessage != ''}">
-		<div class="row text-center">
-			<br/><br/><h1 style="color:red"><c:out value="${loserMessage}"></c:out></h1>
 		</div>
 	</c:if>
 

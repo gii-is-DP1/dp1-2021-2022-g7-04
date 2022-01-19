@@ -36,6 +36,9 @@ public class CellController {
 				if (!cell.getType().equals("FLAG")) {
 					cell.setType("PRESSED");
 				}
+				if (cell.isMine()) {
+					cell.setType("MINE");
+				}
 			} else if (move.equals("flag")) {
 				if (cell.getType().equals("FLAG")) {
 					cell.setType("UNPRESSED");
@@ -51,13 +54,18 @@ public class CellController {
 		this.cellService.saveCell(cell);
 		
 		boolean alreadyWon = minesweeperService.alreadyWon(boardRequest);
-		if(!alreadyWon) {
+		
+		// WIN GAME
+		if(alreadyWon) {
+			redirectAttributes.addAttribute("winner", true);
+			return "redirect:/finishGame";
+		
+		// CONTINUE GAME
+		}else {
 			model.addAttribute(cell);
 			model.addAttribute("minesweeperBoard", cell.getMinesweeperBoard());
 			return "redirect:/newGame";
-		}else {
-			redirectAttributes.addAttribute("gameStatus", "WON");
-			return "redirect:/finishGame";
 		}
+		
 	}
 }

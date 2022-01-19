@@ -30,4 +30,9 @@ public class CellService {
 	public Cell findCellByPosition(int xPosition, int yPosition) throws DataAccessException {
 		return cellRepository.findByPosition(xPosition, yPosition);
 	}
+	
+	@Transactional
+	public boolean findAnyMine(int boardId) throws DataAccessException {
+		return cellRepository.findAnyMine(boardId)>0;
+	}
 }
