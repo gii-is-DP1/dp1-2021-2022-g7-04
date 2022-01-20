@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
+
 @Controller
 public class PlayerController {
 
@@ -60,9 +61,10 @@ public class PlayerController {
 			List<Player> results = this.playerService.findPlayers(player.getFirstName(),page,pageable);
 			model.put("pageNumber", pageable.getPageNumber());
 			model.put("pageSize", pageable.getPageSize());
-			Double numPages=(results.size())*1.0/pageable.getPageSize();
-			numPages=Math.ceil(numPages);
-			model.put("numPages", numPages);
+			model.put("hasPrevious", pageable.hasPrevious());
+			Integer playersPerPage = pageable.getPageSize();
+			Double totalPages = Math.ceil(playerService.findAll().size()/(playersPerPage+1));
+			model.put("totalPages", totalPages);
 			if (results.isEmpty()) {
 				// no players found
 				result.rejectValue("firstName", "notFound", "not found");

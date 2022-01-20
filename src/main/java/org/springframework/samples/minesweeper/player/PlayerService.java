@@ -27,7 +27,7 @@ public class PlayerService {
 	}
 
 	@Transactional
-	public Iterable<Player> findAll() {
+	public List<Player> findAll() {
 		return playerRepository.findAll();
 	}
 

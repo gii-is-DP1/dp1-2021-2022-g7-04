@@ -19,7 +19,7 @@ public interface PlayerRepository extends Repository<Player, Integer> {
 	void save(Player player) throws DataAccessException;
 
 	@Query("SELECT player FROM Player player")
-	Iterable<Player> findAll();
+	List<Player> findAll();
 	
 	@Query("SELECT player FROM Player player WHERE player.firstName LIKE :firstName%")
 	public List<Player> findPlayers(@Param("firstName") String firstName,Pageable pageable);
