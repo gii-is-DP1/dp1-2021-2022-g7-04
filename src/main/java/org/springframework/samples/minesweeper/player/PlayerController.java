@@ -61,7 +61,7 @@ public class PlayerController {
 			model.put("pageNumber", pageable.getPageNumber());
 			model.put("pageSize", pageable.getPageSize());
 			Double numPages=(results.size())*1.0/pageable.getPageSize();
-			//numPages=Math.ceil(numPages);
+			numPages=Math.ceil(numPages);
 			model.put("numPages", numPages);
 			if (results.isEmpty()) {
 				// no players found

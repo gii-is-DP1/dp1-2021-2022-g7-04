@@ -52,29 +52,22 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<c:if test="${pageNumber != 1}">
-			<td><a href="/players/list?firstName=${firstName}&page=${pageNumber - 1}">Previous</a></td>
-		</c:if>
+		
 
-		<%--For displaying Page numbers. 
-    The when condition does not display a link for the current page--%>
+
+		<td><a href="/players/list?firstName=${firstName}&page=${pageNumber-1}">Previous</a></td>
 		<table border="1" cellpadding="5" cellspacing="5">
+
 			<tr>
 				<c:forEach begin="0" end="${numPages+1}" var="i">
-					<c:choose>
-						<c:when test="${pageNumber eq i}">
-							<td>${i}</td>
-						</c:when>
-						<c:otherwise>
-							<td><a href="/players/list?firstName=${firstName}&page=${i}">${i}</a></td>
-						</c:otherwise>
-					</c:choose>
+			
+					<td><a href="/players/list?firstName=${firstName}&page=${i}">${i}</a></td>
+
 				</c:forEach>
 			</tr>
 		</table>
 
-		<%--For displaying Next link --%>
-		<c:if test="${pageNumber lt numPages}">
-			<td><a href="/players/list?firstName=${firstName}&page=${pageNumber + 1}">Next</a></td>
-		</c:if>
+	
+		<td><a	href="/players/list?firstName=${firstName}&page=${pageNumber + 1}">Next</a></td>
+	
 </minesweeper:layout>
