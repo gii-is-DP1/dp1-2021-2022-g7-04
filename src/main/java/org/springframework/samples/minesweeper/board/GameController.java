@@ -62,6 +62,7 @@ public class GameController {
 		Principal player = request.getUserPrincipal();
 
 		// Manage the board of the player
+		int flagsInMines = 0;
 		MinesweeperBoard board = null;
 		if (!minesweeperService.existsBoardForPlayer(player.getName())) {
 			board = new MinesweeperBoard(player.getName());
@@ -69,6 +70,11 @@ public class GameController {
 			minesweeperService.saveBoard(board);
 		} else {
 			board = minesweeperService.findByPlayer(player.getName());
+			for (Cell c: board.getCells()) {
+				if(c.getType().equals("FLAG")) {
+					flagsInMines--;
+				}
+			}
 		}
 
 		boolean existPlayRequest = false;
@@ -81,21 +87,26 @@ public class GameController {
 			if (difficulty.equals("Medium")) {
 				level = DifficultyLevel.MEDIUM;
 				boardRequest = new BoardRequest(level, player.getName());
+				flagsInMines = boardRequest.getMines();
 			} else if (difficulty.equals("Ace")) {
 				level = DifficultyLevel.ACE;
 				boardRequest = new BoardRequest(level, player.getName());
+				flagsInMines = boardRequest.getMines();
 			} else if (difficulty.equals("Custom")) {
 				level = DifficultyLevel.CUSTOM;
 				boardRequest = new BoardRequest(playRequest.getRows(), playRequest.getColumns(), playRequest.getMines(),
 						player.getName());
+				flagsInMines = boardRequest.getMines();
 			} else {
 				boardRequest = new BoardRequest(level, player.getName());
+				flagsInMines = boardRequest.getMines();
 			}
 
 			boardRequestService.saveRequest(boardRequest);
 		} else {
 			boardRequest = boardRequestService.findByPlayer(player.getName());
 			existPlayRequest = true;
+			flagsInMines = flagsInMines + boardRequest.getMines();
 		}
 
 		if (!existPlayRequest) {
@@ -103,6 +114,7 @@ public class GameController {
 
 			// TODO Mines generation ETC
 		}
+		model.put("flagsInMines", flagsInMines);
 		model.put("minesweeperBoard", board);
 		model.put("boardRequest", boardRequest);
 		model.put("difficulty", difficulty);
@@ -112,10 +124,19 @@ public class GameController {
 	@GetMapping(value = "/continueGame")
 	public String continueGame(Map<String, Object> model, HttpServletRequest request) {
 		Principal player = request.getUserPrincipal();
+		int flagsInMines = 0;
 
 		MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
+		for (Cell c: board.getCells()) {
+			if(c.getType().equals("FLAG")) {
+				flagsInMines--;
+			}
+		}
+		
 		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
-
+		flagsInMines = flagsInMines + boardRequest.getMines();
+		
+		model.put("flagsInMines", flagsInMines);
 		model.put("minesweeperBoard", board);
 		model.put("boardRequest", boardRequest);
 		return "newGame";
@@ -131,7 +152,9 @@ public class GameController {
 		board = new MinesweeperBoard(player.getName());
 		minesweeperService.saveBoard(board);
 		Cell[][] matrixBoard = minesweeperService.initializeGame(boardRequest, board);
-
+		int flagsInMines = boardRequest.getMines();
+		
+		model.put("flagsInMines", flagsInMines);
 		model.put("minesweeperBoard", board);
 		model.put("boardRequest", boardRequest);
 		return "newGame";
