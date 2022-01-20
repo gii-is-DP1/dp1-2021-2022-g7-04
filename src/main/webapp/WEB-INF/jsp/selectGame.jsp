@@ -48,10 +48,13 @@
 		</c:when>
 		
 		<c:otherwise>
+			<h2>Continue your current game?</h2>
 			<form method="get" action="/continueGame" class="form-horizontal"
 				id="continue-game-form">
-				<h2>Continue your current game</h2>
 				<button class="btn btn-default" type="submit">Yes</button>
+			</form>
+			<form method="get" action="/finishGame" class="form-horizontal"
+				id="finish-game-form">
 				<button class="btn btn-default" type="submit">No</button>
 			</form>
 		</c:otherwise>
