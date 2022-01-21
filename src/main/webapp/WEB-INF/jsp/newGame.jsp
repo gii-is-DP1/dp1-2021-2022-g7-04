@@ -15,6 +15,7 @@
 					<c:out value="${loserMessage}"></c:out>
 				</h1>
 			</div>
+			<div>Total mines: ${flagsInMines}</div>
 			<div class="row">
 				<div class="col-md-12">
 					<minesweeper:board minesweeperBoard="${minesweeperBoard}" />
@@ -26,6 +27,7 @@
 			</div>
 		</c:when>
 		<c:otherwise>
+			<div>Total mines: ${flagsInMines}</div>
 			<div class="row">
 				<div class="col-md-12">
 					<minesweeper:board minesweeperBoard="${minesweeperBoard}" />
@@ -45,6 +47,7 @@
 						(1-${boardRequest.rows})</label> <input min="1" size="5"
 						max="${boardRequest.rows}" value="1" type="number"
 						name="xPosition" id="xPosition" />
+					<p>Rows are numbered from left to right.</p>
 				</div>
 
 				<div class="form-group has-feedback">
@@ -52,6 +55,7 @@
 						(1-${boardRequest.columns}) </label> <input min="1" size="5"
 						max="${boardRequest.columns}" value="1" type="number"
 						name="yPosition" id="yPosition" />
+					<p>Columns are numbered from top to bottom.</p>
 				</div>
 
 				<div class="form-group">
