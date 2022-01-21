@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -29,18 +30,19 @@ public class PlayerServiceTest {
 	@Autowired
 	private PlayerService playerService;
 
-	//@Test
-	//void shouldFindPlayersByUserName() {
-		//Sort sort=Sort.by(Sort.Direction.DESC,"firstName");
-		//Pageable pageable=PageRequest.of(0, 5,sort);
-		//Collection<Player> players = this.playerService.findPlayers("Nombre",pageable);
-		//assertThat(players.size()).isEqualTo(1);
+	/*
+	@Test
+	void shouldFindPlayersByUserName() {
+		Sort sort=Sort.by(Sort.Direction.DESC,"firstName");
+		Pageable pageable=PageRequest.of(0, 5,sort);
+		Collection<Player> players = this.playerService.findPlayers("Nombre",pageable);
+		assertThat(players.size()).isEqualTo(1);
 
-//		players = this.playerService.findPlayers("player0",pageable);
-	//	assertThat(players.isEmpty()).isTrue();
-	//}
+		players = this.playerService.findPlayers("player0",pageable);
+		assertThat(players.isEmpty()).isTrue();
+	}
 
-/*	@Test
+	@Test
 	void shouldCreatePlayer() {
 		Sort sort=Sort.by(Sort.Direction.DESC,"firstName");
 		Pageable pageable=PageRequest.of(0, 5,sort);
@@ -65,8 +67,107 @@ public class PlayerServiceTest {
 
 		players = this.playerService.findPlayers("jose",pageable);
 		assertThat(players.size()).isEqualTo(found + 1);
-	}*/
+	}
+*/
+	
+	@Test
+	@Transactional
+	void shouldFindAllPlayers() {
+		List<Player> list1 = this.playerService.findAll();
+		int size1 = list1.size();
+		
+		Player p = new Player();
+		p.setFirstName("jose");
+		p.setLastName("palotes");
+		p.setCity("Sevilla");
+		p.setAddress("Calle Imagen");
+		p.setEmail("jose@gmail.com");
+		p.setTelephone("1234567");
+		
+		User user = new User();
+		user.setUsername("jose1234");
+		user.setPassword("1234");
+		user.setEnabled(true);
+		p.setUser(user);
+		
+		this.userService.saveUser(user);
+		
+		List<Player> list2 = this.playerService.findAll();
+		int size2 = list2.size();
+		
+		
+		assertThat(size1<size2);
+		
+	}
+	
+	@Test
+	@Transactional
+	void shouldSavePlayer() {
+		
+		List<Player> list1 = this.playerService.findAll();
+		int size1 = list1.size();
+		
+		Player p = new Player();
+		p.setFirstName("jose");
+		p.setLastName("palotes");
+		p.setCity("Sevilla");
+		p.setAddress("Calle Imagen");
+		p.setEmail("jose@gmail.com");
+		p.setTelephone("1234567");
+		
+		User user = new User();
+		user.setUsername("jose1234");
+		user.setPassword("1234");
+		user.setEnabled(true);
+		p.setUser(user);
+		
+		this.userService.saveUser(user);
+		
+		List<Player> list2 = this.playerService.findAll();
+		int size2 = list2.size();
+		
+		assertThat(size2>size1);
+		
+	}
+	
+	@Test
+	@Transactional
+	void shouldFindPlayersByFirstname() {
+		Sort sort=Sort.by(Sort.Direction.DESC,"firstName");
+		Pageable pageable=PageRequest.of(0, 5,sort);
+		Collection<Player> players = this.playerService.findPlayers("Nombre",0,pageable);
+		System.out.println("=================================="+players.size()+"=============================================0");
+		assertThat(players.size()).isEqualTo(5);
 
+		players = this.playerService.findPlayers("player0",0,pageable);
+		assertThat(players.isEmpty()).isTrue();
+		
+	}
+	
+	@Test
+	@Transactional
+	void shouldFindPlayerById() {
+		List<Player> list = this.playerService.findAll();
+		Player p1 = list.get(0);
+		
+		Player p2 = this.playerService.findPlayerById(p1.getId());
+		
+		
+		assertThat(p1.getUser().equals(p2.getUser()));
+		
+	}
+	
+
+	@Test
+	@Transactional
+	void shouldFindPlayerByUsername() {
+		Player p = this.playerService.findPlayerByUsername("luis");
+		String city = p.getCity();
+		
+		assertThat(city.equals("Seville"));
+	}
+	
+	
 	@Test
 	@Transactional
 	void shouldUpdatePlayer() {
