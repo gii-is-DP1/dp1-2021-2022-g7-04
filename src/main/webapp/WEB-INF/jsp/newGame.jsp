@@ -9,6 +9,10 @@
 
 <minesweeper:layout pageName="newGame">
 
+	<div>
+		Total mines: ${flagsInMines}
+	</div>
+
 	<div class="row">
 		<div class="col-md-12">
 			<minesweeper:board minesweeperBoard="${minesweeperBoard}" />
