@@ -15,8 +15,8 @@
 	<form:form modelAttribute="player" action="/players/list" method="get"
 		class="form-horizontal" id="search-player-form">
 		<div class="form-group">
-			<div class="control-group" id="username">
-				<label class="col-sm-2 control-label">Username </label>
+			<div class="control-group" id="firstName">
+				<label class="col-sm-2 control-label">First Name </label>
 				<div class="col-sm-10">
 					<form:input class="form-control" path="firstName" size="30"
 						maxlength="80" />

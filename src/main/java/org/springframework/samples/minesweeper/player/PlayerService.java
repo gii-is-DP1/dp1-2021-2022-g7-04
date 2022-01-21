@@ -1,9 +1,12 @@
 package org.springframework.samples.minesweeper.player;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.samples.minesweeper.user.AuthoritiesService;
 import org.springframework.samples.minesweeper.user.UserService;
 import org.springframework.stereotype.Service;
@@ -24,7 +27,7 @@ public class PlayerService {
 	}
 
 	@Transactional
-	public Iterable<Player> findAll() {
+	public List<Player> findAll() {
 		return playerRepository.findAll();
 	}
 
@@ -41,8 +44,8 @@ public class PlayerService {
 	}
 
 	@Transactional(readOnly = true)
-	public Collection<Player> findPlayers(String firstName) throws DataAccessException {
-		return playerRepository.findPlayers(firstName);
+	public List<Player> findPlayers(String firstName,Integer page,Pageable pageable) throws DataAccessException {
+		return playerRepository.findPlayers(firstName,pageable);
 	}
 
 	@Transactional(readOnly = true)

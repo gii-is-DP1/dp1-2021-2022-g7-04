@@ -1,11 +1,20 @@
 package org.springframework.samples.minesweeper.player;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.samples.minesweeper.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +22,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+
 
 @Controller
 public class PlayerController {
@@ -36,23 +48,33 @@ public class PlayerController {
 	}
 
 	@GetMapping(value = "/players/list")
-	public String processFindForm(Player player, BindingResult result, Map<String, Object> model) {
-
-		// allow parameterless GET request for /players to return all records
-		if (player.getFirstName() == null) {
-			player.setFirstName(""); // empty string signifies broadest possible search
-		}
-
-		// find players by username
-		Collection<Player> results = this.playerService.findPlayers(player.getFirstName());
-		if (results.isEmpty()) {
-			// no players found
-			result.rejectValue("firstName", "notFound", "not found");
-			return "players/findPlayers";
-		} else {
-			model.put("selections", results);
-			return "players/playersList";
-		}
+	public String processFindForm(Player player, BindingResult result, Map<String, Object> model,@PageableDefault(page = 0, size = 5)@SortDefault.SortDefaults({
+		@SortDefault(sort = "id", direction = Sort.Direction.ASC),
+		@SortDefault(sort = "firstName", direction = Sort.Direction.DESC)})Pageable pageable) {
+		
+			// allow parameterless GET request for /players to return all records
+			if (player.getFirstName() == null) {
+				player.setFirstName(""); // empty string signifies broadest possible search
+			}
+			Integer page=0;
+			// find players by username
+			List<Player> results = this.playerService.findPlayers(player.getFirstName(),page,pageable);
+			model.put("pageNumber", pageable.getPageNumber());
+			model.put("pageSize", pageable.getPageSize());
+			model.put("hasPrevious", pageable.hasPrevious());
+			Integer playersPerPage = pageable.getPageSize();
+			Double totalPages = Math.ceil(playerService.findAll().size()/(playersPerPage+1));
+			model.put("totalPages", totalPages);
+			if (results.isEmpty()) {
+				// no players found
+				result.rejectValue("firstName", "notFound", "not found");
+				return "players/findPlayers";
+			} else {
+				model.put("selections", results);
+				
+				return "players/playersList";
+			}
+	
 	}
 
 	@GetMapping("/players/{playerId}")
