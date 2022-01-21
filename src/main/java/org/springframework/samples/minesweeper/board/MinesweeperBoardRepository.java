@@ -1,5 +1,7 @@
 package org.springframework.samples.minesweeper.board;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,4 +13,7 @@ public interface MinesweeperBoardRepository extends CrudRepository<MinesweeperBo
 
 	@Query("SELECT board FROM MinesweeperBoard board WHERE board.id =:id")
 	public MinesweeperBoard findBoardById(@Param("id") int id);
+	
+	@Query("SELECT board.cells FROM MinesweeperBoard board WHERE  board.id = :id")
+	public List<Cell> getAllCells(int id);
 }

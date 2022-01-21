@@ -31,11 +31,16 @@ public class MinesweeperBoardService {
 	public MinesweeperBoard findBoardById(int id) {
 		return boardRepo.findBoardById(id);
 	}
+	
+	// Uncover the rest of mines when lost
+	public List<Cell> getAllCells(int id) {
+		return boardRepo.getAllCells(id);
+	}
 
 	// Initialize new game by the numbers of rows and columns
 	public Cell[][] initializeGame(BoardRequest boardRequest, MinesweeperBoard board) {
 		Cell matrix[][];
-		matrix = new Cell[boardRequest.getRows()][];
+		matrix = new Cell[boardRequest.getRows()][boardRequest.getColumns()];
 		List<Cell> cells = new ArrayList<Cell>();
 
 		for (int i = 0; i < boardRequest.getRows(); i++) {
@@ -70,6 +75,7 @@ public class MinesweeperBoardService {
 			}
 		}
 		board.setCells(cells);
+		boardRepo.save(board);
 		System.out.format(
 				"[MinesweeperService] - A new game was initialized with rows=%d, columns=%d, mines=%d for usaername=%s - Level: %s",
 				boardRequest.getRows(), boardRequest.getColumns(), boardRequest.getMines(),
@@ -94,10 +100,12 @@ public class MinesweeperBoardService {
 	}
 
 	// Locate positions for all mines around
-	public void localeMinesArround(BoardRequest boardRequest, Cell[][] matrix) {
+	public void localeMinesArround(BoardRequest boardRequest, Cell matrix[][]) {
 		for (int x = 0; x < boardRequest.getRows(); x++) {
 			for (int y = 0; y < boardRequest.getColumns(); y++) {
-				matrix[x][y].setMinesAround(minesNear(matrix, x, y));
+				Cell current = cellService.findCellByPosition(x, y);
+				current.setMinesAround(minesNear(matrix, x, y));
+				cellService.saveCell(current);
 			}
 		}
 	}
@@ -116,7 +124,7 @@ public class MinesweeperBoardService {
 	}
 
 	private int mineAt(Cell[][] matrix, int y, int x) {
-		if (y >= 0 && y < matrix[0].length && x >= 0 && x < matrix.length && matrix[y][x].isMine()) {
+		if (y >= 0 && y < matrix[0].length && x >= 0 && x < matrix.length && matrix[x][y].isMine()) {
 			return 1;
 		} else {
 			return 0;
@@ -133,7 +141,7 @@ public class MinesweeperBoardService {
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix[0].length; j++) {
 				Cell current = this.cellService.findCellByPosition(i, j);
-				if (!current.isMine() && !current.getType().equals("PRESSED")) {
+				if (!current.isMine() && current.getType().equals("UNPRESSED")) {
 					return false;
 				}
 			}
@@ -141,22 +149,25 @@ public class MinesweeperBoardService {
 		return true;
 	}
 
-	public void clearEmptySpots(Cell[][] matrix, int x, int y, int xMax, int yMax) {
+	public void clearEmptySpots(int x, int y, int xMax, int yMax) {
 		// Base Case
 		if (x < 0 || x > xMax || y < 0 || y > yMax) {
 			return;
 		}
+		
+		Cell current = cellService.findCellByPosition(x, y);
 
-		if (matrix[x][y].getMinesAround() == 0 && !matrix[x][y].getType().equals("PRESSED")) {
-			matrix[x][y].setType("PRESSED");
-			clearEmptySpots(matrix, x + 1, y, xMax, yMax);
-			clearEmptySpots(matrix, x + 1, y + 1, xMax, yMax);
-			clearEmptySpots(matrix, x + 1, y - 1, xMax, yMax);
-			clearEmptySpots(matrix, x - 1, y, xMax, yMax);
-			clearEmptySpots(matrix, x - 1, y - 1, xMax, yMax);
-			clearEmptySpots(matrix, x - 1, y + 1, xMax, yMax);
-			clearEmptySpots(matrix, x, y - 1, xMax, yMax);
-			clearEmptySpots(matrix, x, y + 1, xMax, yMax);
+		if (current.getMinesAround() == 0 && (!current.getType().equals("PRESSED") && !current.isMine())) {
+			current.setType("PRESSED");
+			cellService.saveCell(current);
+			clearEmptySpots(x + 1, y, xMax, yMax);
+			clearEmptySpots(x + 1, y + 1, xMax, yMax);
+			clearEmptySpots(x + 1, y - 1, xMax, yMax);
+			clearEmptySpots(x - 1, y, xMax, yMax);
+			clearEmptySpots(x - 1, y - 1, xMax, yMax);
+			clearEmptySpots(x - 1, y + 1, xMax, yMax);
+			clearEmptySpots(x, y - 1, xMax, yMax);
+			clearEmptySpots(x, y + 1, xMax, yMax);
 		} else {
 			return;
 		}

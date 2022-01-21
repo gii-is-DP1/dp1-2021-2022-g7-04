@@ -1,6 +1,7 @@
 package org.springframework.samples.minesweeper.board;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,11 +35,49 @@ public class CellController {
 		if (!cell.getType().equals("PRESSED")) {
 			if (move.equals("uncover")) {
 				if (!cell.getType().equals("FLAG")) {
-					cell.setType("PRESSED");
-				}
-				if (cell.isMine()) {
-					cell.setType("MINE");
-				}
+					if (cell.isMine()) {
+						cell.setType("MINE");
+						
+						// Uncover the rest of mines
+						MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
+						List<Cell> cells = this.minesweeperService.getAllCells(board.getId());
+						for(Cell c:cells) {
+							if(c.isMine()) {
+								c.setType("MINE");
+							}
+						}
+					}else {
+						minesweeperService.clearEmptySpots(xPosition - 1, yPosition - 1, boardRequest.getRows() - 1, boardRequest.getColumns() - 1);
+						switch(cell.getMinesAround()) {
+						case 1:
+							cell.setType("ONE");
+							break;
+						case 2:
+							cell.setType("TWO");
+							break;
+						case 3:
+							cell.setType("THREE");
+							break;
+						case 4:
+							cell.setType("FOUR");
+							break;
+						case 5:
+							cell.setType("FIVE");
+							break;
+						case 6:
+							cell.setType("SIX");
+							break;
+						case 7:
+							cell.setType("SEVEN");
+							break;
+						case 8:
+							cell.setType("HEIGHT");
+							break;
+						default:
+							cell.setType("PRESSED");
+						}
+					}
+				}				
 			} else if (move.equals("flag")) {
 				if (cell.getType().equals("FLAG")) {
 					cell.setType("UNPRESSED");
@@ -51,6 +90,7 @@ public class CellController {
 				}
 			}
 		}
+		
 		this.cellService.saveCell(cell);
 		
 		boolean alreadyWon = minesweeperService.alreadyWon(boardRequest);

@@ -141,7 +141,12 @@ public class GameController {
 		// Manage the miscellanious
 		boolean foundAnyMine = false;
 		if (!existPlayRequest) {
+			
+			// Initialize board
 			Cell[][] matrixBoard = minesweeperService.initializeGame(boardRequest, board);
+			
+			// Locale mines arround for all cells
+			minesweeperService.localeMinesArround(boardRequest, matrixBoard);
 			
 			// Start audit game (STARTED GAME)
 			Date date = this.minesweeperService.getFormattedDate();
@@ -153,8 +158,6 @@ public class GameController {
 			gameAudit.setFinished(false);
 			gameAudit.setMinesweeperBoardId(board.getId());
 			this.auditService.saveAudit(gameAudit);
-			
-			// TODO Mines generation ETC
 		}else {
 			foundAnyMine = this.cellService.findAnyMine(board.getId());
 		}
@@ -215,7 +218,12 @@ public class GameController {
 		this.minesweeperService.deleteMinesweeperBoard(board);
 		board = new MinesweeperBoard(player.getName());
 		minesweeperService.saveBoard(board);
+		
+		// Initialize board
 		Cell[][] matrixBoard = minesweeperService.initializeGame(boardRequest, board);
+		
+		// Locale mines arround for all cells
+		minesweeperService.localeMinesArround(boardRequest, matrixBoard);
 		
 		// Start audit game (STARTED GAME)
 		Date newDate = this.minesweeperService.getFormattedDate();
