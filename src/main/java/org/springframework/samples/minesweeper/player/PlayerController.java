@@ -100,7 +100,7 @@ public class PlayerController {
 
 			this.playerService.savePlayer(player);
 
-			return "redirect:/players/list";
+			return "redirect:/login";
 		}
 	}
 
