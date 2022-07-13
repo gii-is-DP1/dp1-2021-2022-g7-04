@@ -59,7 +59,6 @@ public class MinesweeperBoardService {
 		int minas = 0;
 		int totalMinas = boardRequest.getMines();
 		Cell celdaEx = null;
-		int i = 0;
 
 		while (minas < totalMinas) {
 			double valor = Math.floor(Math.random() * cells.size());
