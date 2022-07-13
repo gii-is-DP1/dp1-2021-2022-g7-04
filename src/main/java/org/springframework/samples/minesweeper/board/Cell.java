@@ -18,9 +18,9 @@ public class Cell extends BaseEntity {
 	@Range(min = 0, max = 8)
 	int minesAround;
 	String type;
-	@Range(min = 0, max = 29) // 30 columns
+	@Range(min = 0, max = 29)
 	int xPosition;
-	@Range(min = 0, max = 29) // 16 rows
+	@Range(min = 0, max = 29)
 	int yPosition;
 	boolean isMine;
 

@@ -81,14 +81,11 @@ public class CellController {
 			} else if (move.equals("flag")) {
 				if (cell.getType().equals("FLAG")) {
 					cell.setType("UNPRESSED");
-				} else {
+				} //Condición en el else para que no se pueda poner bandera a una casilla con número	
+				else if(cell.getType().equals("UNPRESSED") || cell.getType().equals("PRESSED")){ 
 					cell.setType("FLAG");
 				}
-			} else {
-				if (cell.type.equals("UNPRESSED")) {
-					cell.setType("FLAG");
-				}
-			}
+			} 
 		}
 		
 		this.cellService.saveCell(cell);
