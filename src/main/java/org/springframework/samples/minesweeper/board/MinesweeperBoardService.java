@@ -19,22 +19,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class MinesweeperBoardService {
 
 	@Autowired
-	MinesweeperBoardRepository boardRepo;
+	MinesweeperBoardRepository minesweeperBoardRepository;
 
 	@Autowired
 	CellService cellService;
 
 	public Optional<MinesweeperBoard> findById(Integer id) {
-		return boardRepo.findById(id);
+		return minesweeperBoardRepository.findById(id);
 	}
 
-	public MinesweeperBoard findBoardById(int id) {
-		return boardRepo.findBoardById(id);
-	}
-	
 	// Uncover the rest of mines when lost
 	public List<Cell> getAllCells(int id) {
-		return boardRepo.getAllCells(id);
+		return minesweeperBoardRepository.getAllCells(id);
 	}
 
 	// Initialize new game by the numbers of rows and columns
@@ -74,7 +70,7 @@ public class MinesweeperBoardService {
 			}
 		}
 		board.setCells(cells);
-		boardRepo.save(board);
+		minesweeperBoardRepository.save(board);
 		System.out.format(
 				"[MinesweeperService] - A new game was initialized with rows=%d, columns=%d, mines=%d for usaername=%s - Level: %s",
 				boardRequest.getRows(), boardRequest.getColumns(), boardRequest.getMines(),
@@ -174,7 +170,7 @@ public class MinesweeperBoardService {
 
 	@Transactional
 	public void saveBoard(MinesweeperBoard minesweeperBoard) throws DataAccessException {
-		boardRepo.save(minesweeperBoard);
+		minesweeperBoardRepository.save(minesweeperBoard);
 	}
 
 	public boolean existsBoardForPlayer(String playerName) {
@@ -185,12 +181,12 @@ public class MinesweeperBoardService {
 	}
 
 	public MinesweeperBoard findByPlayer(String playerName) {
-		return boardRepo.findByPlayer(playerName);
+		return minesweeperBoardRepository.findByPlayer(playerName);
 	}
 
 	@Transactional
 	public void deleteMinesweeperBoard(MinesweeperBoard board) throws DataAccessException {
-		boardRepo.delete(board);
+		minesweeperBoardRepository.delete(board);
 	}
 
 	public Date getFormattedDate() {

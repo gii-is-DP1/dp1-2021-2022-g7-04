@@ -1,6 +1,8 @@
 package org.springframework.samples.minesweeper.player;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -26,11 +28,13 @@ public class PlayerService {
 
 	@Transactional
 	public List<Player> findAll() {
-		return playerRepository.findAll();
+		List<Player> allPlayers = new ArrayList<Player>();
+		playerRepository.findAll().forEach(allPlayers::add);
+		return allPlayers;
 	}
 
 	@Transactional(readOnly = true)
-	public Player findPlayerById(int id) throws DataAccessException {
+	public Optional<Player> findPlayerById(int id) throws DataAccessException {
 		return playerRepository.findById(id);
 	}
 

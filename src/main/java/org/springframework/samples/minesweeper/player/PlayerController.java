@@ -94,7 +94,7 @@ public class PlayerController {
 
 	@GetMapping(value = "/players/{playerId}/edit")
 	public String initUpdatePlayerForm(@PathVariable("playerId") int playerId, Model model) {
-		Player player = this.playerService.findPlayerById(playerId);
+		Player player = this.playerService.findPlayerById(playerId).get();
 		model.addAttribute(player);
 		return VIEWS_PLAYER_CREATE_OR_UPDATE_FORM;
 	}
