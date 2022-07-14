@@ -209,7 +209,6 @@ public class MinesweeperBoardService {
 		try {
 			res = sdf.parse(dateInString);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;

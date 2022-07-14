@@ -23,12 +23,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Mostly used as a facade for all Petclinic controllers Also a placeholder
- * for @Transactional and @Cacheable annotations
- *
- * @author Michael Isvy
- */
 @Service
 public class UserService {
 
@@ -49,13 +43,6 @@ public class UserService {
 		return userRepository.findById(username);
 	}
 
-	/*
-	 * @Transactional(readOnly = true) public User findUserByUsername(String
-	 * username) throws DataAccessException { return
-	 * userRepository.findByUsername(username);
-	 * 
-	 * }
-	 */
 	public Collection<User> findPlayersByUsername(String username) {
 		return userRepository.findPlayersByUsername(username);
 	}

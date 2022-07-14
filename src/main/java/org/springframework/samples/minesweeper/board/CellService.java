@@ -10,11 +10,6 @@ public class CellService {
 	@Autowired
 	private CellRepository cellRepository;
 
-	/*
-	 * @Autowired public CellService(CellRepository cellRepository) {
-	 * this.cellRepository = cellRepository; }
-	 */
-
 	@Transactional(readOnly = true)
 	public Cell findCellById(int id) throws DataAccessException {
 		return cellRepository.findById(id);

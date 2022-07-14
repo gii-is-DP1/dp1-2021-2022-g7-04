@@ -30,12 +30,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * @author Juergen Hoeller
- * @author Ken Krebs
- * @author Arjen Poutsma
- * @author Michael Isvy
- */
 @Controller
 public class UserController {
 
@@ -103,11 +97,6 @@ public class UserController {
 		return mav;
 	}
 
-	/*
-	 * @GetMapping("/{username}/delete") public String
-	 * delete(@PathVariable("username") String username) {
-	 * userService.deleteUser(username); return "redirect:/players/find"; }
-	 */
 
 	@GetMapping(value = "/{username}/delete")
 	public String logicDeleteuser(@PathVariable("username") String username) {
