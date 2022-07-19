@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class GameController {
 
@@ -81,6 +84,8 @@ public class GameController {
 			gameAudit.setDifficulty(boardRequest.getLevel().name());
 			gameAudit.setFinished(true);
 			this.auditService.saveAudit(gameAudit);
+			log.info(String.format("GAME OVER - Player '%s' has WON the game!",
+					player.getName()));
 		}else if(!foundAnyMine) {
 			// End audit game (CANCELLED GAME)
 			Date date = this.minesweeperService.getFormattedDate();
@@ -91,6 +96,8 @@ public class GameController {
 			gameAudit.setDifficulty(boardRequest.getLevel().name());
 			gameAudit.setFinished(true);
 			this.auditService.saveAudit(gameAudit);
+			log.info(String.format("GAME OVER - Player '%s' has cancelled the game",
+					player.getName()));
 		}
 		
 		return "redirect:/welcome";
@@ -186,6 +193,8 @@ public class GameController {
 			gameAudit.setDifficulty(boardRequest.getLevel().name());
 			gameAudit.setFinished(true);
 			this.auditService.saveAudit(gameAudit);
+			log.info(String.format("GAME OVER - Player '%s' has lost the game",
+					player.getName()));
 		}
 
 		model.put("flagsInMines", flagsInMines);
