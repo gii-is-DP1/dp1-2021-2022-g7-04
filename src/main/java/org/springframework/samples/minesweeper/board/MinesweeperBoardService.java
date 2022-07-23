@@ -15,8 +15,12 @@ import org.springframework.samples.minesweeper.model.BoardRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class MinesweeperBoardService {
+	
 
 	@Autowired
 	MinesweeperBoardRepository boardRepo;
@@ -75,10 +79,10 @@ public class MinesweeperBoardService {
 		}
 		board.setCells(cells);
 		boardRepo.save(board);
-		System.out.format(
-				"[MinesweeperService] - A new game was initialized with rows=%d, columns=%d, mines=%d for usaername=%s - Level: %s",
-				boardRequest.getRows(), boardRequest.getColumns(), boardRequest.getMines(),
-				boardRequest.getPlayerName(), boardRequest.getLevel());
+		
+		log.info(String.format("START GAME - Player: %s, Board: %dx%d, Mines: %d - Level: %s", boardRequest.getPlayerName(),
+				boardRequest.getRows(), boardRequest.getColumns(), boardRequest.getMines(), boardRequest.getLevel()));
+		
 		return matrix;
 	}
 
@@ -94,8 +98,6 @@ public class MinesweeperBoardService {
 				minesPlaced++;
 			}
 		}
-		System.out.format("[MinesweeperService] - Already installed mines for game of username=%s",
-				boardRequest.getPlayerName());
 	}
 
 	// Locate positions for all mines around
