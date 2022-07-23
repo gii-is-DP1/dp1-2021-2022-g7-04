@@ -35,8 +35,8 @@ public class CellController {
 		if (!cell.getType().equals("PRESSED")) {
 			if (move.equals("uncover")) {
 				if (!cell.getType().equals("FLAG")) {
+					// When press a mine cell
 					if (cell.isMine()) {
-						cell.setType("MINE");
 						
 						// Uncover the rest of mines
 						MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
@@ -46,36 +46,17 @@ public class CellController {
 								c.setType("MINE");
 							}
 						}
+						
+						// Uncover current selected mine
+						cell.setType("MINE-PRESSED");
+						
+					// When press a no-mine cell
 					}else {
+						
+						// Clear cells and set numbers mines around on cells are near from clear cells
 						minesweeperService.clearEmptySpots(xPosition - 1, yPosition - 1, boardRequest.getRows() - 1, boardRequest.getColumns() - 1);
-						switch(cell.getMinesAround()) {
-						case 1:
-							cell.setType("ONE");
-							break;
-						case 2:
-							cell.setType("TWO");
-							break;
-						case 3:
-							cell.setType("THREE");
-							break;
-						case 4:
-							cell.setType("FOUR");
-							break;
-						case 5:
-							cell.setType("FIVE");
-							break;
-						case 6:
-							cell.setType("SIX");
-							break;
-						case 7:
-							cell.setType("SEVEN");
-							break;
-						case 8:
-							cell.setType("HEIGHT");
-							break;
-						default:
-							cell.setType("PRESSED");
-						}
+						this.cellService.checkMinesAround(cell);
+						
 					}
 				}				
 			} else if (move.equals("flag")) {
