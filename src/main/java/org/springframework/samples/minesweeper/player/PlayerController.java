@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
-import org.springframework.samples.minesweeper.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,16 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class PlayerController {
 
-	private static final String VIEWS_PLAYER_CREATE_FORM = "players/createPlayerForm";
-	private static final String VIEWS_PLAYER_UPDATE_FORM = "players/updatePlayerForm";
-
 	private static final String VIEWS_PLAYER_CREATE_OR_UPDATE_FORM = "players/createOrUpdatePlayerForm";
 
 	@Autowired
 	private PlayerService playerService;
-
-	@Autowired
-	private UserService userService;
 
 	@GetMapping(value = "/players/find")
 	public String initFindForm(Map<String, Object> model) {
@@ -49,9 +42,8 @@ public class PlayerController {
 		@SortDefault(sort = "firstName", direction = Sort.Direction.DESC)})Pageable pageable) {
 		
 			// allow parameterless GET request for /players to return all records
-			if (player.getFirstName() == null) {
-				player.setFirstName(""); // empty string signifies broadest possible search
-			}
+			player = this.playerService.checkPlayerSearched(player);
+			
 			Integer page=0;
 			// find players by username
 			List<Player> results = this.playerService.findPlayers(player.getFirstName(),page,pageable);
