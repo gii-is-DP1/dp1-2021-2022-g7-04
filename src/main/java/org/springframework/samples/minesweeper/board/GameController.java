@@ -1,10 +1,6 @@
 package org.springframework.samples.minesweeper.board;
 
 import java.security.Principal;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -47,15 +43,7 @@ public class GameController {
 		} else {
 			model.put("gameStarted", false);
 		}
-		/*
-		 * if(minesweeperService.existsBoardForPlayer(player.getName())) { BoardRequest
-		 * request2 = boardRequestService.findByPlayer(player.getName());
-		 * boardRequestService.deleteRequest(request2);
-		 * 
-		 * } else {
-		 * 
-		 * }
-		 */
+		
 		return "selectGame";
 	}
 
@@ -113,7 +101,6 @@ public class GameController {
 		MinesweeperBoard board = null;
 		if (!minesweeperService.existsBoardForPlayer(player.getName())) {
 			board = new MinesweeperBoard(player.getName());
-
 			minesweeperService.saveBoard(board);
 		} else {
 			board = minesweeperService.findByPlayer(player.getName());
