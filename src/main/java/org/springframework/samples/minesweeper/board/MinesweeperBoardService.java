@@ -169,7 +169,11 @@ public class MinesweeperBoardService {
 			clearEmptySpots(x - 1, y + 1, xMax, yMax);
 			clearEmptySpots(x, y - 1, xMax, yMax);
 			clearEmptySpots(x, y + 1, xMax, yMax);
-		} else {
+			
+		// Set numbers mines around on cells are near from clear cells
+		} else if(current.getMinesAround()>0 && (current.getType().equals("UNPRESSED") && !current.isMine())){
+			cellService.checkMinesAround(current);
+		}else {
 			return;
 		}
 	}
