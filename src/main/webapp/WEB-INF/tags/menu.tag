@@ -32,6 +32,11 @@
 							<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
 							<span>New Game</span>
 						</minesweeper:menuItem>
+						<minesweeper:menuItem active="${name eq 'game stats'}"
+							url="/gameStats" title="game-stats">
+							<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+							<span>Game stats</span>
+						</minesweeper:menuItem>
 					</c:if>
 				</sec:authorize>
 
@@ -42,7 +47,11 @@
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							<span>Players</span>
 						</minesweeper:menuItem>
-						
+						<minesweeper:menuItem active="${name eq 'config achievements'}"
+							url="/configAchievements" title="config-achievements">
+							<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+							<span>Config achievements</span>
+						</minesweeper:menuItem>
 						<minesweeper:menuItem active="${name eq 'audits'}"
 							url="/audits" title="audits">
 							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>

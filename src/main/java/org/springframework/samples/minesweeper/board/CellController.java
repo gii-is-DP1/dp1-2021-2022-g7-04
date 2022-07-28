@@ -27,7 +27,9 @@ public class CellController {
 
 	@GetMapping(value = "/cells/update")
 	public String initUpdateCellForm(@RequestParam("xPosition") int xPosition, @RequestParam("yPosition") int yPosition,
-			@RequestParam("move") String move, Model model, HttpServletRequest request, final RedirectAttributes redirectAttributes) {
+			@RequestParam("move") String move, Model model, HttpServletRequest request, final RedirectAttributes redirectAttributes,
+			@RequestParam(required=false) Integer flagsInMines,
+			@RequestParam(required=false) Integer timer) {
 		Principal player = request.getUserPrincipal();
 		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
 		
@@ -42,8 +44,12 @@ public class CellController {
 						MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
 						List<Cell> cells = this.minesweeperService.getAllCells(board.getId());
 						for(Cell c:cells) {
-							if(c.isMine()) {
+							// Show mine
+							if(c.isMine() && !c.getType().contentEquals("FLAG")) {
 								c.setType("MINE");
+							// Show mine guessed
+							}else if(c.isMine() && c.getType().contentEquals("FLAG")) {
+								c.setType("MINE-GUESSED");
 							}
 						}
 						
@@ -64,7 +70,9 @@ public class CellController {
 					cell.setType("UNPRESSED");
 				} //Condición en el else para que no se pueda poner bandera a una casilla con número	
 				else if(cell.getType().equals("UNPRESSED") || cell.getType().equals("PRESSED")){ 
-					cell.setType("FLAG");
+					if(flagsInMines>0) {
+						cell.setType("FLAG");
+					}
 				}
 			} 
 		}
@@ -82,6 +90,8 @@ public class CellController {
 		}else {
 			model.addAttribute(cell);
 			model.addAttribute("minesweeperBoard", cell.getMinesweeperBoard());
+			model.addAttribute("flagsInMines", flagsInMines);
+			redirectAttributes.addAttribute("timer", timer);
 			return "redirect:/newGame";
 		}
 		

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.minesweeper.audit.Audit;
 import org.springframework.samples.minesweeper.audit.AuditService;
+import org.springframework.samples.minesweeper.configuration.AdminStats;
+import org.springframework.samples.minesweeper.configuration.AdminStatsService;
 import org.springframework.samples.minesweeper.model.BoardRequest;
 import org.springframework.samples.minesweeper.model.BoardRequestService;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,61 @@ public class GameController {
 	private CellService cellService;
 	@Autowired
 	private AuditService auditService;
+	@Autowired
+	private AdminStatsService adminStatsService;
+	
+	@GetMapping(value = "/configAchievements")
+	public String configAchievements(Map<String, Object> model, HttpServletRequest request) {
+		
+		Integer bronzeMinimumGames = this.adminStatsService.getMinimumGamesByLevel("BRONZE");
+		Integer silverMinimumGames = this.adminStatsService.getMinimumGamesByLevel("SILVER");
+		Integer goldMinimumGames = this.adminStatsService.getMinimumGamesByLevel("GOLD");
+		
+		model.put("bronzeMinimumGames", bronzeMinimumGames);
+		model.put("silverMinimumGames", silverMinimumGames);
+		model.put("goldMinimumGames", goldMinimumGames);
+		
+		return "admin/configAchievements";
+	}
+	
+	@GetMapping(value = "/updateAchievements")
+	public String updateAchievements(Map<String, Object> model, HttpServletRequest request,
+			@RequestParam("bronzeGames") int bronzeGames,
+			@RequestParam("silverGames") int silverGames,
+			@RequestParam("goldGames") int goldGames) {
+		
+		AdminStats bronzeStats = this.adminStatsService.getStatsByLevel("BRONZE");
+		bronzeStats.setGames(bronzeGames);
+		
+		AdminStats silverStats = this.adminStatsService.getStatsByLevel("SILVER");
+		silverStats.setGames(silverGames);
+		
+		AdminStats goldStats = this.adminStatsService.getStatsByLevel("GOLD");
+		goldStats.setGames(goldGames);
+		
+		this.adminStatsService.saveAdminStats(bronzeStats);
+		this.adminStatsService.saveAdminStats(silverStats);
+		this.adminStatsService.saveAdminStats(goldStats);
+		
+		model.put("bronzeMinimumGames", bronzeGames);
+		model.put("silverMinimumGames", silverGames);
+		model.put("goldMinimumGames", goldGames);
+		
+		return "admin/configAchievements";
+	}
+	
+	@GetMapping(value = "/gameStats")
+	public String gameStats(Map<String, Object> model, HttpServletRequest request) {
+
+		Integer bronzeMinimumGames = this.adminStatsService.getMinimumGamesByLevel("BRONZE");
+		Integer silverMinimumGames = this.adminStatsService.getMinimumGamesByLevel("SILVER");
+		Integer goldMinimumGames = this.adminStatsService.getMinimumGamesByLevel("GOLD");
+		
+		model.put("bronzeMinimumGames", bronzeMinimumGames);
+		model.put("silverMinimumGames", silverMinimumGames);
+		model.put("goldMinimumGames", goldMinimumGames);
+		return "players/gameStats";
+	}
 
 	@GetMapping(value = "/selectGame")
 	public String selectGame(Map<String, Object> model, BoardRequest boardRequest, HttpServletRequest request) {
@@ -93,24 +150,11 @@ public class GameController {
 
 	@GetMapping(value = "/newGame")
 	public String newGame(@RequestParam(value = "difficulty", required = false) String difficulty,
-			Map<String, Object> model, BoardRequest playRequest, HttpServletRequest request) {
+			Map<String, Object> model, BoardRequest playRequest, HttpServletRequest request, @RequestParam(required=false) Integer timer) {
 		Principal player = request.getUserPrincipal();
-
-		// Manage the board of the player
+		
 		int flagsInMines = 0;
 		MinesweeperBoard board = null;
-		if (!minesweeperService.existsBoardForPlayer(player.getName())) {
-			board = new MinesweeperBoard(player.getName());
-			minesweeperService.saveBoard(board);
-		} else {
-			board = minesweeperService.findByPlayer(player.getName());
-			for (Cell c: board.getCells()) {
-				if(c.getType().equals("FLAG")) {
-					flagsInMines--;
-				}
-			}
-		}
-
 		boolean existPlayRequest = false;
 
 		// Manage the play request of the player
@@ -141,6 +185,19 @@ public class GameController {
 			boardRequest = boardRequestService.findByPlayer(player.getName());
 			existPlayRequest = true;
 			flagsInMines = flagsInMines + boardRequest.getMines();
+		}
+		
+		// Manage the board of the player
+		if (!minesweeperService.existsBoardForPlayer(player.getName())) {
+			board = new MinesweeperBoard(player.getName());
+			minesweeperService.saveBoard(board);
+		} else {
+			board = minesweeperService.findByPlayer(player.getName());
+			for (Cell c: board.getCells()) {
+				if(c.getType().equals("FLAG")) {
+					flagsInMines--;
+				}
+			}
 		}
 
 		// Manage the miscellanious
@@ -188,6 +245,7 @@ public class GameController {
 		model.put("minesweeperBoard", board);
 		model.put("boardRequest", boardRequest);
 		model.put("difficulty", difficulty);
+		model.put("timer", timer);
 		return "newGame";
 	}
 
@@ -215,7 +273,7 @@ public class GameController {
 	@GetMapping(value = "/restartGame")
 	public String restartGame(Map<String, Object> model, HttpServletRequest request) {
 		Principal player = request.getUserPrincipal();
-
+		
 		MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
 		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
 		boolean foundAnyMine = this.cellService.findAnyMine(board.getId());
@@ -258,6 +316,7 @@ public class GameController {
 		model.put("flagsInMines", flagsInMines);
 		model.put("minesweeperBoard", board);
 		model.put("boardRequest", boardRequest);
+		model.put("timer", 0);
 		return "newGame";
 	}
 }

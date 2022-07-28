@@ -1,9 +1,11 @@
 package org.springframework.samples.minesweeper.audit;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,11 @@ public class AuditService {
 	@Transactional
 	public Collection<Audit> findAll() throws DataAccessException {
 		return auditRepository.findAll();
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Audit> findAudits(Integer page,Pageable pageable) throws DataAccessException {
+		return auditRepository.findAudits(pageable);
 	}
 
 	@Transactional(readOnly = true)

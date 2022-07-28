@@ -67,3 +67,12 @@ INSERT INTO players(id,first_name,last_name,city,address,telephone,email,usernam
 VALUES (17,'Nombre9','Apellido','Seville','Reina Mercedes','12345678','player@player.com','jugador9');
 INSERT INTO players(id,first_name,last_name,city,address,telephone,email,username) 
 VALUES (18,'Nombre10','Apellido','Seville','Reina Mercedes','12345678','player@player.com','jugador10');
+
+-- STATS DATA
+
+INSERT INTO admin_stats(id,level_achievement,games) 
+VALUES (1,'BRONZE',10);
+INSERT INTO admin_stats(id,level_achievement,games)
+VALUES (2,'SILVER',25);
+INSERT INTO admin_stats(id,level_achievement,games)
+VALUES (3,'GOLD',50);
