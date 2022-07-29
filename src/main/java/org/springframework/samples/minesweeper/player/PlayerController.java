@@ -68,7 +68,7 @@ public class PlayerController {
 	@GetMapping("/players/{playerId}")
 	public ModelAndView showPlayer(@PathVariable("playerId") int playerId) {
 		ModelAndView mav = new ModelAndView("players/playerDetails");
-		mav.addObject(this.playerService.findPlayerById(playerId));
+		mav.addObject(this.playerService.findPlayerById(playerId).get());
 		return mav;
 	}
 
