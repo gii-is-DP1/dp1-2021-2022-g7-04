@@ -112,4 +112,10 @@ public class PlayerController {
 			return "redirect:/players/{playerId}";
 		}
 	}
+	
+	@GetMapping(value = "/{username}/delete")
+	public String deletePlayer(@PathVariable("username") String username) {
+		playerService.deletePlayer(username);
+		return "players/playerDelete";
+	}
 }

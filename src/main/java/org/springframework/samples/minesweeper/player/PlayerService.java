@@ -61,4 +61,10 @@ public class PlayerService {
 	public Player findPlayerByUsername(String username) throws DataAccessException {
 		return playerRepository.findPlayerByUsername(username);
 	}
+	
+	@Transactional
+	public void deletePlayer(String username) {
+		Integer id = playerRepository.findPlayerByUsername(username).getId();
+		playerRepository.deleteById(id); //it deletes a player and the correspondent user
+	}
 }
