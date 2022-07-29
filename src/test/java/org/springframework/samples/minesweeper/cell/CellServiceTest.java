@@ -2,12 +2,6 @@ package org.springframework.samples.minesweeper.cell;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import java.util.Collection;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +13,6 @@ import org.springframework.samples.minesweeper.board.MinesweeperBoardService;
 import org.springframework.samples.minesweeper.board.Cell;
 import org.springframework.samples.minesweeper.player.Player;
 import org.springframework.samples.minesweeper.player.PlayerService;
-import org.springframework.samples.minesweeper.user.User;
-import org.springframework.samples.minesweeper.user.UserService;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -40,7 +32,7 @@ public class CellServiceTest {
 		Cell c = new Cell();
 		this.cellService.saveCell(c);
 		
-		Cell c2 = this.cellService.findCellById(c.getId());
+		Cell c2 = this.cellService.findCellById(c.getId()).get();
 		
 		assertNotNull(c2);
 	}
@@ -51,7 +43,7 @@ public class CellServiceTest {
 		c.setXPosition(2);
 		this.cellService.saveCell(c);
 		
-		Cell c2 = this.cellService.findCellById(c.getId());
+		Cell c2 = this.cellService.findCellById(c.getId()).get();
 		
 		assertThat(c2.getXPosition()==2);
 	}
@@ -70,7 +62,7 @@ public class CellServiceTest {
 	
 	@Test
 	void shouldfindAnyMine() {
-		Player p = this.playerService.findPlayerById(6);
+		Player p = this.playerService.findPlayerById(6).get();
 		MinesweeperBoard board = new MinesweeperBoard(p.getFirstName());
 		
 		Cell c = new Cell();

@@ -150,7 +150,7 @@ public class PlayerServiceTest {
 		List<Player> list = this.playerService.findAll();
 		Player p1 = list.get(0);
 		
-		Player p2 = this.playerService.findPlayerById(p1.getId());
+		Player p2 = this.playerService.findPlayerById(p1.getId()).get();
 		
 		
 		assertThat(p1.getUser().equals(p2.getUser()));
@@ -171,7 +171,7 @@ public class PlayerServiceTest {
 	@Test
 	@Transactional
 	void shouldUpdatePlayer() {
-		Player player = this.playerService.findPlayerById(6);
+		Player player = this.playerService.findPlayerById(6).get();
 		String oldLastName = player.getLastName();
 		String newLastName = oldLastName + "X";
 
@@ -179,7 +179,7 @@ public class PlayerServiceTest {
 		this.playerService.savePlayer(player);
 
 		// retrieving new name from database
-		player = this.playerService.findPlayerById(6);
+		player = this.playerService.findPlayerById(6).get();
 		assertThat(player.getLastName()).isEqualTo(newLastName);
 	}
 }

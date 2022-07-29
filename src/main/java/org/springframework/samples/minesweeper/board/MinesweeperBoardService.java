@@ -23,22 +23,18 @@ public class MinesweeperBoardService {
 	
 
 	@Autowired
-	MinesweeperBoardRepository boardRepo;
+	MinesweeperBoardRepository minesweeperBoardRepository;
 
 	@Autowired
 	CellService cellService;
 
 	public Optional<MinesweeperBoard> findById(Integer id) {
-		return boardRepo.findById(id);
+		return minesweeperBoardRepository.findById(id);
 	}
 
-	public MinesweeperBoard findBoardById(int id) {
-		return boardRepo.findBoardById(id);
-	}
-	
 	// Uncover the rest of mines when lost
 	public List<Cell> getAllCells(int id) {
-		return boardRepo.getAllCells(id);
+		return minesweeperBoardRepository.getAllCells(id);
 	}
 
 	// Initialize new game by the numbers of rows and columns
@@ -78,7 +74,8 @@ public class MinesweeperBoardService {
 			}
 		}
 		board.setCells(cells);
-		boardRepo.save(board);
+
+		minesweeperBoardRepository.save(board);
 		
 		log.info(String.format("START GAME - Player: %s, Board: %dx%d, Mines: %d - Level: %s", boardRequest.getPlayerName(),
 				boardRequest.getRows(), boardRequest.getColumns(), boardRequest.getMines(), boardRequest.getLevel()));
@@ -180,7 +177,7 @@ public class MinesweeperBoardService {
 
 	@Transactional
 	public void saveBoard(MinesweeperBoard minesweeperBoard) throws DataAccessException {
-		boardRepo.save(minesweeperBoard);
+		minesweeperBoardRepository.save(minesweeperBoard);
 	}
 
 	public boolean existsBoardForPlayer(String playerName) {
@@ -191,12 +188,12 @@ public class MinesweeperBoardService {
 	}
 
 	public MinesweeperBoard findByPlayer(String playerName) {
-		return boardRepo.findByPlayer(playerName);
+		return minesweeperBoardRepository.findByPlayer(playerName);
 	}
 
 	@Transactional
 	public void deleteMinesweeperBoard(MinesweeperBoard board) throws DataAccessException {
-		boardRepo.delete(board);
+		minesweeperBoardRepository.delete(board);
 	}
 
 	public Date getFormattedDate() {
@@ -215,7 +212,6 @@ public class MinesweeperBoardService {
 		try {
 			res = sdf.parse(dateInString);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
