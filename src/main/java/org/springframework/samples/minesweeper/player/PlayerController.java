@@ -68,7 +68,7 @@ public class PlayerController {
 	@GetMapping("/players/{playerId}")
 	public ModelAndView showPlayer(@PathVariable("playerId") int playerId) {
 		ModelAndView mav = new ModelAndView("players/playerDetails");
-		mav.addObject(this.playerService.findPlayerById(playerId));
+		mav.addObject(this.playerService.findPlayerById(playerId).get());
 		return mav;
 	}
 
@@ -111,5 +111,11 @@ public class PlayerController {
 			this.playerService.savePlayer(player);
 			return "redirect:/players/{playerId}";
 		}
+	}
+	
+	@GetMapping(value = "/{username}/delete")
+	public String deletePlayer(@PathVariable("username") String username) {
+		playerService.deletePlayer(username);
+		return "players/playerDelete";
 	}
 }

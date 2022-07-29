@@ -90,16 +90,11 @@ public class UserController {
 
 	@GetMapping("/users/{username}")
 	public ModelAndView showUser(@PathVariable("username") String username) {
-		// comprobar que solo pueda ver estos detalles un admin o el user que se haya
-		// logueado
+		// this details can only be seen by the administrator or the logged user
 		ModelAndView mav = new ModelAndView("users/userDetails");
 		mav.addObject(this.userService.findByUsername(username));
 		return mav;
 	}
 
-	@GetMapping(value = "/{username}/delete")
-	public String logicDeleteuser(@PathVariable("username") String username) {
-		userService.logicDeleteUser(username);
-		return "users/userLogicDelete";
-	}
+	
 }
