@@ -151,8 +151,12 @@ public class GameController {
 		model.put("minDurationGlobalGames", minDurationGlobalGames);
 		
 		// PLAYER STATS
-		
 		// Miscellaneous
+		int numberPlayerGames;
+		int averageDurationPlayerGames;
+		int totalDurationPlayerGames;
+		int maxDurationPlayerGames;
+		int minDurationPlayerGames;
 		
 		// Game stats
 

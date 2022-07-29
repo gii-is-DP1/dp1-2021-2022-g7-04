@@ -98,23 +98,27 @@
 			  <tbody>
 			    <tr>
 					<th width="50%" >Number of games played</th>
-					<td style="font-size:20px"><c:out value="${numberPlayerGames}" /></td>
+					<td style="font-size:20px;text-align:center"><c:out value="${numberPlayerGames}" /></td>
 				</tr>
 				<tr>
 					<th>Average duration games played</th>
-					<td style="font-size:20px"><c:out value="${averageDurationPlayerGames}" /> minutes</td>
+					<!--<td style="font-size:20px;text-align:center"><c:out value="${averageDurationPlayerGames}" /> minutes</td>-->
+					<td style="font-size:20px;text-align:center">IMPLEMENTING</td>
 				</tr>
 				<tr>
 					<th>Total duration games played</th>
-					<td style="font-size:20px"><c:out value="${totalDurationPlayerGames}" /> minutes</td>
+					<!--<td style="font-size:20px;text-align:center"><c:out value="${totalDurationPlayerGames}" /> minutes</td>-->
+					<td style="font-size:20px;text-align:center">IMPLEMENTING</td>
 				</tr>
 				<tr>
 					<th>Maximum duration of games played</th>
-					<td style="font-size:20px"><c:out value="${maxDurationPlayerGames}" /> minutes</td>
+					<!--<td style="font-size:20px;text-align:center"><c:out value="${maxDurationPlayerGames}" /> minutes</td>-->
+					<td style="font-size:20px;text-align:center">IMPLEMENTING</td>
 				</tr>
 				<tr>
 					<th>Minimum duration of games played</th>
-					<td style="font-size:20px"><c:out value="${minDurationPlayerGames}" /> minutes</td>
+					<!--<td style="font-size:20px;text-align:center"><c:out value="${minDurationPlayerGames}" /> minutes</td>-->
+					<td style="font-size:20px;text-align:center">IMPLEMENTING</td>
 				</tr>
 			  </tbody>
 			  <thead>
@@ -125,19 +129,23 @@
 			  <tbody>
 			    <tr>
 					<th width="50%">Total activated mines</th>
-					<td style="font-size:20px"><c:out value="${numberActivatedMines}" /></td>
+					<!--<td style="font-size:20px;text-align:center"><c:out value="${numberActivatedMines}" /></td>-->
+					<td style="font-size:20px;text-align:center">IMPLEMENTING</td>
 				</tr>
 				<tr>
 					<th>Total mine explosions contained</th>
-					<td style="font-size:20px"><c:out value="${numberGuessedMines}" /></td>
+					<!--<td style="font-size:20px;text-align:center"><c:out value="${numberGuessedMines}" /></td>-->
+					<td style="font-size:20px;text-align:center">IMPLEMENTING</td>
 				</tr>
 				<tr>
 					<th>Total flags placed</th>
-					<td style="font-size:20px"><c:out value="${numberTotalFlags}" /></td>
+					<!--<td style="font-size:20px;text-align:center"><c:out value="${numberTotalFlags}" /></td>-->
+					<td style="font-size:20px;text-align:center">IMPLEMENTING</td>
 				</tr>
 				<tr>
 					<th>Total cells clicked</th>
-					<td style="font-size:20px"><c:out value="${numberCellsClicked}" /></td>
+					<!--<td style="font-size:20px;text-align:center"><c:out value="${numberCellsClicked}" /></td>-->
+					<td style="font-size:20px;text-align:center">IMPLEMENTING</td>
 				</tr>
 			  </tbody>
 			  <thead>
