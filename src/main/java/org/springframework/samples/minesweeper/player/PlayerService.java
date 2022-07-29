@@ -37,6 +37,13 @@ public class PlayerService {
 	public Optional<Player> findPlayerById(int id) throws DataAccessException {
 		return playerRepository.findById(id);
 	}
+	
+	@Transactional
+	public Player checkPlayerSearched(Player player) throws DataAccessException {
+		if (player.getFirstName() == null)
+			player.setFirstName(""); // empty string signifies broadest possible search
+		return player;
+	}
 
 	@Transactional
 	public void savePlayer(Player player) throws DataAccessException {

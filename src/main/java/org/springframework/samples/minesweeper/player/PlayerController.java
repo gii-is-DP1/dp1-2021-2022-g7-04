@@ -6,8 +6,8 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
@@ -18,16 +18,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 @Controller
 public class PlayerController {
-
 
 	private static final String VIEWS_PLAYER_CREATE_OR_UPDATE_FORM = "players/createOrUpdatePlayerForm";
 
 	@Autowired
 	private PlayerService playerService;
-
 
 	@GetMapping(value = "/players/find")
 	public String initFindForm(Map<String, Object> model) {
@@ -41,9 +42,8 @@ public class PlayerController {
 		@SortDefault(sort = "firstName", direction = Sort.Direction.DESC)})Pageable pageable) {
 		
 			// allow parameterless GET request for /players to return all records
-			if (player.getFirstName() == null) {
-				player.setFirstName(""); // empty string signifies broadest possible search
-			}
+			player = this.playerService.checkPlayerSearched(player);
+			
 			Integer page=0;
 			// find players by username
 			List<Player> results = this.playerService.findPlayers(player.getFirstName(),page,pageable);
@@ -87,6 +87,8 @@ public class PlayerController {
 		} else {
 
 			this.playerService.savePlayer(player);
+			
+			log.info(String.format("MANAGE GAME - '%s' has registered as a new player. Welcome!", player.getUser().getUsername()));
 
 			return "redirect:/login";
 		}

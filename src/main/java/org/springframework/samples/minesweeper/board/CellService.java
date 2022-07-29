@@ -32,4 +32,37 @@ public class CellService {
 	public boolean findAnyMine(int boardId) throws DataAccessException {
 		return cellRepository.findAnyMine(boardId)>0;
 	}
+	
+	@Transactional
+	public void checkMinesAround(Cell cell) throws DataAccessException {
+		switch(cell.getMinesAround()) {
+		case 1:
+			cell.setType("ONE");
+			break;
+		case 2:
+			cell.setType("TWO");
+			break;
+		case 3:
+			cell.setType("THREE");
+			break;
+		case 4:
+			cell.setType("FOUR");
+			break;
+		case 5:
+			cell.setType("FIVE");
+			break;
+		case 6:
+			cell.setType("SIX");
+			break;
+		case 7:
+			cell.setType("SEVEN");
+			break;
+		case 8:
+			cell.setType("HEIGHT");
+			break;
+		default:
+			cell.setType("PRESSED");
+		}
+		cellRepository.save(cell);
+	}
 }
