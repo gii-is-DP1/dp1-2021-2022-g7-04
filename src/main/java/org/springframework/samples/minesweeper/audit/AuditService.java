@@ -39,4 +39,9 @@ public class AuditService {
 	public Audit findByActiveBoard(int boardId) throws DataAccessException {
 		return auditRepository.findByActiveBoard(boardId);
 	}
+	
+	@Transactional
+	public List<Audit> findAllNotCancelledOrStarted() throws DataAccessException {
+		return auditRepository.findAllNotCancelledOrStarted();
+	}
 }

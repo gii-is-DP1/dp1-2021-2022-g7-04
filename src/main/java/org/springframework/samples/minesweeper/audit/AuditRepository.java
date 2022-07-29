@@ -24,4 +24,7 @@ public interface AuditRepository extends Repository<Audit, Integer> {
 
 	@Query("SELECT audit FROM Audit audit WHERE audit.minesweeperBoardId = :id")
 	public Audit findByActiveBoard(@Param("id") int id);
+	
+	@Query("SELECT audit FROM Audit audit WHERE audit.gameStatus<>'CANCELLED' AND audit.gameStatus<>'STARTED'")
+	public List<Audit> findAllNotCancelledOrStarted();
 }

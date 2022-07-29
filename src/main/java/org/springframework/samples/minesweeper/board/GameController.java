@@ -2,6 +2,7 @@ package org.springframework.samples.minesweeper.board;
 
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,7 +79,33 @@ public class GameController {
 	
 	@GetMapping(value = "/gameStats")
 	public String gameStats(Map<String, Object> model, HttpServletRequest request) {
+		
+		// HALL OF FAME (TOP 3 RANKING)
+		
+		// GLOBAL STATS
+		int numberGlobalGames;
+		int averageNumberGlobalGames;
+		int averageDurationGlobalGames;
+		int totalDurationGlobalGames;
+		int maxDurationGlobalGames;
+		int minDurationGlobalGames;
+		
+		List<Audit> audits = this.auditService.findAllNotCancelledOrStarted();
+		
+		// Number of games played (total)
+		numberGlobalGames = audits.size();
+		
+		
+		
+		model.put("numberGlobalGames", numberGlobalGames);
+		
+		// PLAYER STATS
+		
+		// Miscellaneous
+		
+		// Game stats
 
+		// Achievements
 		Integer bronzeMinimumGames = this.adminStatsService.getMinimumGamesByLevel("BRONZE");
 		Integer silverMinimumGames = this.adminStatsService.getMinimumGamesByLevel("SILVER");
 		Integer goldMinimumGames = this.adminStatsService.getMinimumGamesByLevel("GOLD");
@@ -194,7 +221,7 @@ public class GameController {
 		} else {
 			board = minesweeperService.findByPlayer(player.getName());
 			for (Cell c: board.getCells()) {
-				if(c.getType().equals("FLAG")) {
+				if(c.getType().equals("FLAG") || c.getType().equals("MINE-GUESSED")) {
 					flagsInMines--;
 				}
 			}
@@ -222,6 +249,8 @@ public class GameController {
 			this.auditService.saveAudit(gameAudit);
 		}else {
 			foundAnyMine = this.cellService.findAnyMine(board.getId());
+			boardRequest.setTimer(timer);
+			boardRequestService.saveRequest(boardRequest);
 		}
 		
 		// LOSE GAME
@@ -256,7 +285,7 @@ public class GameController {
 
 		MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
 		for (Cell c: board.getCells()) {
-			if(c.getType().equals("FLAG")) {
+			if(c.getType().equals("FLAG") || c.getType().equals("MINE-GUESSED")) {
 				flagsInMines--;
 			}
 		}
@@ -264,9 +293,13 @@ public class GameController {
 		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
 		flagsInMines = flagsInMines + boardRequest.getMines();
 		
+		// Retieve the previous time and always add the page change delay (2 seconds)
+		int timer = boardRequest.getTimer()+2;
+		
 		model.put("flagsInMines", flagsInMines);
 		model.put("minesweeperBoard", board);
 		model.put("boardRequest", boardRequest);
+		model.put("timer", timer);
 		return "newGame";
 	}
 

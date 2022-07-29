@@ -44,6 +44,8 @@ public class BoardRequest extends BaseEntity {
 	@Min(10)
 	@Max(99)
 	private int mines;
+	
+	private int timer;
 
 	private DifficultyLevel level;
 
