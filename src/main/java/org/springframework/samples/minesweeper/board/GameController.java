@@ -1,9 +1,12 @@
 package org.springframework.samples.minesweeper.board;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -80,7 +83,27 @@ public class GameController {
 	@GetMapping(value = "/gameStats")
 	public String gameStats(Map<String, Object> model, HttpServletRequest request) {
 		
+		List<Audit> games = this.auditService.findAllNotCancelledOrStarted();
+		
 		// HALL OF FAME (TOP 3 RANKING)
+		List<Object[]> hallOfFame = this.auditService.getHallOfFame();
+		Object[] top1 = hallOfFame.get(0);
+		Object[] top2 = hallOfFame.get(1);
+		Object[] top3 = hallOfFame.get(2);
+		
+		String playerTop1Username = ((String) top1[0]).toUpperCase();
+		String playerTop2Username = ((String) top2[0]).toUpperCase();
+		String playerTop3Username = ((String) top3[0]).toUpperCase();
+		model.put("playerTop1Username", playerTop1Username);
+		model.put("playerTop2Username", playerTop2Username);
+		model.put("playerTop3Username", playerTop3Username);
+		
+		long playerTop1WinGames = (long) top1[1];
+		long playerTop2WinGames = (long) top2[1];
+		long playerTop3WinGames = (long) top3[1];
+		model.put("playerTop1WinGames", playerTop1WinGames);
+		model.put("playerTop2WinGames", playerTop2WinGames);
+		model.put("playerTop3WinGames", playerTop3WinGames);
 		
 		// GLOBAL STATS
 		int numberGlobalGames;
@@ -90,14 +113,42 @@ public class GameController {
 		int maxDurationGlobalGames;
 		int minDurationGlobalGames;
 		
-		List<Audit> audits = this.auditService.findAllNotCancelledOrStarted();
-		
 		// Number of games played (total)
-		numberGlobalGames = audits.size();
-		
-		
-		
+		numberGlobalGames = games.size();
 		model.put("numberGlobalGames", numberGlobalGames);
+		
+		// Average games played by player
+		List<Double> listGamesByPlayer = this.auditService.getNumberGamesByPlayer();
+		double sumGamesByPlayer = listGamesByPlayer.stream().mapToDouble(Double::doubleValue).sum();
+		averageNumberGlobalGames = (int) Math.ceil(sumGamesByPlayer/listGamesByPlayer.size());
+		model.put("averageNumberGlobalGames", averageNumberGlobalGames);
+		
+		// Average duration games 
+		List<Double> durationGames = new ArrayList<Double>();
+		
+		for(Audit g:games) {
+			long diffInMillies = Math.abs(g.getEndDate().getTime()-g.getStartDate().getTime());
+			double diff = (double) TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
+			durationGames.add(Math.ceil(diff));
+		}
+		
+		double sumDurationGames = durationGames.stream().mapToDouble(Double::doubleValue).sum();
+		averageDurationGlobalGames = (int) Math.ceil(sumDurationGames/durationGames.size());
+		model.put("averageDurationGlobalGames", averageDurationGlobalGames);
+		
+		// Total duration games played
+		totalDurationGlobalGames = (int) sumDurationGames;
+		model.put("totalDurationGlobalGames", totalDurationGlobalGames);
+		
+		// Maximum duration of games played
+		maxDurationGlobalGames = Collections.max(durationGames,null).intValue();
+		model.put("maxDurationGlobalGames", maxDurationGlobalGames);
+		
+		// Minimum duration of games played
+		minDurationGlobalGames = Collections.min(durationGames,null).intValue();
+		if(minDurationGlobalGames<=0)
+			minDurationGlobalGames = 1;
+		model.put("minDurationGlobalGames", minDurationGlobalGames);
 		
 		// PLAYER STATS
 		

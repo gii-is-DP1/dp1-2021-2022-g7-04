@@ -30,24 +30,24 @@
 			    </tr>
 			    <tr>
 			      <th width="10%" style="text-align:center" scope="col">#</th>
-			      <th width="40%" style="text-align:center" scope="col">Player</th>
+			      <th width="40%" style="text-align:center" scope="col">Player (Username)</th>
 			      <th style="text-align:center" scope="col">Games Won</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			    <tr style="background-color:#ffdb4d">
 			      <th style="text-align:center" scope="row">TOP 1</th>
-			      <th><c:out value="${playerTop1Username}" /></th>
+			      <th style="text-align:center"><c:out value="${playerTop1Username}" /></th>
 			      <td style="font-size:20px;text-align:center"><c:out value="${playerTop1WinGames}" /></td>
 			    </tr>
 			    <tr style="background-color:#cccccc">
 			      <th style="text-align:center" scope="row">TOP 2</th>
-			      <th><c:out value="${playerTop2Username}" /></th>
+			      <th style="text-align:center"><c:out value="${playerTop2Username}" /></th>
 			      <td style="font-size:20px;text-align:center"><c:out value="${playerTop2WinGames}" /></td>
 			    </tr>
 			    <tr style="background-color:#e6cbb3">
 			      <th style="text-align:center" scope="row">TOP 3</th>
-			      <th><c:out value="${playerTop3Username}" /></th>
+			      <th style="text-align:center"><c:out value="${playerTop3Username}" /></th>
 			      <td style="font-size:20px;text-align:center"><c:out value="${playerTop3WinGames}" /></td>
 			    </tr>
 			  </tbody>
@@ -61,28 +61,28 @@
 			  </thead>
 			  <tbody>
 			    <tr>
-			      	<th width="50%">Number of games played</th>
-					<td style="font-size:20px"><c:out value="${numberGlobalGames}" /></td>
+			      	<th width="50%">Total games played</th>
+					<td style="font-size:20px;text-align:center"><c:out value="${numberGlobalGames}" /></td>
 			    </tr>
 			    <tr>
-			      	<th>Average games played</th>
-					<td style="font-size:20px"><c:out value="${averageNumberGlobalGames}" /></td>
+			      	<th>Average games played by player</th>
+					<td style="font-size:20px;text-align:center"><c:out value="${averageNumberGlobalGames}" /></td>
 			    </tr>
 			    <tr>
 					<th>Average duration games played</th>
-					<td style="font-size:20px"><c:out value="${averageDurationGlobalGames}" /> minutes</td>
+					<td style="font-size:20px;text-align:center"><c:out value="${averageDurationGlobalGames}" /> minutes</td>
 				</tr>
 				<tr>
 					<th>Total duration games played</th>
-					<td style="font-size:20px"><c:out value="${totalDurationGlobalGames}" /> minutes</td>
+					<td style="font-size:20px;text-align:center"><c:out value="${totalDurationGlobalGames}" /> minutes</td>
 				</tr>
 				<tr>
 					<th>Maximum duration of games played</th>
-					<td style="font-size:20px"><c:out value="${maxDurationGlobalGames}" /> minutes</td>
+					<td style="font-size:20px;text-align:center"><c:out value="${maxDurationGlobalGames}" /> minutes</td>
 				</tr>
 				<tr>
 					<th>Minimum duration of games played</th>
-					<td style="font-size:20px"><c:out value="${minDurationGlobalGames}" /> minutes</td>
+					<td style="font-size:20px;text-align:center"><c:out value="${minDurationGlobalGames}" /> minutes</td>
 				</tr>
 			  </tbody>
 			</table>
@@ -147,7 +147,7 @@
 			  </thead>
 			  <tbody>
 			  	<tr>
-					<th width="50%"><img width="32px" alt="bronze" src="${bronze}" /> BRONZE LEVEL: You have won <c:out value="${bronzeMinimumGames}" /> games</th>
+					<th><img width="32px" alt="bronze" src="${bronze}" /> BRONZE LEVEL: You have won <c:out value="${bronzeMinimumGames}" /> games</th>
 					<td>
 						<c:choose>
 							<c:when test="${successAchievement1}">
@@ -184,6 +184,72 @@
 							</c:otherwise>
 						</c:choose>
 					</td>
+				</tr>
+			  </tbody>
+			</table>
+	</c:if>
+	<c:if test="${fn:contains(principal.authorities, 'admin')}">
+		<h2>GAME STATS</h2><br/>
+			<table class="table table-striped table-bordered">
+			  <thead>
+			    <tr>
+			      <th colspan=3 scope="col" style="text-align:center">HALL OF FAME</th>
+			    </tr>
+			    <tr>
+			      <th width="10%" style="text-align:center" scope="col">#</th>
+			      <th width="40%" style="text-align:center" scope="col">Player (Username)</th>
+			      <th style="text-align:center" scope="col">Games Won</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr style="background-color:#ffdb4d">
+			      <th style="text-align:center" scope="row">TOP 1</th>
+			      <th style="text-align:center"><c:out value="${playerTop1Username}" /></th>
+			      <td style="font-size:20px;text-align:center"><c:out value="${playerTop1WinGames}" /></td>
+			    </tr>
+			    <tr style="background-color:#cccccc">
+			      <th style="text-align:center" scope="row">TOP 2</th>
+			      <th style="text-align:center"><c:out value="${playerTop2Username}" /></th>
+			      <td style="font-size:20px;text-align:center"><c:out value="${playerTop2WinGames}" /></td>
+			    </tr>
+			    <tr style="background-color:#e6cbb3">
+			      <th style="text-align:center" scope="row">TOP 3</th>
+			      <th style="text-align:center"><c:out value="${playerTop3Username}" /></th>
+			      <td style="font-size:20px;text-align:center"><c:out value="${playerTop3WinGames}" /></td>
+			    </tr>
+			  </tbody>
+			</table>
+			<br/>
+			<table class="table table-striped table-bordered">
+			  <thead>
+			    <tr>
+			      <th colspan=2 scope="col" style="text-align:center">GLOBAL STATS</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      	<th width="50%">Total games played</th>
+					<td style="font-size:20px;text-align:center"><c:out value="${numberGlobalGames}" /></td>
+			    </tr>
+			    <tr>
+			      	<th>Average games played by player</th>
+					<td style="font-size:20px;text-align:center"><c:out value="${averageNumberGlobalGames}" /></td>
+			    </tr>
+			    <tr>
+					<th>Average duration games played</th>
+					<td style="font-size:20px;text-align:center"><c:out value="${averageDurationGlobalGames}" /> minutes</td>
+				</tr>
+				<tr>
+					<th>Total duration games played</th>
+					<td style="font-size:20px;text-align:center"><c:out value="${totalDurationGlobalGames}" /> minutes</td>
+				</tr>
+				<tr>
+					<th>Maximum duration of games played</th>
+					<td style="font-size:20px;text-align:center"><c:out value="${maxDurationGlobalGames}" /> minutes</td>
+				</tr>
+				<tr>
+					<th>Minimum duration of games played</th>
+					<td style="font-size:20px;text-align:center"><c:out value="${minDurationGlobalGames}" /> minutes</td>
 				</tr>
 			  </tbody>
 			</table>

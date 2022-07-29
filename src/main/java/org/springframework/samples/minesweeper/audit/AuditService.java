@@ -44,4 +44,14 @@ public class AuditService {
 	public List<Audit> findAllNotCancelledOrStarted() throws DataAccessException {
 		return auditRepository.findAllNotCancelledOrStarted();
 	}
+	
+	@Transactional
+	public List<Object[]> getHallOfFame() throws DataAccessException {
+		return auditRepository.getHallOfFame();
+	}
+	
+	@Transactional
+	public List<Double> getNumberGamesByPlayer() throws DataAccessException {
+		return auditRepository.getNumberGamesByPlayer();
+	}
 }
