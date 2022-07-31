@@ -27,15 +27,14 @@ public class PlayerServiceTest {
 	@Autowired
 	private PlayerService playerService;
 
-	/*
 	@Test
-	void shouldFindPlayersByUserName() {
+	void shouldFindPlayersByFirstName() {
 		Sort sort=Sort.by(Sort.Direction.DESC,"firstName");
 		Pageable pageable=PageRequest.of(0, 5,sort);
-		Collection<Player> players = this.playerService.findPlayers("Nombre",pageable);
-		assertThat(players.size()).isEqualTo(1);
+		Collection<Player> players = this.playerService.findPlayers("Nombre",0,pageable);
+		assertThat(players.size()).isEqualTo(5);
 
-		players = this.playerService.findPlayers("player0",pageable);
+		players = this.playerService.findPlayers("player0",0,pageable);
 		assertThat(players.isEmpty()).isTrue();
 	}
 
@@ -43,7 +42,7 @@ public class PlayerServiceTest {
 	void shouldCreatePlayer() {
 		Sort sort=Sort.by(Sort.Direction.DESC,"firstName");
 		Pageable pageable=PageRequest.of(0, 5,sort);
-		Collection<Player> players = this.playerService.findPlayers("jose",pageable);
+		Collection<Player> players = this.playerService.findPlayers("jose",0,pageable);
 		int found = players.size();
 
 		Player p = new Player();
@@ -62,10 +61,10 @@ public class PlayerServiceTest {
 		this.playerService.savePlayer(p);
 		assertThat(p.getId().longValue()).isNotEqualTo(0);
 
-		players = this.playerService.findPlayers("jose",pageable);
+		players = this.playerService.findPlayers("jose",0,pageable);
 		assertThat(players.size()).isEqualTo(found + 1);
 	}
-*/
+
 	
 	@Test
 	@Transactional
