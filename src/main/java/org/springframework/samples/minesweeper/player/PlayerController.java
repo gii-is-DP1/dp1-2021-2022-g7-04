@@ -10,12 +10,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
+import org.springframework.samples.minesweeper.user.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
@@ -65,12 +69,13 @@ public class PlayerController {
 	
 	}
 
-	@GetMapping("/players/{playerId}")
-	public ModelAndView showPlayer(@PathVariable("playerId") int playerId) {
+	@GetMapping("/players/{username}")
+	public ModelAndView showPlayer(@PathVariable("username") String username) {
 		ModelAndView mav = new ModelAndView("players/playerDetails");
-		mav.addObject(this.playerService.findPlayerById(playerId).get());
+		mav.addObject(this.playerService.findPlayerByUsername(username));
 		return mav;
 	}
+	
 
 	@GetMapping(value = "/players/new")
 	public String initCreationForm(Map<String, Object> model) {
@@ -109,7 +114,8 @@ public class PlayerController {
 		} else {
 			player.setId(playerId);
 			this.playerService.savePlayer(player);
-			return "redirect:/players/{playerId}";
+	
+			return "redirect:/players/"+player.getUser().getUsername();
 		}
 	}
 	
