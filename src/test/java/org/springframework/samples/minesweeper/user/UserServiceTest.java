@@ -15,12 +15,13 @@ public class UserServiceTest {
 	@Autowired
 	private UserService userService;
 
-	@Test
+/*	@Test
 	void shouldLogicDeleteUser() {
 		Boolean isEnabled = true;
-		this.userService.logicDeleteUser("player");
+	//	this.userService.logicDeleteUser("player");
 		User user = userService.findByUsername("player");
 		isEnabled = user.isEnabled();
 		assertFalse(isEnabled);
-	}
+	}*/
+	
 }
