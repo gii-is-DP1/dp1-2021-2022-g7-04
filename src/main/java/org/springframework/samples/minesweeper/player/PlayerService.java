@@ -56,6 +56,11 @@ public class PlayerService {
 	public List<Player> findPlayers(String firstName,Integer page,Pageable pageable) throws DataAccessException {
 		return playerRepository.findPlayers(firstName,pageable);
 	}
+	
+	@Transactional(readOnly = true)
+	public Integer countFoundedPlayers(String firstName) throws DataAccessException {
+		return playerRepository.countFoundedPlayers(firstName);
+	}
 
 	@Transactional(readOnly = true)
 	public Player findPlayerByUsername(String username) throws DataAccessException {

@@ -44,14 +44,14 @@ public class PlayerController {
 			// allow parameterless GET request for /players to return all records
 			player = this.playerService.checkPlayerSearched(player);
 			
-			Integer page=0;
-			// find players by username
+			Integer nresults = this.playerService.countFoundedPlayers(player.getFirstName());
+			Integer page = 0;
+			// find players by first name
 			List<Player> results = this.playerService.findPlayers(player.getFirstName(),page,pageable);
 			model.put("pageNumber", pageable.getPageNumber());
-			model.put("pageSize", pageable.getPageSize());
 			model.put("hasPrevious", pageable.hasPrevious());
-			Integer playersPerPage = pageable.getPageSize();
-			Double totalPages = Math.ceil(playerService.findAll().size()/(playersPerPage+1));
+			model.put("firstName", player.getFirstName());
+			Double totalPages = Math.ceil(nresults/(pageable.getPageSize())); // 
 			model.put("totalPages", totalPages);
 			if (results.isEmpty()) {
 				// no players found
@@ -59,7 +59,7 @@ public class PlayerController {
 				return "players/findPlayers";
 			} else {
 				model.put("selections", results);
-				
+
 				return "players/playersList";
 			}
 	

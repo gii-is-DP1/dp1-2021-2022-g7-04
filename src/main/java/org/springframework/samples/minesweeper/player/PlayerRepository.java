@@ -11,7 +11,12 @@ public interface PlayerRepository extends CrudRepository<Player, Integer> {
 
 	@Query("SELECT player FROM Player player WHERE player.firstName LIKE :firstName%")
 	public List<Player> findPlayers(@Param("firstName") String firstName,Pageable pageable);
+	
+	@Query("SELECT COUNT(ID) FROM Player player WHERE player.firstName LIKE :firstName%")
+	public Integer countFoundedPlayers(@Param("firstName") String firstName);
 
 	@Query("SELECT player FROM Player player WHERE player.user.username = :username")
 	public Player findPlayerByUsername(@Param("username") String username);
+	
+	
 }
