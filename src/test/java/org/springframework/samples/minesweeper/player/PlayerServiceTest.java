@@ -1,14 +1,14 @@
 package org.springframework.samples.minesweeper.player;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.criterion.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -16,9 +16,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.samples.minesweeper.player.Player;
-import org.springframework.samples.minesweeper.player.PlayerService;
 import org.springframework.samples.minesweeper.user.User;
 import org.springframework.samples.minesweeper.user.UserService;
 import org.springframework.stereotype.Service;
@@ -181,5 +178,13 @@ public class PlayerServiceTest {
 		// retrieving new name from database
 		player = this.playerService.findPlayerById(6).get();
 		assertThat(player.getLastName()).isEqualTo(newLastName);
+	}
+	
+	@Test
+	void shouldDeletePlayer() {
+		assertNotNull(this.playerService.findPlayerByUsername("player"));
+		this.playerService.deletePlayer("player");
+		Player player = playerService.findPlayerByUsername("player");
+		assertNull(player);
 	}
 }
