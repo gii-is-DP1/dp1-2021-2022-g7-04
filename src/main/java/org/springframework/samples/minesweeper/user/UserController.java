@@ -16,6 +16,7 @@
 package org.springframework.samples.minesweeper.user;
 
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -71,7 +72,7 @@ public class UserController {
 
 	@GetMapping(value = "/users/{username}/edit")
 	public String initUpdateUserForm(@PathVariable("username") String username, Model model) {
-		User user = this.userService.findByUsername(username);
+		Optional<User> user = this.userService.findUser(username);
 		model.addAttribute(user);
 		return VIEWS_SERVICE_UPDATE_FORM;
 	}
@@ -92,7 +93,7 @@ public class UserController {
 	public ModelAndView showUser(@PathVariable("username") String username) {
 		// this details can only be seen by the administrator or the logged user
 		ModelAndView mav = new ModelAndView("users/userDetails");
-		mav.addObject(this.userService.findByUsername(username));
+		mav.addObject(this.userService.findUser(username));
 		return mav;
 	}
 
