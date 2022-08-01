@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.minesweeper.user;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +42,5 @@ public class UserService {
 		return userRepository.findById(username);
 	}
 
-	public Collection<User> findPlayersByUsername(String username) {
-		return userRepository.findPlayersByUsername(username);
-	}
-
-	public User findByUsername(String username) {
-		return userRepository.findByUsername(username);
-	}
 
 }
