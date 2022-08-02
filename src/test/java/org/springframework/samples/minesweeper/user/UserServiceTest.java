@@ -31,9 +31,9 @@ public class UserServiceTest {
 	
 	@Test
 	void shouldCreateUser() {
-		Sort sort=Sort.by(Sort.Direction.DESC,"firstName");
-		Pageable pageable=PageRequest.of(0, 5,sort);
-		Collection<Player> players = this.playerService.findPlayers("jose",0,pageable);
+		Sort sort = Sort.by(Sort.Direction.DESC, "firstName");
+		Pageable pageable = PageRequest.of(0, 5, sort);
+		Collection<Player> players = this.playerService.findPlayers("jose", 0, pageable);
 		int found = players.size();
 
 		Player p = new Player();
@@ -55,7 +55,7 @@ public class UserServiceTest {
 		Optional<User> userFound; 
 		userFound = this.userService.findUser("jose1234");
 		assertNotNull(userFound);
-		players = this.playerService.findPlayers("jose",0,pageable);
+		players = this.playerService.findPlayers("jose", 0, pageable);
 		assertThat(players.size()).isEqualTo(found + 1);
 	}
 	
@@ -86,7 +86,6 @@ public class UserServiceTest {
 		int size2 = list2.size();
 		
 		assertThat(size2>size1);
-		
 	}
 	
 	@Test
@@ -101,11 +100,10 @@ public class UserServiceTest {
 		Optional<User> user1 = this.userService.findUser("jose1234");
 
 		assertNotNull(user1);
-		assertEquals(user.getUsername(), user1.get().getUsername()); 	// the username is the id attribute for users, so 
-																// the same username means the same user
+		assertEquals(user.getUsername(), user1.get().getUsername()); 	
+		// the username is the id attribute for users, so the same username means the same user
 	}
 	
-
 	@Test
 	void shouldDeleteUser() {
 		assertNotNull(this.userService.findUser("player"));

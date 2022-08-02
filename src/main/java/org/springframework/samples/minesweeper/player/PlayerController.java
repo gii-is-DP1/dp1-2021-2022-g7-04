@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
 @Controller
 public class PlayerController {
@@ -33,50 +32,52 @@ public class PlayerController {
 	@GetMapping(value = "/players/find")
 	public String initFindForm(Map<String, Object> model) {
 		model.put("player", new Player());
+		
 		return "players/findPlayers";
 	}
 
 	@GetMapping(value = "/players/list")
-	public String processFindForm(Player player, BindingResult result, Map<String, Object> model,@PageableDefault(page = 0, size = 5)@SortDefault.SortDefaults({
-		@SortDefault(sort = "id", direction = Sort.Direction.ASC),
-		@SortDefault(sort = "firstName", direction = Sort.Direction.DESC)})Pageable pageable) {
-		
-			// allow parameterless GET request for /players to return all records
-			player = this.playerService.checkPlayerSearched(player);
-			
-			Integer nresults = this.playerService.countFoundedPlayers(player.getFirstName());
-			Integer page = 0;
-			// find players by first name
-			List<Player> results = this.playerService.findPlayers(player.getFirstName(),page,pageable);
-			model.put("pageNumber", pageable.getPageNumber());
-			model.put("hasPrevious", pageable.hasPrevious());
-			model.put("firstName", player.getFirstName());
-			Double totalPages = Math.ceil(nresults/(pageable.getPageSize())); // 
-			model.put("totalPages", totalPages);
-			if (results.isEmpty()) {
-				// no players found
-				result.rejectValue("firstName", "notFound", "not found");
-				return "players/findPlayers";
-			} else {
-				model.put("selections", results);
+	public String processFindForm(Player player, BindingResult result, Map<String, Object> model,
+			@PageableDefault(page = 0, size = 5) @SortDefault.SortDefaults({
+					@SortDefault(sort = "id", direction = Sort.Direction.ASC),
+					@SortDefault(sort = "firstName", direction = Sort.Direction.DESC) }) Pageable pageable) {
 
-				return "players/playersList";
-			}
-	
+		// allow parameterless GET request for /players to return all records
+		player = this.playerService.checkPlayerSearched(player);
+
+		Integer nresults = this.playerService.countFoundedPlayers(player.getFirstName());
+		Integer page = 0;
+		// find players by first name
+		List<Player> results = this.playerService.findPlayers(player.getFirstName(), page, pageable);
+		model.put("pageNumber", pageable.getPageNumber());
+		model.put("hasPrevious", pageable.hasPrevious());
+		model.put("firstName", player.getFirstName());
+		Double totalPages = Math.ceil(nresults / (pageable.getPageSize()));
+		model.put("totalPages", totalPages);
+		if (results.isEmpty()) {
+			// no players found
+			result.rejectValue("firstName", "notFound", "not found");
+			return "players/findPlayers";
+		} else {
+			model.put("selections", results);
+
+			return "players/playersList";
+		}
 	}
 
 	@GetMapping("/players/{username}")
 	public ModelAndView showPlayer(@PathVariable("username") String username) {
 		ModelAndView mav = new ModelAndView("players/playerDetails");
 		mav.addObject(this.playerService.findPlayerByUsername(username));
+		
 		return mav;
 	}
-	
 
 	@GetMapping(value = "/players/new")
 	public String initCreationForm(Map<String, Object> model) {
 		Player player = new Player();
 		model.put("player", player);
+		
 		return VIEWS_PLAYER_CREATE_OR_UPDATE_FORM;
 	}
 
@@ -86,10 +87,10 @@ public class PlayerController {
 		if (result.hasErrors()) {
 			return VIEWS_PLAYER_CREATE_OR_UPDATE_FORM;
 		} else {
-
 			this.playerService.savePlayer(player);
-			
-			log.info(String.format("MANAGE GAME - '%s' has registered as a new player. Welcome!", player.getUser().getUsername()));
+
+			log.info(String.format("MANAGE GAME - '%s' has registered as a new player. Welcome!",
+					player.getUser().getUsername()));
 
 			return "redirect:/login";
 		}
@@ -99,6 +100,7 @@ public class PlayerController {
 	public String initUpdatePlayerForm(@PathVariable("playerId") int playerId, Model model) {
 		Player player = this.playerService.findPlayerById(playerId).get();
 		model.addAttribute(player);
+		
 		return VIEWS_PLAYER_CREATE_OR_UPDATE_FORM;
 	}
 
@@ -110,14 +112,15 @@ public class PlayerController {
 		} else {
 			player.setId(playerId);
 			this.playerService.savePlayer(player);
-	
-			return "redirect:/players/"+player.getUser().getUsername();
+
+			return "redirect:/players/" + player.getUser().getUsername();
 		}
 	}
-	
+
 	@GetMapping(value = "/{username}/delete")
 	public String deletePlayer(@PathVariable("username") String username) {
 		playerService.deletePlayer(username);
+		
 		return "players/playerDelete";
 	}
 }

@@ -1,18 +1,3 @@
-/*
- * Copyright 2002-2013 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.springframework.samples.minesweeper.user;
 
 import java.util.Map;
@@ -53,6 +38,7 @@ public class UserController {
 	public String initCreationForm(Map<String, Object> model) {
 		User user = new User();
 		model.put("user", user);
+		
 		return VIEWS_SERVICE_CREATE_FORM;
 	}
 
@@ -63,7 +49,6 @@ public class UserController {
 			return VIEWS_SERVICE_CREATE_FORM;
 		} else {
 			// creating user, and authority
-
 			this.userService.saveUser(user);
 
 			return "redirect:/users/" + user.getUsername();
@@ -74,6 +59,7 @@ public class UserController {
 	public String initUpdateUserForm(@PathVariable("username") String username, Model model) {
 		Optional<User> user = this.userService.findUser(username);
 		model.addAttribute(user);
+		
 		return VIEWS_SERVICE_UPDATE_FORM;
 	}
 
@@ -85,6 +71,7 @@ public class UserController {
 		} else {
 			user.setUsername(username);
 			this.userService.saveUser(user);
+			
 			return "redirect:/users/{username}";
 		}
 	}
@@ -94,8 +81,7 @@ public class UserController {
 		// this details can only be seen by the administrator or the logged user
 		ModelAndView mav = new ModelAndView("users/userDetails");
 		mav.addObject(this.userService.findUser(username));
+		
 		return mav;
 	}
-
-	
 }

@@ -29,20 +29,20 @@ public class PlayerServiceTest {
 
 	@Test
 	void shouldFindPlayersByFirstName() {
-		Sort sort=Sort.by(Sort.Direction.DESC,"firstName");
-		Pageable pageable=PageRequest.of(0, 5,sort);
-		Collection<Player> players = this.playerService.findPlayers("Nombre",0,pageable);
+		Sort sort = Sort.by(Sort.Direction.DESC, "firstName");
+		Pageable pageable = PageRequest.of(0, 5, sort);
+		Collection<Player> players = this.playerService.findPlayers("Nombre", 0, pageable);
 		assertThat(players.size()).isEqualTo(5);
 
-		players = this.playerService.findPlayers("player0",0,pageable);
+		players = this.playerService.findPlayers("player0", 0, pageable);
 		assertThat(players.isEmpty()).isTrue();
 	}
 
 	@Test
 	void shouldCreatePlayer() {
-		Sort sort=Sort.by(Sort.Direction.DESC,"firstName");
-		Pageable pageable=PageRequest.of(0, 5,sort);
-		Collection<Player> players = this.playerService.findPlayers("jose",0,pageable);
+		Sort sort = Sort.by(Sort.Direction.DESC, "firstName");
+		Pageable pageable = PageRequest.of(0, 5, sort);
+		Collection<Player> players = this.playerService.findPlayers("jose", 0, pageable);
 		int found = players.size();
 
 		Player p = new Player();
@@ -61,11 +61,10 @@ public class PlayerServiceTest {
 		this.playerService.savePlayer(p);
 		assertThat(p.getId().longValue()).isNotEqualTo(0);
 
-		players = this.playerService.findPlayers("jose",0,pageable);
+		players = this.playerService.findPlayers("jose", 0, pageable);
 		assertThat(players.size()).isEqualTo(found + 1);
 	}
 
-	
 	@Test
 	@Transactional
 	void shouldFindAllPlayers() {
@@ -91,9 +90,7 @@ public class PlayerServiceTest {
 		List<Player> list2 = this.playerService.findAll();
 		int size2 = list2.size();
 		
-		
 		assertThat(size1<size2);
-		
 	}
 	
 	@Test
@@ -123,37 +120,32 @@ public class PlayerServiceTest {
 		int size2 = list2.size();
 		
 		assertThat(size2>size1);
-		
 	}
 	
 	@Test
 	@Transactional
 	void shouldFindPlayersByFirstname() {
-		Sort sort=Sort.by(Sort.Direction.DESC,"firstName");
-		Pageable pageable=PageRequest.of(0, 5,sort);
-		Collection<Player> players = this.playerService.findPlayers("Nombre",0,pageable);
-		System.out.println("=================================="+players.size()+"=============================================0");
+		Sort sort = Sort.by(Sort.Direction.DESC, "firstName");
+		Pageable pageable = PageRequest.of(0, 5, sort);
+		Collection<Player> players = this.playerService.findPlayers("Nombre", 0, pageable);
+		System.out.println("==================================" + players.size() + "=============================================0");
 		assertThat(players.size()).isEqualTo(5);
 
-		players = this.playerService.findPlayers("player0",0,pageable);
+		players = this.playerService.findPlayers("player0", 0, pageable);
 		assertThat(players.isEmpty()).isTrue();
-		
 	}
 	
 	@Test
 	@Transactional
 	void shouldFindPlayerById() {
 		List<Player> list = this.playerService.findAll();
-		Player p1 = list.get(0);
 		
+		Player p1 = list.get(0);
 		Player p2 = this.playerService.findPlayerById(p1.getId()).get();
 		
-		
 		assertThat(p1.getUser().equals(p2.getUser()));
-		
 	}
 	
-
 	@Test
 	@Transactional
 	void shouldFindPlayerByUsername() {
@@ -162,7 +154,6 @@ public class PlayerServiceTest {
 		
 		assertThat(city.equals("Seville"));
 	}
-	
 	
 	@Test
 	@Transactional
