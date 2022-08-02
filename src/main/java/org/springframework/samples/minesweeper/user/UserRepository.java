@@ -8,6 +8,4 @@ public interface UserRepository extends CrudRepository<User, String> {
 
 	@Query("SELECT user FROM User user WHERE user.username LIKE :username%")
 	public User findByUsername(@Param("username") String username);
-
-
 }

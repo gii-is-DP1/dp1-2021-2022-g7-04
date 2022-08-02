@@ -37,7 +37,7 @@ public class PlayerService {
 	public Optional<Player> findPlayerById(int id) throws DataAccessException {
 		return playerRepository.findById(id);
 	}
-	
+
 	@Transactional
 	public Player checkPlayerSearched(Player player) throws DataAccessException {
 		if (player.getFirstName() == null)
@@ -53,10 +53,10 @@ public class PlayerService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Player> findPlayers(String firstName,Integer page,Pageable pageable) throws DataAccessException {
-		return playerRepository.findPlayers(firstName,pageable);
+	public List<Player> findPlayers(String firstName, Integer page, Pageable pageable) throws DataAccessException {
+		return playerRepository.findPlayers(firstName, pageable);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Integer countFoundedPlayers(String firstName) throws DataAccessException {
 		return playerRepository.countFoundedPlayers(firstName);
@@ -66,10 +66,10 @@ public class PlayerService {
 	public Player findPlayerByUsername(String username) throws DataAccessException {
 		return playerRepository.findPlayerByUsername(username);
 	}
-	
+
 	@Transactional
 	public void deletePlayer(String username) {
 		Integer id = playerRepository.findPlayerByUsername(username).getId();
-		playerRepository.deleteById(id); //it deletes a player and the correspondent user
+		playerRepository.deleteById(id); // it deletes a player and the correspondent user
 	}
 }
