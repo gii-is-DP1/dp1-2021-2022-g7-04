@@ -8,7 +8,7 @@ public interface CellRepository extends CrudRepository<Cell, Integer> {
 
 	@Query("SELECT cell FROM Cell cell WHERE cell.xPosition = :xPosition AND cell.yPosition = :yPosition")
 	public Cell findByPosition(@Param("xPosition") int xPosition, @Param("yPosition") int yPosition);
-	
+
 	@Query("SELECT count(cell) FROM Cell cell WHERE cell.type = 'MINE' and minesweeperBoard.id = :id")
 	public int findAnyMine(@Param("id") int id);
 }

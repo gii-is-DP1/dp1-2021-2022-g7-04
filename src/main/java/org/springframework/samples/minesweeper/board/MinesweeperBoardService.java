@@ -20,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class MinesweeperBoardService {
-	
 
 	@Autowired
 	MinesweeperBoardRepository minesweeperBoardRepository;
@@ -76,10 +75,11 @@ public class MinesweeperBoardService {
 		board.setCells(cells);
 
 		minesweeperBoardRepository.save(board);
-		
-		log.info(String.format("START GAME - Player: %s, Board: %dx%d, Mines: %d - Level: %s", boardRequest.getPlayerName(),
-				boardRequest.getRows(), boardRequest.getColumns(), boardRequest.getMines(), boardRequest.getLevel()));
-		
+
+		log.info(String.format("START GAME - Player: %s, Board: %dx%d, Mines: %d - Level: %s",
+				boardRequest.getPlayerName(), boardRequest.getRows(), boardRequest.getColumns(),
+				boardRequest.getMines(), boardRequest.getLevel()));
+
 		return matrix;
 	}
 
@@ -152,7 +152,7 @@ public class MinesweeperBoardService {
 		if (x < 0 || x > xMax || y < 0 || y > yMax) {
 			return;
 		}
-		
+
 		Cell current = cellService.findCellByPosition(x, y);
 
 		if (current.getMinesAround() == 0 && (!current.getType().equals("PRESSED") && !current.isMine())) {
@@ -166,11 +166,11 @@ public class MinesweeperBoardService {
 			clearEmptySpots(x - 1, y + 1, xMax, yMax);
 			clearEmptySpots(x, y - 1, xMax, yMax);
 			clearEmptySpots(x, y + 1, xMax, yMax);
-			
-		// Set numbers mines around on cells are near from clear cells
-		} else if(current.getMinesAround()>0 && (current.getType().equals("UNPRESSED") && !current.isMine())){
+
+			// Set numbers mines around on cells are near from clear cells
+		} else if (current.getMinesAround() > 0 && (current.getType().equals("UNPRESSED") && !current.isMine())) {
 			cellService.checkMinesAround(current);
-		}else {
+		} else {
 			return;
 		}
 	}
@@ -199,15 +199,15 @@ public class MinesweeperBoardService {
 	public Date getFormattedDate() {
 		Calendar date = Calendar.getInstance();
 		String y = String.valueOf(date.get(Calendar.YEAR));
-		String m = String.valueOf(date.get(Calendar.MONTH+1));
-		String d = String.valueOf(date.get(Calendar.DAY_OF_MONTH)); 
+		String m = String.valueOf(date.get(Calendar.MONTH + 1));
+		String d = String.valueOf(date.get(Calendar.DAY_OF_MONTH));
 
 		String hh = String.valueOf(date.get(Calendar.HOUR_OF_DAY));
 		String mm = String.valueOf(date.get(Calendar.MINUTE));
 		String ss = String.valueOf(date.get(Calendar.SECOND));
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		String dateInString = String.format("%s/%s/%s %s:%s:%s",y,m,d,hh,mm,ss);
+		String dateInString = String.format("%s/%s/%s %s:%s:%s", y, m, d, hh, mm, ss);
 		Date res = new Date();
 		try {
 			res = sdf.parse(dateInString);
