@@ -21,18 +21,18 @@ import org.springframework.samples.minesweeper.configuration.CustomRevisionListe
 import lombok.Data;
 
 @Entity
-@Table(name="REVISON_INFO")
+@Table(name = "REVISON_INFO")
 @RevisionEntity(CustomRevisionListener.class)
 @Data
 public class Revision implements Serializable {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="revison_seq")
-	@SequenceGenerator(name="revision_seq", sequenceName="rbac.seq_revision_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "revison_seq")
+	@SequenceGenerator(name = "revision_seq", sequenceName = "rbac.seq_revision_id")
 	@RevisionNumber
 	private int id;
-	
-	@Column(name="REVISION_DATE")
+
+	@Column(name = "REVISION_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	@RevisionTimestamp
 	private Date date;

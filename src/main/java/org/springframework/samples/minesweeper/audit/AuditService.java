@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuditService {
 	@Autowired
 	private AuditRepository auditRepository;
-	
+
 	@Transactional
 	public Iterable<Audit> findAll() throws DataAccessException {
 		return auditRepository.findAll();
