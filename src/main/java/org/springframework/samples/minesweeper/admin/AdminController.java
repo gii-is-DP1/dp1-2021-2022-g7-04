@@ -2,7 +2,6 @@ package org.springframework.samples.minesweeper.admin;
 
 //package org.springframework.samples.minesweeper.administrator;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
-
 @Controller
 public class AdminController {
 
@@ -24,16 +21,12 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
-
-
 	@GetMapping("/admin")
 	public ModelAndView showAdmin() {
 		ModelAndView mav = new ModelAndView("admin/adminDetails");
 		mav.addObject(this.adminService.findAdmin());
 		return mav;
 	}
-	
-
 	
 	@GetMapping(value = "/admin/{adminId}/edit")
 	public String initUpdatePlayerForm(Model model) {
@@ -54,5 +47,4 @@ public class AdminController {
 			return "redirect:/admin";
 		}
 	}
-	
 }
