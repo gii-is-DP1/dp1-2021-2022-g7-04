@@ -27,15 +27,15 @@ public class CellService {
 	public Cell findCellByPosition(int xPosition, int yPosition) throws DataAccessException {
 		return cellRepository.findByPosition(xPosition, yPosition);
 	}
-	
+
 	@Transactional
 	public boolean findAnyMine(int boardId) throws DataAccessException {
-		return cellRepository.findAnyMine(boardId)>0;
+		return cellRepository.findAnyMine(boardId) > 0;
 	}
-	
+
 	@Transactional
 	public void checkMinesAround(Cell cell) throws DataAccessException {
-		switch(cell.getMinesAround()) {
+		switch (cell.getMinesAround()) {
 		case 1:
 			cell.setType("ONE");
 			break;

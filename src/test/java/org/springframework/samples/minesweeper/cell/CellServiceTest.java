@@ -26,7 +26,6 @@ public class CellServiceTest {
 	@Autowired
 	private MinesweeperBoardService minesweeperBoardService;
 	
-
 	@Test
 	void shouldfindCellById() {
 		Cell c = new Cell();
@@ -74,7 +73,6 @@ public class CellServiceTest {
 		assertThat(this.cellService.findAnyMine(board.getId()));
 	}
 	
-	
 	/*
 	@Test
 	void shouldFindBoardById() {
@@ -121,8 +119,6 @@ public class CellServiceTest {
 		this.minesweeperBoardService.deleteMinesweeperBoard(board);
 		Optional<MinesweeperBoard> board2 = this.minesweeperBoardService.findById(boardId);
 		assertThat(!board.equals(board2));
-	}
-	
+	}	
 	*/
-	
 }
