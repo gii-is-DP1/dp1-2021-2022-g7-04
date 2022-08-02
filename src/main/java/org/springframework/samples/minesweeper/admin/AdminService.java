@@ -27,5 +27,4 @@ public class AdminService {
 		userService.saveUser(admin.getUser());
 		authoritiesService.saveAuthorities(admin.getUser().getUsername(), "admin");
 	}
-
 }

@@ -20,5 +20,4 @@ public class AuditController {
 		model.put("audits", audits);
 		return "admin/viewAudits";
 	}
-
 }

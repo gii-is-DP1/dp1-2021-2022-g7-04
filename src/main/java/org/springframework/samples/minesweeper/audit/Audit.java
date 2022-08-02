@@ -37,5 +37,4 @@ public class Audit extends BaseEntity {
 	private boolean isFinished;
 	
 	private int minesweeperBoardId;
-	
 }
