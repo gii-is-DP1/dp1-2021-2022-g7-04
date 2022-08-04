@@ -9,12 +9,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AdminService {
-	@Autowired
+	
 	private AdminRepository adminRepository;
+	
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
 	private AuthoritiesService authoritiesService;
+	
+	@Autowired
+	public AdminService(AdminRepository adminRepository) {
+		this.adminRepository = adminRepository;
+	}
 	
 	@Transactional
 	public Admin findAdmin() {

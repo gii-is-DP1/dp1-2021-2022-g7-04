@@ -26,8 +26,12 @@ public class PlayerController {
 
 	private static final String VIEWS_PLAYER_CREATE_OR_UPDATE_FORM = "players/createOrUpdatePlayerForm";
 
+	private final PlayerService playerService;
+	
 	@Autowired
-	private PlayerService playerService;
+	public PlayerController(PlayerService playerService) {
+		this.playerService = playerService;
+	}
 
 	@GetMapping(value = "/players/find")
 	public String initFindForm(Map<String, Object> model) {
