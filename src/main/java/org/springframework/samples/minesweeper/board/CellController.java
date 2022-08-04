@@ -63,7 +63,7 @@ public class CellController {
 			} else if (move.equals("flag")) {
 				if (cell.getType().equals("FLAG")) {
 					cell.setType("UNPRESSED");
-				} // Condición en el else para que no se pueda poner bandera a una casilla con número
+				}  // Condition to not flag a uncovered cell with a number on it
 				else if (cell.getType().equals("UNPRESSED") || cell.getType().equals("PRESSED")) {
 					cell.setType("FLAG");
 				}
