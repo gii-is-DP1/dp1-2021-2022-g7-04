@@ -18,8 +18,12 @@ public class AdminController {
 
 	private static final String VIEWS_ADMIN_CREATE_OR_UPDATE_FORM = "admin/createOrUpdateAdminForm";
 
-	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	public AdminController(AdminService adminService) {
+		this.adminService = adminService;
+	}
 
 	@GetMapping("/admin")
 	public ModelAndView showAdmin() {
