@@ -269,11 +269,11 @@ public class GameController {
 		}
 		
 		// Manage the board of the player
-		if (!minesweeperService.existsBoardForPlayer(player.getName())) {
+		if (!minesweeperBoardService.existsBoardForPlayer(player.getName())) {
 			board = new MinesweeperBoard(player.getName());
-			minesweeperService.saveBoard(board);
+			minesweeperBoardService.saveBoard(board);
 		} else {
-			board = minesweeperService.findByPlayer(player.getName());
+			board = minesweeperBoardService.findByPlayer(player.getName());
 			for (Cell c: board.getCells()) {
 				if(c.getType().equals("FLAG") || c.getType().equals("MINE-GUESSED")) {
 					flagsInMines--;

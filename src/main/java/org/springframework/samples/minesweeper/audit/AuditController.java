@@ -21,11 +21,9 @@ public class AuditController {
 
 	@GetMapping(value = "/audits")
 	public String selectGame(Map<String, Object> model, HttpServletRequest request, @PageableDefault(page = 0, size = 5)@SortDefault.SortDefaults({
-		Iterable<Audit> audits = this.auditService.findAll();
 		@SortDefault(sort = "id", direction = Sort.Direction.ASC),
 		@SortDefault(sort = "player", direction = Sort.Direction.DESC)})Pageable pageable) {
 		Integer page=0;
-		// find players by username
 		List<Audit> results = this.auditService.findAudits(page,pageable);
 		model.put("pageNumber", pageable.getPageNumber());
 		model.put("pageSize", pageable.getPageSize());

@@ -15,7 +15,7 @@ public class AuditService {
 	private AuditRepository auditRepository;
 
 	@Transactional
-	public Iterable<Audit> findAll() throws DataAccessException {
+	public List<Audit> findAll() throws DataAccessException {
 		return auditRepository.findAll();
 	}
 	
