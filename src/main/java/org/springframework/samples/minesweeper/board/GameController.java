@@ -17,6 +17,10 @@ import org.springframework.samples.minesweeper.configuration.AdminStats;
 import org.springframework.samples.minesweeper.configuration.AdminStatsService;
 import org.springframework.samples.minesweeper.model.BoardRequest;
 import org.springframework.samples.minesweeper.model.BoardRequestService;
+import org.springframework.samples.minesweeper.player.Player;
+import org.springframework.samples.minesweeper.player.PlayerService;
+import org.springframework.samples.minesweeper.player.PlayerStats;
+import org.springframework.samples.minesweeper.player.PlayerStatsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +42,11 @@ public class GameController {
 	@Autowired
 	private AuditService auditService;
 	@Autowired
+	private PlayerService playerService;
+	@Autowired
 	private AdminStatsService adminStatsService;
+	@Autowired
+	private PlayerStatsService playerStatsService;
 	
 	@GetMapping(value = "/configAchievements")
 	public String configAchievements(Map<String, Object> model, HttpServletRequest request) {
@@ -86,6 +94,7 @@ public class GameController {
 		List<Audit> games = this.auditService.findAllNotCancelledOrStarted();
 		
 		// HALL OF FAME (TOP 3 RANKING)
+		
 		List<Object[]> hallOfFame = this.auditService.getHallOfFame();
 		Object[] top1 = hallOfFame.get(0);
 		Object[] top2 = hallOfFame.get(1);
@@ -106,6 +115,7 @@ public class GameController {
 		model.put("playerTop3WinGames", playerTop3WinGames);
 		
 		// GLOBAL STATS
+		
 		int numberGlobalGames;
 		int averageNumberGlobalGames;
 		int averageDurationGlobalGames;
@@ -151,23 +161,102 @@ public class GameController {
 		model.put("minDurationGlobalGames", minDurationGlobalGames);
 		
 		// PLAYER STATS
-		// Miscellaneous
-		int numberPlayerGames;
-		int averageDurationPlayerGames;
-		int totalDurationPlayerGames;
-		int maxDurationPlayerGames;
-		int minDurationPlayerGames;
+		Principal player = request.getUserPrincipal();
+		String playerName = player.getName();
 		
-		// Game stats
-
-		// Achievements
-		Integer bronzeMinimumGames = this.adminStatsService.getMinimumGamesByLevel("BRONZE");
-		Integer silverMinimumGames = this.adminStatsService.getMinimumGamesByLevel("SILVER");
-		Integer goldMinimumGames = this.adminStatsService.getMinimumGamesByLevel("GOLD");
+		// Retrieve player stats only if player authenticate (not admin)
+		Player currentPlayer = this.playerService.findPlayerByUsername(playerName);
+		if(currentPlayer!=null) {
+			
+			// PLAYER STATS - Miscellaneous
+			int numberPlayerGames;
+			int averageDurationPlayerGames;
+			int totalDurationPlayerGames;
+			int maxDurationPlayerGames;
+			int minDurationPlayerGames;
+			
+			List<Audit> playerGames = this.auditService.findPlayerNotCancelledOrStarted(playerName);
+			
+			// Number of player games
+			numberPlayerGames = playerGames.size();
+			model.put("numberPlayerGames", numberPlayerGames);
+			
+			// Average duration player games 
+			List<Double> durationPlayerGames = new ArrayList<Double>();
+			
+			for(Audit g:playerGames) {
+				long diffInMillies = Math.abs(g.getEndDate().getTime()-g.getStartDate().getTime());
+				double diff = (double) TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
+				durationPlayerGames.add(Math.ceil(diff));
+			}
+			
+			double sumDurationPlayerGames = durationPlayerGames.stream().mapToDouble(Double::doubleValue).sum();
+			averageDurationPlayerGames = (int) Math.ceil(sumDurationPlayerGames/durationPlayerGames.size());
+			model.put("averageDurationPlayerGames", averageDurationPlayerGames);
+			
+			// Total duration player games
+			totalDurationPlayerGames = (int) sumDurationPlayerGames;
+			model.put("totalDurationPlayerGames", totalDurationPlayerGames);
+			
+			// Maximum duration of player games
+			maxDurationPlayerGames = Collections.max(durationPlayerGames,null).intValue();
+			model.put("maxDurationPlayerGames", maxDurationPlayerGames);
+			
+			// Minimum duration of player games
+			minDurationPlayerGames = Collections.min(durationPlayerGames,null).intValue();
+			if(minDurationPlayerGames<=0)
+				minDurationPlayerGames = 1;
+			model.put("minDurationPlayerGames", minDurationPlayerGames);
+			
+			// PLAYER STATS - Game stats
+			int numberWonGames;
+			int numberActivatedMines;
+			int numberGuessedMines;
+			int numberTotalFlags;
+			int numberCellsClicked;
+			
+			PlayerStats playerStats = this.playerStatsService.getPlayerStats(playerName);
+			
+			// Total won games
+			List<Audit> auditsWonGames = this.auditService.getAllWonGames(playerName);
+			numberWonGames = auditsWonGames.size();
+			model.put("numberWonGames", numberWonGames);
+			
+			// Total activated mines
+			numberActivatedMines = playerStats.getNumberActivatedMines();
+			model.put("numberActivatedMines", numberActivatedMines);
+			
+			// Total mine explosions contained (guessed)
+			numberGuessedMines = playerStats.getNumberGuessedMines();
+			model.put("numberGuessedMines", numberGuessedMines);
+			
+			// Total flags placed
+			numberTotalFlags = playerStats.getNumberTotalFlags();
+			model.put("numberTotalFlags", numberTotalFlags);
+			
+			// Total cells clicked
+			numberCellsClicked = playerStats.getNumberCellsClicked();
+			model.put("numberCellsClicked", numberCellsClicked);
 		
-		model.put("bronzeMinimumGames", bronzeMinimumGames);
-		model.put("silverMinimumGames", silverMinimumGames);
-		model.put("goldMinimumGames", goldMinimumGames);
+			// PLAYER STATS - Achievements
+			Integer bronzeMinimumGames = this.adminStatsService.getMinimumGamesByLevel("BRONZE");
+			Integer silverMinimumGames = this.adminStatsService.getMinimumGamesByLevel("SILVER");
+			Integer goldMinimumGames = this.adminStatsService.getMinimumGamesByLevel("GOLD");
+			
+			model.put("bronzeMinimumGames", bronzeMinimumGames);
+			model.put("silverMinimumGames", silverMinimumGames);
+			model.put("goldMinimumGames", goldMinimumGames);
+			
+			// Turn Off/On achievements
+			if(numberWonGames>=bronzeMinimumGames)
+				model.put("successAchievement1", true);
+			if(numberWonGames>=silverMinimumGames)
+				model.put("successAchievement2", true);
+			if(numberWonGames>=goldMinimumGames)
+				model.put("successAchievement3", true);
+			
+		
+		}
 		return "players/gameStats";
 	}
 

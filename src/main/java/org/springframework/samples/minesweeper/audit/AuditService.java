@@ -1,6 +1,5 @@
 package org.springframework.samples.minesweeper.audit;
 
-import java.util.Optional;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +45,11 @@ public class AuditService {
 	}
 	
 	@Transactional
+	public List<Audit> getAllWonGames(String player) throws DataAccessException {
+		return auditRepository.getAllWonGames(player);
+	}
+	
+	@Transactional
 	public List<Object[]> getHallOfFame() throws DataAccessException {
 		return auditRepository.getHallOfFame();
 	}
@@ -53,5 +57,10 @@ public class AuditService {
 	@Transactional
 	public List<Double> getNumberGamesByPlayer() throws DataAccessException {
 		return auditRepository.getNumberGamesByPlayer();
+	}
+
+	@Transactional
+	public List<Audit> findPlayerNotCancelledOrStarted(String player) {
+		return auditRepository.findPlayerNotCancelledOrStarted(player);
 	}
 }

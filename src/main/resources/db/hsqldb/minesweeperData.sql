@@ -141,5 +141,25 @@ INSERT INTO admin_stats(id,level_achievement,games)
 VALUES (3,'GOLD',50);
 
 -- PLAYER STATS
--- INSERT INTO player_stats(id,number_global_games,average_number_global_games,average_duration_global_games,total_duration_global_games,max_duration_global_games,min_duration_global_games)
--- VALUES (1,0,0,0,0,0,0);
+INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
+VALUES (1,'jugador1',1,11,18,46);
+INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
+VALUES (2,'jugador2',0,0,0,0);
+INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
+VALUES (3,'jugador3',0,0,0,0);
+INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
+VALUES (4,'jugador4',0,0,0,0);
+INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
+VALUES (5,'jugador5',1,4,8,22);
+INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
+VALUES (6,'jugador6',0,0,0,0);
+INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
+VALUES (7,'jugador7',1,25,33,79);
+INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
+VALUES (8,'jugador8',1,23,30,93);
+INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
+VALUES (9,'jugador9',0,0,0,0);
+INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
+VALUES (10,'jugador10',0,0,0,0);
+INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
+VALUES (11,'player',0,0,0,0);
