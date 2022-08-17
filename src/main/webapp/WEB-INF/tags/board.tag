@@ -7,6 +7,7 @@
 <img id="PRESSED" src="resources/images/pressed2.png" style="display:none">
 <img id="MINE" src="resources/images/boom.png" style="display:none">
 <img id="MINE-PRESSED" src="resources/images/boom-pressed.png" style="display:none">
+<img id="MINE-GUESSED" src="resources/images/boom-guessed.png" style="display:none">
 <img id="ONE" src="resources/images/one.png" style="display:none">
 <img id="TWO" src="resources/images/two.png" style="display:none">
 <img id="THREE" src="resources/images/three.png" style="display:none">

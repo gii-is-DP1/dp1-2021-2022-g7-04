@@ -10,7 +10,7 @@
 
 <sec:authentication var="principal" property="principal" />
 
-<minesweeper:layout pageName="selectDifficulty">
+<minesweeper:layout pageName="new game">
 
 	<c:choose>
 		<c:when test="${gameStarted eq false}">
@@ -19,7 +19,7 @@
 
 			<form method="get" action="/newGame" class="form-horizontal" id="select-game-form">
 			
-				<div class="form-group has-feedback">
+				<div class="form-horizontal has-feedback">
 					<input type="radio" id="beginner" name="difficulty" value="Beginner" checked /> <label for="beginner">Beginner</label><br>
 					<input type="radio" id="medium" name="difficulty" value="Medium" /> <label for="medium">Medium</label><br>
 					<input type="radio" id="ace" name="difficulty" value="Ace" /> <label for="ace">Ace</label><br>
@@ -28,9 +28,10 @@
 					<div style="display: none" id="CustomRequest">
 						<form:form modelAttribute="boardRequest" class="form-horizontal">
 						
-							<div class="form-group has-feedback">
+							<div class="form-horizontal has-feedback">
 								<form:hidden path="id" />
 								<form:hidden path="playerName" value="${principal.username}" />
+								<input id="timer" name="timer" type="hidden" value="0">
 								<label>Rows: </label>
 								<form:input path="rows" value="8" type="number" min="8" max="16" size="5" name="rows" />
 								&nbsp;&nbsp;&nbsp; 
