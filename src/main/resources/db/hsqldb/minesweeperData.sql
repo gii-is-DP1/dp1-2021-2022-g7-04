@@ -45,6 +45,10 @@ INSERT INTO players(id,first_name,last_name,city,address,telephone,email,usernam
 VALUES (6,'Nombre','Apellido','Seville','Reina Mercedes','12345678','player@player.com','player');
 
 
+INSERT INTO administrator(id,first_name,last_name,city,address,telephone,email,username) 
+VALUES (1,'Administrator','Administrator','Seville','Reina Mercedes','666666666','admin@alum.es','admin');
+
+
 INSERT INTO players(id,first_name,last_name,city,address,telephone,email,username) 
 VALUES (8,'Luis','Cerrato','Seville','Reina Mercedes','666666666','luicersan@alum.es','luis');
 INSERT INTO players(id,first_name,last_name,city,address,telephone,email,username) 

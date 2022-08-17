@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="minesweeper" tagdir="/WEB-INF/tags"%>
 
-<minesweeper:layout pageName="user">
+<minesweeper:layout pageName="player">
 
 	<p>Jugador eliminado</p>
 	<spring:url value="/players/find" var="listUrl"></spring:url>

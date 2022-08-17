@@ -1,11 +1,11 @@
 package org.springframework.samples.minesweeper.player;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.samples.minesweeper.user.AuthoritiesService;
 import org.springframework.samples.minesweeper.user.UserService;
@@ -28,14 +28,16 @@ public class PlayerService {
 
 	@Transactional
 	public List<Player> findAll() {
-		return playerRepository.findAll();
+		List<Player> allPlayers = new ArrayList<Player>();
+		playerRepository.findAll().forEach(allPlayers::add);
+		return allPlayers;
 	}
 
 	@Transactional(readOnly = true)
-	public Player findPlayerById(int id) throws DataAccessException {
+	public Optional<Player> findPlayerById(int id) throws DataAccessException {
 		return playerRepository.findById(id);
 	}
-	
+
 	@Transactional
 	public Player checkPlayerSearched(Player player) throws DataAccessException {
 		if (player.getFirstName() == null)
@@ -51,12 +53,23 @@ public class PlayerService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Player> findPlayers(String firstName,Integer page,Pageable pageable) throws DataAccessException {
-		return playerRepository.findPlayers(firstName,pageable);
+	public List<Player> findPlayers(String firstName, Integer page, Pageable pageable) throws DataAccessException {
+		return playerRepository.findPlayers(firstName, pageable);
+	}
+
+	@Transactional(readOnly = true)
+	public Integer countFoundedPlayers(String firstName) throws DataAccessException {
+		return playerRepository.countFoundedPlayers(firstName);
 	}
 
 	@Transactional(readOnly = true)
 	public Player findPlayerByUsername(String username) throws DataAccessException {
 		return playerRepository.findPlayerByUsername(username);
+	}
+
+	@Transactional
+	public void deletePlayer(String username) {
+		Integer id = playerRepository.findPlayerByUsername(username).getId();
+		playerRepository.deleteById(id); // it deletes a player and the correspondent user
 	}
 }

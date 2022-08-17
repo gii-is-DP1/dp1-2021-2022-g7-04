@@ -19,7 +19,7 @@ public class CellController {
 
 	@Autowired
 	private CellService cellService;
-	
+
 	@Autowired
 	private MinesweeperBoardService minesweeperService;
 	@Autowired
@@ -32,18 +32,18 @@ public class CellController {
 			@RequestParam(required=false) Integer timer) {
 		Principal player = request.getUserPrincipal();
 		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
-		
+
 		Cell cell = this.cellService.findCellByPosition(xPosition - 1, yPosition - 1);
 		if (!cell.getType().equals("PRESSED")) {
 			if (move.equals("uncover")) {
 				if (!cell.getType().equals("FLAG")) {
 					// When press a mine cell
 					if (cell.isMine()) {
-						
+
 						// Uncover the rest of mines
 						MinesweeperBoard board = this.minesweeperService.findByPlayer(player.getName());
 						List<Cell> cells = this.minesweeperService.getAllCells(board.getId());
-						for(Cell c:cells) {
+						for (Cell c : cells) {
 							// Show mine
 							if(c.isMine() && !c.getType().contentEquals("FLAG")) {
 								c.setType("MINE");
@@ -52,48 +52,46 @@ public class CellController {
 								c.setType("MINE-GUESSED");
 							}
 						}
-						
+
 						// Uncover current selected mine
 						cell.setType("MINE-PRESSED");
-						
-					// When press a no-mine cell
-					}else {
-						
+
+						// When press a no-mine cell
+					} else {
+
 						// Clear cells and set numbers mines around on cells are near from clear cells
-						minesweeperService.clearEmptySpots(xPosition - 1, yPosition - 1, boardRequest.getRows() - 1, boardRequest.getColumns() - 1);
+						minesweeperService.clearEmptySpots(xPosition - 1, yPosition - 1, boardRequest.getRows() - 1,
+								boardRequest.getColumns() - 1);
 						this.cellService.checkMinesAround(cell);
-						
 					}
-				}				
+				}
 			} else if (move.equals("flag")) {
 				if (cell.getType().equals("FLAG")) {
 					cell.setType("UNPRESSED");
-				} //Condición en el else para que no se pueda poner bandera a una casilla con número	
-				else if(cell.getType().equals("UNPRESSED") || cell.getType().equals("PRESSED")){ 
+				}  // Condition to not flag a uncovered cell with a number on it
+				else if (cell.getType().equals("UNPRESSED") || cell.getType().equals("PRESSED")) {
 					if(flagsInMines>0) {
 						cell.setType("FLAG");
 					}
 				}
 			} 
 		}
-		
 		this.cellService.saveCell(cell);
-		
+
 		boolean alreadyWon = minesweeperService.alreadyWon(boardRequest);
-		
+
 		// WIN GAME
-		if(alreadyWon) {
+		if (alreadyWon) {
 			redirectAttributes.addAttribute("winner", true);
 			return "redirect:/finishGame";
-		
-		// CONTINUE GAME
-		}else {
+
+			// CONTINUE GAME
+		} else {
 			model.addAttribute(cell);
 			model.addAttribute("minesweeperBoard", cell.getMinesweeperBoard());
 			model.addAttribute("flagsInMines", flagsInMines);
 			redirectAttributes.addAttribute("timer", timer);
 			return "redirect:/newGame";
 		}
-		
 	}
 }

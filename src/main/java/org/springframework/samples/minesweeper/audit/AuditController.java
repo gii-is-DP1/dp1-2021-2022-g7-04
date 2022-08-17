@@ -21,6 +21,7 @@ public class AuditController {
 
 	@GetMapping(value = "/audits")
 	public String selectGame(Map<String, Object> model, HttpServletRequest request, @PageableDefault(page = 0, size = 5)@SortDefault.SortDefaults({
+		Iterable<Audit> audits = this.auditService.findAll();
 		@SortDefault(sort = "id", direction = Sort.Direction.ASC),
 		@SortDefault(sort = "player", direction = Sort.Direction.DESC)})Pageable pageable) {
 		Integer page=0;
@@ -35,5 +36,4 @@ public class AuditController {
 		model.put("audits", results);
 		return "admin/viewAudits";
 	}
-
 }

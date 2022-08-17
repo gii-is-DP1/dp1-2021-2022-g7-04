@@ -1,5 +1,7 @@
 package org.springframework.samples.minesweeper.board;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,7 @@ public class CellService {
 	private CellRepository cellRepository;
 
 	@Transactional(readOnly = true)
-	public Cell findCellById(int id) throws DataAccessException {
+	public Optional<Cell> findCellById(int id) throws DataAccessException {
 		return cellRepository.findById(id);
 	}
 
@@ -25,15 +27,15 @@ public class CellService {
 	public Cell findCellByPosition(int xPosition, int yPosition) throws DataAccessException {
 		return cellRepository.findByPosition(xPosition, yPosition);
 	}
-	
+
 	@Transactional
 	public boolean findAnyMine(int boardId) throws DataAccessException {
-		return cellRepository.findAnyMine(boardId)>0;
+		return cellRepository.findAnyMine(boardId) > 0;
 	}
-	
+
 	@Transactional
 	public void checkMinesAround(Cell cell) throws DataAccessException {
-		switch(cell.getMinesAround()) {
+		switch (cell.getMinesAround()) {
 		case 1:
 			cell.setType("ONE");
 			break;

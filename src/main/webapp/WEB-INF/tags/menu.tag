@@ -94,10 +94,22 @@
 											</p>
 										</div>
 										<div class="col-lg-8">
+										<c:if test = "${fn:contains(principal.authorities, 'player')}">
 											<p class="text-center">
-												<a href="<c:url value="/users/${principal.username}" />"
+											
+												<a href="<c:url value="/players/${principal.username}" />"
 													class="btn btn-primary btn-block btn-sm">My profile</a>
+											
 											</p>
+											</c:if>
+											<c:if test = "${fn:contains(principal.authorities, 'admin')}">
+											<p class="text-center">
+											
+												<a href="<c:url value="/admin" />"
+													class="btn btn-primary btn-block btn-sm">My profile</a>
+											
+											</p>
+											</c:if>
 										</div>
 									</div>
 								</div>
