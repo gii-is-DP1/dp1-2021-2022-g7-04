@@ -113,6 +113,8 @@ public class CellController {
 		// WIN GAME
 		if (alreadyWon) {
 			redirectAttributes.addAttribute("winner", true);
+			redirectAttributes.addAttribute("timer", timer);
+			redirectAttributes.addAttribute("flagsInMines", flagsInMines);
 			return "redirect:/finishGame";
 
 			// CONTINUE GAME

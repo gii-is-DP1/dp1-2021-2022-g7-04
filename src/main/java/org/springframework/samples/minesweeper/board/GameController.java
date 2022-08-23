@@ -48,6 +48,7 @@ public class GameController {
 	@Autowired
 	private PlayerStatsService playerStatsService;
 	
+	
 	@GetMapping(value = "/configAchievements")
 	public String configAchievements(Map<String, Object> model, HttpServletRequest request) {
 		
@@ -152,6 +153,8 @@ public class GameController {
 		
 		// Maximum duration of games played
 		maxDurationGlobalGames = Collections.max(durationGames,null).intValue();
+		if(maxDurationGlobalGames<=0)
+			maxDurationGlobalGames = 1;
 		model.put("maxDurationGlobalGames", maxDurationGlobalGames);
 		
 		// Minimum duration of games played
@@ -168,6 +171,8 @@ public class GameController {
 		Player currentPlayer = this.playerService.findPlayerByUsername(playerName);
 		if(currentPlayer!=null) {
 			
+			int numberWonGames;
+			
 			// PLAYER STATS - Miscellaneous
 			int numberPlayerGames;
 			int averageDurationPlayerGames;
@@ -181,63 +186,86 @@ public class GameController {
 			numberPlayerGames = playerGames.size();
 			model.put("numberPlayerGames", numberPlayerGames);
 			
-			// Average duration player games 
-			List<Double> durationPlayerGames = new ArrayList<Double>();
+			// When current player has any finished games
+			if(numberPlayerGames>0) {
 			
-			for(Audit g:playerGames) {
-				long diffInMillies = Math.abs(g.getEndDate().getTime()-g.getStartDate().getTime());
-				double diff = (double) TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
-				durationPlayerGames.add(Math.ceil(diff));
+				// Average duration player games 
+				List<Double> durationPlayerGames = new ArrayList<Double>();
+				
+				for(Audit g:playerGames) {
+					long diffInMillies = Math.abs(g.getEndDate().getTime()-g.getStartDate().getTime());
+					double diff = (double) TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
+					durationPlayerGames.add(Math.ceil(diff));
+				}
+				
+				double sumDurationPlayerGames = durationPlayerGames.stream().mapToDouble(Double::doubleValue).sum();
+				averageDurationPlayerGames = (int) Math.ceil(sumDurationPlayerGames/durationPlayerGames.size());
+				model.put("averageDurationPlayerGames", averageDurationPlayerGames);
+				
+				// Total duration player games
+				totalDurationPlayerGames = (int) sumDurationPlayerGames;
+				model.put("totalDurationPlayerGames", totalDurationPlayerGames);
+				
+				// Maximum duration of player games
+				maxDurationPlayerGames = Collections.max(durationPlayerGames,null).intValue();
+				if(maxDurationPlayerGames<=0)
+					maxDurationPlayerGames = 1;
+				model.put("maxDurationPlayerGames", maxDurationPlayerGames);
+				
+				// Minimum duration of player games
+				minDurationPlayerGames = Collections.min(durationPlayerGames,null).intValue();
+				if(minDurationPlayerGames<=0)
+					minDurationPlayerGames = 1;
+				model.put("minDurationPlayerGames", minDurationPlayerGames);
+				
+				// PLAYER STATS - Game stats
+				int numberActivatedMines;
+				int numberGuessedMines;
+				int numberTotalFlags;
+				int numberCellsClicked;
+				
+				PlayerStats playerStats = this.playerStatsService.getPlayerStats(playerName);
+				
+				// Total won games
+				List<Audit> auditsWonGames = this.auditService.getAllWonGames(playerName);
+				numberWonGames = auditsWonGames.size();
+				model.put("numberWonGames", numberWonGames);
+				
+				// Total activated mines
+				numberActivatedMines = playerStats.getNumberActivatedMines();
+				model.put("numberActivatedMines", numberActivatedMines);
+				
+				// Total mine explosions contained (guessed)
+				numberGuessedMines = playerStats.getNumberGuessedMines();
+				model.put("numberGuessedMines", numberGuessedMines);
+				
+				// Total flags placed
+				numberTotalFlags = playerStats.getNumberTotalFlags();
+				model.put("numberTotalFlags", numberTotalFlags);
+				
+				// Total cells clicked
+				numberCellsClicked = playerStats.getNumberCellsClicked();
+				model.put("numberCellsClicked", numberCellsClicked);
+			
+			// When current player hasn't finished any games
+			} else {
+				
+				numberWonGames = 0;
+				
+				// PLAYER STATS - Miscellaneous
+				model.put("averageDurationPlayerGames", 0);
+				model.put("totalDurationPlayerGames", 0);
+				model.put("maxDurationPlayerGames", 0);
+				model.put("minDurationPlayerGames", 0);
+				
+				// PLAYER STATS - Game stats
+				model.put("numberWonGames", numberWonGames);
+				model.put("numberActivatedMines", 0);
+				model.put("numberGuessedMines", 0);
+				model.put("numberTotalFlags", 0);
+				model.put("numberCellsClicked", 0);
 			}
 			
-			double sumDurationPlayerGames = durationPlayerGames.stream().mapToDouble(Double::doubleValue).sum();
-			averageDurationPlayerGames = (int) Math.ceil(sumDurationPlayerGames/durationPlayerGames.size());
-			model.put("averageDurationPlayerGames", averageDurationPlayerGames);
-			
-			// Total duration player games
-			totalDurationPlayerGames = (int) sumDurationPlayerGames;
-			model.put("totalDurationPlayerGames", totalDurationPlayerGames);
-			
-			// Maximum duration of player games
-			maxDurationPlayerGames = Collections.max(durationPlayerGames,null).intValue();
-			model.put("maxDurationPlayerGames", maxDurationPlayerGames);
-			
-			// Minimum duration of player games
-			minDurationPlayerGames = Collections.min(durationPlayerGames,null).intValue();
-			if(minDurationPlayerGames<=0)
-				minDurationPlayerGames = 1;
-			model.put("minDurationPlayerGames", minDurationPlayerGames);
-			
-			// PLAYER STATS - Game stats
-			int numberWonGames;
-			int numberActivatedMines;
-			int numberGuessedMines;
-			int numberTotalFlags;
-			int numberCellsClicked;
-			
-			PlayerStats playerStats = this.playerStatsService.getPlayerStats(playerName);
-			
-			// Total won games
-			List<Audit> auditsWonGames = this.auditService.getAllWonGames(playerName);
-			numberWonGames = auditsWonGames.size();
-			model.put("numberWonGames", numberWonGames);
-			
-			// Total activated mines
-			numberActivatedMines = playerStats.getNumberActivatedMines();
-			model.put("numberActivatedMines", numberActivatedMines);
-			
-			// Total mine explosions contained (guessed)
-			numberGuessedMines = playerStats.getNumberGuessedMines();
-			model.put("numberGuessedMines", numberGuessedMines);
-			
-			// Total flags placed
-			numberTotalFlags = playerStats.getNumberTotalFlags();
-			model.put("numberTotalFlags", numberTotalFlags);
-			
-			// Total cells clicked
-			numberCellsClicked = playerStats.getNumberCellsClicked();
-			model.put("numberCellsClicked", numberCellsClicked);
-		
 			// PLAYER STATS - Achievements
 			Integer bronzeMinimumGames = this.adminStatsService.getMinimumGamesByLevel("BRONZE");
 			Integer silverMinimumGames = this.adminStatsService.getMinimumGamesByLevel("SILVER");
@@ -254,7 +282,6 @@ public class GameController {
 				model.put("successAchievement2", true);
 			if(numberWonGames>=goldMinimumGames)
 				model.put("successAchievement3", true);
-			
 		
 		}
 		return "players/gameStats";
@@ -277,19 +304,25 @@ public class GameController {
 
 	@GetMapping(value = "/finishGame")
 	public String finishGame(@RequestParam(required = false) boolean winner, Map<String, Object> model,
-			HttpServletRequest request, RedirectAttributes redirectAttributes) {
+			HttpServletRequest request, @RequestParam(required=false) Integer timer, @RequestParam(required = false) int flagsInMines) {
 		Principal player = request.getUserPrincipal();
+		boolean foundAnyMine = true;
+		
+		// Retrieve current player stats
+		PlayerStats playerStats = this.playerStatsService.getPlayerStats(player.getName());
 
 		MinesweeperBoard board = this.minesweeperBoardService.findByPlayer(player.getName());
 		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
-		boolean foundAnyMine = this.cellService.findAnyMine(board.getId());
-
-		this.minesweeperBoardService.deleteMinesweeperBoard(board);
-		boardRequestService.deleteRequest(boardRequest);
+		
+		if(board!=null) {
+			foundAnyMine = this.cellService.findAnyMine(board.getId());
+	
+			this.minesweeperBoardService.deleteMinesweeperBoard(board);
+			boardRequestService.deleteRequest(boardRequest);
+		}
 
 		// WIN GAME
 		if (winner) {
-			redirectAttributes.addAttribute("winner", true);
 
 			// End audit game (WIN GAME)
 			Date date = this.minesweeperBoardService.getFormattedDate();
@@ -301,6 +334,32 @@ public class GameController {
 			gameAudit.setFinished(true);
 			this.auditService.saveAudit(gameAudit);
 			log.info(String.format("GAME OVER - Player '%s' has WON the game!", player.getName()));
+			
+			// Set board for showing to current player ---
+			List<Cell> cells = board.getCells();
+			for (Cell c : cells) {
+				// Show mine
+				if(c.isMine() && c.getType().contentEquals("FLAG")) {
+					c.setType("MINE-GUESSED");
+					
+					// Update number of guessed mines (PLAYER STATS)
+					playerStats.setNumberGuessedMines(playerStats.getNumberGuessedMines()+1);
+				}
+				
+			}
+			// -------------------------------------------
+			
+			// Saving current PLAYER STATS
+			this.playerStatsService.savePlayerStats(playerStats);
+			
+			board.setCells(cells);
+			
+			model.put("minesweeperBoard", board);
+			model.put("winnerMessage", "Congratulations, you won!");
+			model.put("timer", timer);
+			model.put("flagsInMines", flagsInMines);
+			
+			return "newGame";
 		} else if (!foundAnyMine) {
 			// End audit game (CANCELLED GAME)
 			Date date = this.minesweeperBoardService.getFormattedDate();
@@ -312,9 +371,12 @@ public class GameController {
 			gameAudit.setFinished(true);
 			this.auditService.saveAudit(gameAudit);
 			log.info(String.format("GAME OVER - Player '%s' has cancelled the game", player.getName()));
+			
+			return "redirect:/welcome";
+		} else {
+			return "redirect:/welcome";
 		}
-
-		return "redirect:/welcome";
+		
 	}
 
 	@GetMapping(value = "/newGame")
