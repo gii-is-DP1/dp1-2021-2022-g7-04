@@ -23,6 +23,8 @@
 	<script type="text/javascript">
 		document.addEventListener("DOMContentLoaded", function(event) {
 			var message = "${loserMessage}";
+			var message2 ="${winnerMessage}";
+			// When Lose game
 			if (message != "") {
 				var current_seconds = parseInt(document
 						.getElementById("cont_timer").innerHTML);
@@ -39,6 +41,26 @@
 						+ minute + ":" + seconds;
 				document.getElementById("flagsRemaining").style.display = "none";
 				document.getElementById("nextMove").style.display = "none";
+			
+			// When won game
+			} else if(message2 != "") {
+				var current_seconds = parseInt(document
+						.getElementById("cont_timer").innerHTML);
+				var hour = Math.floor(current_seconds / 3600);
+				var minute = Math.floor((current_seconds - hour * 3600) / 60);
+				var seconds = current_seconds - (hour * 3600 + minute * 60);
+				if (hour < 10)
+					hour = "0" + hour;
+				if (minute < 10)
+					minute = "0" + minute;
+				if (seconds < 10)
+					seconds = "0" + seconds;
+				document.getElementById("timer_finish_bis").innerHTML = hour + ":"
+						+ minute + ":" + seconds;
+				document.getElementById("flagsRemaining").style.display = "none";
+				document.getElementById("nextMove").style.display = "none";
+				document.getElementById("restartGame").style.display = "none";
+				
 			} else {
 				countUpTimer();
 				var timerVariable = setInterval(countUpTimer, 1000);
@@ -72,6 +94,17 @@
 			</h1>
 			<span style="font-size: 18px"><b>Time: <span
 					id="timer_finish"></span></b></span><br />
+			<span style="font-size: 18px"><b>Flags
+					remaining: ${flagsInMines}</b></span>
+		</div>
+	</c:if>
+	<c:if test="${winnerMessage != null}">
+		<div class="row text-center">
+			<h1 style="color: green">
+				<c:out value="${winnerMessage}"></c:out>
+			</h1>
+			<span style="font-size: 18px"><b>Time: <span
+					id="timer_finish_bis"></span></b></span><br />
 			<span style="font-size: 18px"><b>Flags
 					remaining: ${flagsInMines}</b></span>
 		</div>
@@ -134,7 +167,7 @@
 	</div>
 
 	<legend>Options</legend>
-	<form action="/restartGame" method="get" class="form-horizontal"
+	<form id="restartGame" action="/restartGame" method="get" class="form-horizontal"
 		id="finish-game-form">
 		<input id="flagsInMines" name="flagsInMines" type="hidden"
 			value="${flagsInMines}"> 

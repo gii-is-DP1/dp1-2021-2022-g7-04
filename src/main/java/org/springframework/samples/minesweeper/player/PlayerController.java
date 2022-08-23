@@ -29,6 +29,9 @@ public class PlayerController {
 	private final PlayerService playerService;
 	
 	@Autowired
+	private PlayerStatsService playerStatsService;
+	
+	@Autowired
 	public PlayerController(PlayerService playerService) {
 		this.playerService = playerService;
 	}
@@ -92,6 +95,15 @@ public class PlayerController {
 			return VIEWS_PLAYER_CREATE_OR_UPDATE_FORM;
 		} else {
 			this.playerService.savePlayer(player);
+			
+			// Initialize player stats with zero
+			PlayerStats playerStats = new PlayerStats();
+			playerStats.setPlayer(player.getUser().getUsername());
+			playerStats.setNumberActivatedMines(0);
+			playerStats.setNumberGuessedMines(0);
+			playerStats.setNumberTotalFlags(0);
+			playerStats.setNumberCellsClicked(0);
+			this.playerStatsService.savePlayerStats(playerStats);
 
 			log.info(String.format("MANAGE GAME - '%s' has registered as a new player. Welcome!",
 					player.getUser().getUsername()));

@@ -38,10 +38,6 @@ public class WelcomeController {
 		model.put("persons", persons);
 		model.put("title", "Design & Testing I - Minesweeper");
 		model.put("group", "G7-04");
-		
-		if(winner) {
-			model.put("winnerMessage", "Congratulations, you win a game!");
-		}
 
 		return "welcome";
 	}
