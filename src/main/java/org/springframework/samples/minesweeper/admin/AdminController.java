@@ -33,14 +33,14 @@ public class AdminController {
 	}
 	
 	@GetMapping(value = "/admin/{adminId}/edit")
-	public String initUpdatePlayerForm(Model model) {
+	public String initUpdateAdminForm(Model model) {
 		Admin admin = this.adminService.findAdmin();
 		model.addAttribute(admin);
 		return VIEWS_ADMIN_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping(value = "/admin/{adminId}/edit")
-	public String processUpdatePlayerForm(@Valid Admin admin, BindingResult result,
+	public String processUpdateAdminForm(@Valid Admin admin, BindingResult result,
 			@PathVariable("adminId") int adminId) {
 		if (result.hasErrors()) {
 			return VIEWS_ADMIN_CREATE_OR_UPDATE_FORM;
