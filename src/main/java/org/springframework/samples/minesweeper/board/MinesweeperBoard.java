@@ -19,6 +19,8 @@ import lombok.Setter;
 @Setter
 @Table(name = "minesweeper_board")
 public class MinesweeperBoard extends BaseEntity {
+	private final int MINESWEEPER_WIDTH = 800;
+	private final int MINESWEEPER_HEIGHT = 600;
 	@NotEmpty
 	private String playerName;
 	String background;
@@ -32,8 +34,8 @@ public class MinesweeperBoard extends BaseEntity {
 
 	public MinesweeperBoard(String playerName) {
 		this.background = null;
-		this.width = 800;
-		this.height = 400;
+		this.width = MINESWEEPER_WIDTH;
+		this.height = MINESWEEPER_HEIGHT;
 		this.playerName = playerName;
 	}
 
