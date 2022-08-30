@@ -10,15 +10,14 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
+
 import org.springframework.samples.minesweeper.model.Person;
 import org.springframework.samples.minesweeper.user.User;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Audited
+
 @Getter
 @Setter
 @Entity
@@ -37,7 +36,7 @@ public class Admin extends Person {
 	@Email
 	private String email;
 	
-	@NotAudited
+	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;
