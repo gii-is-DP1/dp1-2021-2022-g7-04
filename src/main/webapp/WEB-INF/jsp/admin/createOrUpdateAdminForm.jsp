@@ -11,8 +11,7 @@
 <minesweeper:layout pageName="administrator">
 
 	<h2>
-		<c:if test="${player['new']}">New </c:if>
-		Player
+		Administrator
 	</h2>
 	
 	<form:form modelAttribute="admin" class="form-horizontal"
