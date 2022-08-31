@@ -26,7 +26,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin")
-	public ModelAndView showAdmin() {
+	public ModelAndView findAdmin() {
 		ModelAndView mav = new ModelAndView("admin/adminDetails");
 		mav.addObject(this.adminService.findAdmin());
 		return mav;
