@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 
@@ -19,7 +20,9 @@ import lombok.Setter;
 @Setter
 @Table(name = "minesweeper_board")
 public class MinesweeperBoard extends BaseEntity {
+	@Transient
 	private final int MINESWEEPER_WIDTH = 800;
+	@Transient
 	private final int MINESWEEPER_HEIGHT = 600;
 	@NotEmpty
 	private String playerName;
