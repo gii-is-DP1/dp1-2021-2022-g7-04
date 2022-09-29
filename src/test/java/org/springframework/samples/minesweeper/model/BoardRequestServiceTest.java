@@ -11,6 +11,8 @@ import org.springframework.samples.minesweeper.board.DifficultyLevel;
 import org.springframework.samples.minesweeper.player.Player;
 import org.springframework.samples.minesweeper.player.PlayerService;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
+
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class BoardRequestServiceTest {
@@ -29,6 +31,7 @@ public class BoardRequestServiceTest {
 	}
 
 	@Test
+	@Transactional
 	void shouldSaveRequestBoard() {
 		Player p = this.playerService.findPlayerById(6).get();
 		BoardRequest boardRequest = new BoardRequest(DifficultyLevel.BEGINNER, p.getFirstName());
@@ -46,6 +49,7 @@ public class BoardRequestServiceTest {
 	}
 
 	@Test
+	@Transactional
 	void shouldDeleteBoardRequest() {
 		Player p = this.playerService.findPlayerById(6).get();
 		BoardRequest boardRequest = new BoardRequest(DifficultyLevel.BEGINNER, p.getFirstName());

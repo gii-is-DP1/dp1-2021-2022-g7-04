@@ -30,6 +30,7 @@ public class UserServiceTest {
 	private PlayerService playerService;
 	
 	@Test
+	@Transactional
 	void shouldCreateUser() {
 		Sort sort = Sort.by(Sort.Direction.DESC, "firstName");
 		Pageable pageable = PageRequest.of(0, 5, sort);
@@ -89,7 +90,6 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	void shouldFindUserByUsername() {
 		User user = new User();
 		user.setUsername("jose1234");
@@ -105,6 +105,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
+	@Transactional
 	void shouldDeleteUser() {
 		assertNotNull(this.userService.findUser("player"));
 		this.playerService.deletePlayer("player"); // delete a Player implies deleting the associated User

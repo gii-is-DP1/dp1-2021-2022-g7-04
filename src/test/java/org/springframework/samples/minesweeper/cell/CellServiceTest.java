@@ -3,6 +3,8 @@ package org.springframework.samples.minesweeper.cell;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -37,6 +39,7 @@ public class CellServiceTest {
 	}
 	
 	@Test
+	@Transactional
 	void shouldSaveCell() {
 		Cell c = new Cell();
 		c.setXPosition(2);

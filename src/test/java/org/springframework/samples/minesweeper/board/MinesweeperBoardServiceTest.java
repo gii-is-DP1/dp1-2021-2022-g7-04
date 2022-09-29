@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -31,6 +33,7 @@ public class MinesweeperBoardServiceTest {
 	}
 
 	@Test
+	@Transactional
 	void shouldSaveBoard() {
 		Player p = this.playerService.findPlayerById(6).get();
 		MinesweeperBoard board = new MinesweeperBoard(p.getFirstName());
@@ -57,6 +60,7 @@ public class MinesweeperBoardServiceTest {
 	}
 
 	@Test
+	@Transactional
 	void shouldDeleteBoard() {
 		Player p = this.playerService.findPlayerById(6).get();
 		MinesweeperBoard board = new MinesweeperBoard(p.getFirstName());

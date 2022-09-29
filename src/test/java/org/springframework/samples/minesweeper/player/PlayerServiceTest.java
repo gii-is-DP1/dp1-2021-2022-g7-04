@@ -39,6 +39,7 @@ public class PlayerServiceTest {
 	}
 
 	@Test
+	@Transactional
 	void shouldCreatePlayer() {
 		Sort sort = Sort.by(Sort.Direction.DESC, "firstName");
 		Pageable pageable = PageRequest.of(0, 5, sort);
@@ -66,7 +67,6 @@ public class PlayerServiceTest {
 	}
 
 	@Test
-	@Transactional
 	void shouldFindAllPlayers() {
 		List<Player> list1 = this.playerService.findAll();
 		int size1 = list1.size();
@@ -123,7 +123,6 @@ public class PlayerServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	void shouldFindPlayersByFirstname() {
 		Sort sort = Sort.by(Sort.Direction.DESC, "firstName");
 		Pageable pageable = PageRequest.of(0, 5, sort);
@@ -136,7 +135,6 @@ public class PlayerServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	void shouldFindPlayerById() {
 		List<Player> list = this.playerService.findAll();
 		
@@ -147,7 +145,6 @@ public class PlayerServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	void shouldFindPlayerByUsername() {
 		Player p = this.playerService.findPlayerByUsername("luis");
 		String city = p.getCity();
@@ -171,6 +168,7 @@ public class PlayerServiceTest {
 	}
 	
 	@Test
+	@Transactional
 	void shouldDeletePlayer() {
 		assertNotNull(this.playerService.findPlayerByUsername("player"));
 		this.playerService.deletePlayer("player");
