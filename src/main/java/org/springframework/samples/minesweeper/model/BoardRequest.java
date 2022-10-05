@@ -27,6 +27,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "board_requests")
 public class BoardRequest extends BaseEntity {
+	
 	@NotEmpty
 	private String playerName;
 

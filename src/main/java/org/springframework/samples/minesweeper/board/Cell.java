@@ -15,11 +15,15 @@ import lombok.Setter;
 @Setter
 @Table(name = "cells")
 public class Cell extends BaseEntity {
+	
 	@Range(min = 0, max = 8)
 	int minesAround;
+	
 	String type;
+	
 	@Range(min = 0, max = 29)
 	int xPosition;
+	
 	@Range(min = 0, max = 29)
 	int yPosition;
 	boolean isMine;

@@ -1,7 +1,6 @@
 package org.springframework.samples.minesweeper.player;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -24,15 +23,15 @@ import lombok.Setter;
 @Entity
 @Table(name = "players")
 public class Player extends Person {
-	@Column(name = "city") 
+	
 	private String city;
-	@Column(name = "address")
+
 	private String address;
-	@Column(name = "telephone")
+
 	@NotEmpty
 	@Digits(fraction = 0, integer = 10)
 	private String telephone;
-	@Column(name = "email")
+
 	@NotEmpty
 	@Email
 	private String email;

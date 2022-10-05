@@ -23,14 +23,16 @@ import lombok.Setter;
 @Entity
 @Table(name = "administrator")
 public class Admin extends Person {
-	@Column(name = "city") 
+
 	private String city;
-	@Column(name = "address")
+
 	private String address;
+	
 	@Column(name = "telephone")
 	@NotEmpty
 	@Digits(fraction = 0, integer = 10)
 	private String telephone;
+	
 	@Column(name = "email")
 	@NotEmpty
 	@Email

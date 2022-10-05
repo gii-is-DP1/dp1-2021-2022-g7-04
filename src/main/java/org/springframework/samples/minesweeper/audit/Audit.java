@@ -18,6 +18,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "audits")
 public class Audit extends BaseEntity {
+	
 	@Column(name = "start_date")        
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date startDate;

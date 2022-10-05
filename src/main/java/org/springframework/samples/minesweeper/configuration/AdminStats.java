@@ -22,7 +22,6 @@ public class AdminStats extends BaseEntity {
 	@NotBlank
 	private String levelAchievement;
 
-	@Column(name = "games")
 	@Digits(fraction = 0, integer = 10)
 	@Min(0)
 	private Integer games;
