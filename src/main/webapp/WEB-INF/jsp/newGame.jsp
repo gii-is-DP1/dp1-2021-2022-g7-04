@@ -167,7 +167,7 @@
 	</div>
 
 	<legend>Options</legend>
-	<form id="restartGame" action="/restartGame" method="get" class="form-horizontal"
+	<form action="/restartGame" method="get" class="form-horizontal"
 		id="restart-game-form">
 		<input id="flagsInMines" name="flagsInMines" type="hidden"
 			value="${flagsInMines}"> 
