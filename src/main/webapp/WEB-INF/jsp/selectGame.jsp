@@ -47,15 +47,16 @@
 				</div>
 			</form>
 		</c:when>
-		
+
 		<c:otherwise>
 			<h2>Continue your current game?</h2>
 			<form method="get" action="/continueGame" class="form-horizontal"
 				id="continue-game-form">
 				<button class="btn btn-default" type="submit">Yes</button>
 			</form>
-			<form method="get" action="/finishGame" class="form-horizontal"
+			<form action="/finishGame" method="get" class="form-horizontal"
 				id="finish-game-form">
+				<input id="flagsInMines" name="flagsInMines" type="hidden" value=0>
 				<button class="btn btn-default" type="submit">No</button>
 			</form>
 		</c:otherwise>
