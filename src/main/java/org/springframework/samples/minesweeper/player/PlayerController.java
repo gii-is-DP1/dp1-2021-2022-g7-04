@@ -25,6 +25,9 @@ import lombok.extern.slf4j.Slf4j;
 public class PlayerController {
 
 	private static final String VIEWS_PLAYER_CREATE_OR_UPDATE_FORM = "players/createOrUpdatePlayerForm";
+	private static final String VIEWS_FIND_PLAYER_FORM = "players/findPlayers";
+	private static final String VIEWS_LIST_PLAYER = "players/playersList";
+	private static final String VIEWS_DELETE_PLAYER = "players/playerDelete";
 
 	private final PlayerService playerService;
 	
@@ -40,7 +43,7 @@ public class PlayerController {
 	public String initFindForm(Map<String, Object> model) {
 		model.put("player", new Player());
 		
-		return "players/findPlayers";
+		return VIEWS_FIND_PLAYER_FORM;
 	}
 
 	@GetMapping(value = "/players/list")
@@ -64,11 +67,11 @@ public class PlayerController {
 		if (results.isEmpty()) {
 			// no players found
 			result.rejectValue("firstName", "notFound", "not found");
-			return "players/findPlayers";
+			return VIEWS_FIND_PLAYER_FORM;
 		} else {
 			model.put("selections", results);
 
-			return "players/playersList";
+			return VIEWS_LIST_PLAYER;
 		}
 	}
 
@@ -137,6 +140,6 @@ public class PlayerController {
 	public String deletePlayer(@PathVariable("username") String username) {
 		playerService.deletePlayer(username);
 		
-		return "players/playerDelete";
+		return VIEWS_DELETE_PLAYER;
 	}
 }

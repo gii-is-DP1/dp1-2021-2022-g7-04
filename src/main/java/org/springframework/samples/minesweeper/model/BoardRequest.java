@@ -28,22 +28,43 @@ import lombok.Setter;
 @Table(name = "board_requests")
 public class BoardRequest extends BaseEntity {
 	
+	private static final int MIN_ROWS = 8;
+	private static final int MAX_ROWS = 16;
+	
+	private static final int MIN_COLUMNS = 8;
+	private static final int MAX_COLUMNS = 30;
+	
+	private static final int MIN_MINES = 10;
+	private static final int MAX_MINES = 99;
+	
+	private static final int BEGINNER_ROWS = 8;
+	private static final int BEGINNER_COLUMNS = 8;
+	private static final int BEGINNER_MINES = 10;
+	
+	private static final int MEDIUM_ROWS = 16;
+	private static final int MEDIUM_COLUMNS = 16;
+	private static final int MEDIUM_MINES = 40;
+	
+	private static final int ACE_ROWS = 16;
+	private static final int ACE_COLUMNS = 30;
+	private static final int ACE_MINES = 99;
+	
 	@NotEmpty
 	private String playerName;
 
 	@NotNull
-	@Min(8)
-	@Max(16)
+	@Min(MIN_ROWS)
+	@Max(MAX_ROWS)
 	private int rows;
 
 	@NotNull
-	@Min(8)
-	@Max(30)
+	@Min(MIN_COLUMNS)
+	@Max(MAX_COLUMNS)
 	private int columns;
 
 	@NotNull
-	@Min(10)
-	@Max(99)
+	@Min(MIN_MINES)
+	@Max(MAX_MINES)
 	private int mines;
 	
 	private int timer;
@@ -54,7 +75,7 @@ public class BoardRequest extends BaseEntity {
 	}
 
 	/**
-	 * Set a board request by difficulty (For Beginner, Medium and Ace levels)
+	 * Set a board request by difficulty (Beginner, Medium and Ace levels)
 	 *
 	 * @param level    must not be {@literal null}.
 	 * @param username must not be {@literal null}.
@@ -63,24 +84,24 @@ public class BoardRequest extends BaseEntity {
 	public BoardRequest(DifficultyLevel level, String username) {
 		switch (level) {
 		case BEGINNER:
-			this.rows = 8;
-			this.columns = 8;
-			this.mines = 10;
+			this.rows = 	BEGINNER_ROWS;
+			this.columns = 	BEGINNER_COLUMNS;
+			this.mines = 	BEGINNER_MINES;
 			break;
 		case MEDIUM:
-			this.rows = 16;
-			this.columns = 16;
-			this.mines = 40;
+			this.rows = 	MEDIUM_ROWS;
+			this.columns = 	MEDIUM_COLUMNS;
+			this.mines = 	MEDIUM_MINES;
 			break;
 		case ACE:
-			this.rows = 16;
-			this.columns = 30;
-			mines = 99;
+			this.rows = 	ACE_ROWS;
+			this.columns = 	ACE_COLUMNS;
+			mines = 		ACE_MINES;
 			break;
 		default:
-			this.rows = 8;
-			this.columns = 8;
-			this.mines = 10;
+			this.rows = 	BEGINNER_ROWS;
+			this.columns = 	BEGINNER_COLUMNS;
+			this.mines = 	BEGINNER_MINES;
 		}
 		this.level = level;
 		this.playerName = username;

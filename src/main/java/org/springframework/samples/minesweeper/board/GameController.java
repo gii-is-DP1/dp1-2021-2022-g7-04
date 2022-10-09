@@ -24,13 +24,19 @@ import org.springframework.samples.minesweeper.player.PlayerStatsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 public class GameController {
+	
+	private static final String WON_GAME_STATEMENT = "Congratulations, you won!";
+	private static final String LOST_GAME_STATEMENT = "Sorry, you have lost...";
+	
+	private static final String VIEWS_ADMIN_ACHIEVEMENTS = "admin/configAchievements";
+	private static final String VIEWS_PLAYER_STATS = "players/gameStats";
+	private static final String VIEWS_SELECT_GAME = "selectGame";
+	private static final String VIEWS_NEW_GAME = "newGame";
 
 	@Autowired
 	MinesweeperBoardService minesweeperBoardService;
@@ -60,7 +66,7 @@ public class GameController {
 		model.put("silverMinimumGames", silverMinimumGames);
 		model.put("goldMinimumGames", goldMinimumGames);
 		
-		return "admin/configAchievements";
+		return VIEWS_ADMIN_ACHIEVEMENTS;
 	}
 	
 	@GetMapping(value = "/updateAchievements")
@@ -86,7 +92,7 @@ public class GameController {
 		model.put("silverMinimumGames", silverGames);
 		model.put("goldMinimumGames", goldGames);
 		
-		return "admin/configAchievements";
+		return VIEWS_ADMIN_ACHIEVEMENTS;
 	}
 	
 	@GetMapping(value = "/gameStats")
@@ -284,7 +290,7 @@ public class GameController {
 				model.put("successAchievement3", true);
 		
 		}
-		return "players/gameStats";
+		return VIEWS_PLAYER_STATS;
 	}
 
 	@GetMapping(value = "/selectGame")
@@ -299,7 +305,7 @@ public class GameController {
 			model.put("gameStarted", false);
 		}
 
-		return "selectGame";
+		return VIEWS_SELECT_GAME;
 	}
 
 	@GetMapping(value = "/finishGame")
@@ -329,7 +335,7 @@ public class GameController {
 			Audit gameAudit = this.auditService.findByActiveBoard(board.getId());
 			gameAudit.setEndDate(date);
 			gameAudit.setPlayer(player.getName());
-			gameAudit.setGameStatus("WON");
+			gameAudit.setGameStatus(GameStatus.WON.name());
 			gameAudit.setDifficulty(boardRequest.getLevel().name());
 			gameAudit.setFinished(true);
 			this.auditService.saveAudit(gameAudit);
@@ -355,18 +361,18 @@ public class GameController {
 			board.setCells(cells);
 			
 			model.put("minesweeperBoard", board);
-			model.put("winnerMessage", "Congratulations, you won!");
+			model.put("winnerMessage", WON_GAME_STATEMENT);
 			model.put("timer", timer);
 			model.put("flagsInMines", flagsInMines);
 			
-			return "newGame";
+			return VIEWS_NEW_GAME;
 		} else if (!foundAnyMine) {
 			// End audit game (CANCELLED GAME)
 			Date date = this.minesweeperBoardService.getFormattedDate();
 			Audit gameAudit = this.auditService.findByActiveBoard(board.getId());
 			gameAudit.setEndDate(date);
 			gameAudit.setPlayer(player.getName());
-			gameAudit.setGameStatus("CANCELLED");
+			gameAudit.setGameStatus(GameStatus.CANCELLED.name());
 			gameAudit.setDifficulty(boardRequest.getLevel().name());
 			gameAudit.setFinished(true);
 			this.auditService.saveAudit(gameAudit);
@@ -446,7 +452,7 @@ public class GameController {
 			Audit gameAudit = new Audit();
 			gameAudit.setStartDate(date);
 			gameAudit.setPlayer(player.getName());
-			gameAudit.setGameStatus("STARTED");
+			gameAudit.setGameStatus(GameStatus.STARTED.name());
 			gameAudit.setDifficulty(boardRequest.getLevel().name());
 			gameAudit.setFinished(false);
 			gameAudit.setMinesweeperBoardId(board.getId());
@@ -459,14 +465,14 @@ public class GameController {
 
 		// LOSE GAME
 		if (foundAnyMine) {
-			model.put("loserMessage", "Sorry, you have lost...");
+			model.put("loserMessage", LOST_GAME_STATEMENT);
 
 			// End audit game (LOSE GAME)
 			Date date = this.minesweeperBoardService.getFormattedDate();
 			Audit gameAudit = this.auditService.findByActiveBoard(board.getId());
 			gameAudit.setEndDate(date);
 			gameAudit.setPlayer(player.getName());
-			gameAudit.setGameStatus("LOST");
+			gameAudit.setGameStatus(GameStatus.LOST.name());
 			gameAudit.setDifficulty(boardRequest.getLevel().name());
 			gameAudit.setFinished(true);
 			this.auditService.saveAudit(gameAudit);
@@ -478,7 +484,7 @@ public class GameController {
 		model.put("boardRequest", boardRequest);
 		model.put("difficulty", difficulty);
 		model.put("timer", timer);
-		return "newGame";
+		return VIEWS_NEW_GAME;
 	}
 
 	@GetMapping(value = "/continueGame")
@@ -503,7 +509,7 @@ public class GameController {
 		model.put("minesweeperBoard", board);
 		model.put("boardRequest", boardRequest);
 		model.put("timer", timer);
-		return "newGame";
+		return VIEWS_NEW_GAME;
 	}
 
 	@GetMapping(value = "/restartGame")
@@ -520,7 +526,7 @@ public class GameController {
 			Audit gameAudit = this.auditService.findByActiveBoard(board.getId());
 			gameAudit.setEndDate(date);
 			gameAudit.setPlayer(player.getName());
-			gameAudit.setGameStatus("CANCELLED");
+			gameAudit.setGameStatus(GameStatus.CANCELLED.name());
 			gameAudit.setDifficulty(boardRequest.getLevel().name());
 			gameAudit.setFinished(true);
 			this.auditService.saveAudit(gameAudit);
@@ -541,7 +547,7 @@ public class GameController {
 		Audit newGameAudit = new Audit();
 		newGameAudit.setStartDate(newDate);
 		newGameAudit.setPlayer(player.getName());
-		newGameAudit.setGameStatus("STARTED");
+		newGameAudit.setGameStatus(GameStatus.STARTED.name());
 		newGameAudit.setDifficulty(boardRequest.getLevel().name());
 		newGameAudit.setFinished(false);
 		newGameAudit.setMinesweeperBoardId(board.getId());
@@ -553,6 +559,6 @@ public class GameController {
 		model.put("minesweeperBoard", board);
 		model.put("boardRequest", boardRequest);
 		model.put("timer", 0);
-		return "newGame";
+		return VIEWS_NEW_GAME;
 	}
 }
