@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AuditController {
+	
+	private static final String VIEWS_ADMIN_AUDITS = "admin/viewAudits";
 
 	@Autowired
 	private AuditService auditService;
@@ -32,6 +34,6 @@ public class AuditController {
 		Double totalPages = Math.ceil(auditService.findAll().size()/(auditsPerPage+1));
 		model.put("totalPages", totalPages);
 		model.put("audits", results);
-		return "admin/viewAudits";
+		return VIEWS_ADMIN_AUDITS;
 	}
 }
