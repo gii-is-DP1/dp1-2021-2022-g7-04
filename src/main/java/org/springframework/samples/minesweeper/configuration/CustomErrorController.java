@@ -34,7 +34,7 @@ public class CustomErrorController implements ErrorController{
 			}
 		}
 		//display generic error
-		return "error";
+		return "errors/error-default";
 	}
 
 }

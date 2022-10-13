@@ -139,14 +139,14 @@
 			<label class="col-sm-2 ">Rows (1-${boardRequest.rows})</label> <input
 				min="1" size="5" max="${boardRequest.rows}" value="1" type="number"
 				name="xPosition" id="xPosition" /> <span>Rows are numbered
-				from left to right.</span>
+				from top to bottom.</span>
 		</div>
 
 		<div class="form-group has-feedback">
 			<label class="col-sm-2 ">Columns (1-${boardRequest.columns})
 			</label> <input min="1" size="5" max="${boardRequest.columns}" value="1"
 				type="number" name="yPosition" id="yPosition" /> <span>Columns
-				are numbered from top to bottom.</span>
+				are numbered from left to right.</span>
 		</div>
 
 		<div class="form-group">
