@@ -387,14 +387,15 @@ public class GameController {
 
 	@GetMapping(value = "/newGame")
 	public String newGame(@RequestParam(value = "difficulty", required = false) String difficulty,
-			Map<String, Object> model, BoardRequest playRequest, HttpServletRequest request, @RequestParam(required=false) Integer timer) {
+			Map<String, Object> model, BoardRequest playRequest, HttpServletRequest request, @RequestParam(required=false) Integer timer,
+			Boolean flagWarning) {
 		Principal player = request.getUserPrincipal();
 		
 		int flagsInMines = 0;
 		MinesweeperBoard board = null;
 
 		boolean existPlayRequest = false;
-
+		
 		// Manage the play request of the player
 		BoardRequest boardRequest = null;
 		if (!boardRequestService.existsRequestBoardForPlayer(player.getName())) {
@@ -484,6 +485,7 @@ public class GameController {
 		model.put("boardRequest", boardRequest);
 		model.put("difficulty", difficulty);
 		model.put("timer", timer);
+		model.put("flagWarning", flagWarning);
 		return VIEWS_NEW_GAME;
 	}
 
@@ -491,7 +493,7 @@ public class GameController {
 	public String continueGame(Map<String, Object> model, HttpServletRequest request) {
 		Principal player = request.getUserPrincipal();
 		int flagsInMines = 0;
-
+		
 		MinesweeperBoard board = this.minesweeperBoardService.findByPlayer(player.getName());
 		for (Cell c : board.getCells()) {
 			if(c.getType().equals("FLAG") || c.getType().equals("MINE-GUESSED")) {
