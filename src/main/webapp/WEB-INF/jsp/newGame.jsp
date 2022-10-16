@@ -109,6 +109,7 @@
 					remaining: ${flagsInMines}</b></span>
 		</div>
 	</c:if>
+	
 	<div>
 		<div style="height: 30px; font-size: 30px; text-align: center"
 			id="count_up_timer"></div>
@@ -117,6 +118,14 @@
 			<b>Flags remaining: ${flagsInMines}</b>
 		</div>
 	</div>
+
+	<div>
+		<c:if test="${flagWarning == true}">
+			<b>¡WARNING!: You cannot uncover a flagged cell, try to select another cell</b>
+		</c:if>
+
+	</div>
+
 	<div class="row">
 		<div class="col-md-12">
 			<minesweeper:board minesweeperBoard="${minesweeperBoard}" />

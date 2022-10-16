@@ -37,6 +37,8 @@ public class CellController {
 		Principal player = request.getUserPrincipal();
 		BoardRequest boardRequest = boardRequestService.findByPlayer(player.getName());
 		
+		Boolean flagWarning = null;
+		
 		// Retrieve current player stats
 		PlayerStats playerStats = this.playerStatsService.getPlayerStats(player.getName());
 
@@ -80,6 +82,9 @@ public class CellController {
 								boardRequest.getColumns() - 1);
 						this.cellService.checkMinesAround(cell);
 					}
+				} //An exception shows up when you try to uncover a flagged cell
+				else if(cell.getType().equals("FLAG")) {
+					flagWarning = true;
 				}
 			} else if (move.equals("flag")) {
 				// Update number of cells clicked (PLAYER STATS)
@@ -122,6 +127,7 @@ public class CellController {
 			model.addAttribute(cell);
 			model.addAttribute("minesweeperBoard", cell.getMinesweeperBoard());
 			model.addAttribute("flagsInMines", flagsInMines);
+			redirectAttributes.addAttribute("flagWarning", flagWarning);
 			redirectAttributes.addAttribute("timer", timer);
 			return "redirect:/newGame";
 		}
