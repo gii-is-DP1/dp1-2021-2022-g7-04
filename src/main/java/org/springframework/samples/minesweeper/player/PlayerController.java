@@ -29,6 +29,7 @@ public class PlayerController {
 	private static final String VIEWS_LIST_PLAYER = "players/playersList";
 	private static final String VIEWS_DELETE_PLAYER = "players/playerDelete";
 
+	@Autowired
 	private final PlayerService playerService;
 	
 	@Autowired
@@ -111,7 +112,7 @@ public class PlayerController {
 			log.info(String.format("MANAGE GAME - '%s' has registered as a new player. Welcome!",
 					player.getUser().getUsername()));
 
-			return "redirect:/login";
+			return "redirect:/";
 		}
 	}
 
