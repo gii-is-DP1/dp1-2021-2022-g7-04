@@ -13,6 +13,11 @@ public class PlayerStatsService {
 	@Autowired
 	private PlayerStatsRepository playerStatsRepository;
 	
+	@Autowired
+	public PlayerStatsService(PlayerStatsRepository playerStatsRepository) {
+		this.playerStatsRepository = playerStatsRepository;
+	}
+	
 	@Transactional
 	public List<PlayerStats> findAll() throws DataAccessException {
 		return playerStatsRepository.findAll();
