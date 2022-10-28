@@ -1,7 +1,5 @@
 package org.springframework.samples.minesweeper.admin;
 
-//package org.springframework.samples.minesweeper.administrator;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ public class AdminController {
 
 	private static final String VIEWS_ADMIN_CREATE_OR_UPDATE_FORM = "admin/createOrUpdateAdminForm";
 
+	@Autowired
 	private AdminService adminService;
 	
 	@Autowired

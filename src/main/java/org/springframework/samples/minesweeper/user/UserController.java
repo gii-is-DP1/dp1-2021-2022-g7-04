@@ -22,6 +22,7 @@ public class UserController {
 	private static final String VIEWS_SERVICE_CREATE_FORM = "users/createUserForm";
 	private static final String VIEWS_SERVICE_UPDATE_FORM = "users/updateUserForm";
 
+	@Autowired
 	private final UserService userService;
 
 	@Autowired
