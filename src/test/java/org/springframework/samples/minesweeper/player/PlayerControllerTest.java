@@ -71,7 +71,7 @@ public class PlayerControllerTest {
 	@WithMockUser(username="player",authorities={"player"})
 	void testGetPlayerProfile() throws Exception {
 		when(this.playerService.findPlayerByUsername(TEST_PLAYER_NAME)).thenReturn(player);
-		mockMvc.perform(get("/players/{username}",TEST_PLAYER_NAME)).andExpect(status().isOk());
+		mockMvc.perform(get("/players/list/{username}",TEST_PLAYER_NAME)).andExpect(status().isOk());
 	}
 	
 	@Test
@@ -84,7 +84,7 @@ public class PlayerControllerTest {
 	@WithMockUser(username="player",authorities={"player"})
 	void testUpdatePlayer() throws Exception {
 		when(this.playerService.findPlayerById(anyInt())).thenReturn(Optional.of(player));
-		mockMvc.perform(get("/players/{playerId}/edit",TEST_PLAYER_ID)).andExpect(status().isOk());
+		mockMvc.perform(get("/players/list/{playerId}/edit",TEST_PLAYER_ID)).andExpect(status().isOk());
 	}
 	
 	@Test

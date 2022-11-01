@@ -32,7 +32,7 @@
 				<c:forEach items="${selections}" var="player">
 					<tr>
 						<c:if test="${player.user.enabled}">
-							<td><spring:url value="/players/{username}" var="playerUrl">
+							<td><spring:url value="/players/list/{username}" var="playerUrl">
 									<spring:param name="username" value="${player.user.username}" />
 								</spring:url> <a href="${fn:escapeXml(playerUrl)}"><c:out
 										value="${player.user.username}" /></a></td>

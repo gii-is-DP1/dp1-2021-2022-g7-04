@@ -76,7 +76,7 @@ public class PlayerController {
 		}
 	}
 
-	@GetMapping("/players/{username}")
+	@GetMapping("/players/list/{username}")
 	public ModelAndView showPlayer(@PathVariable("username") String username) {
 		ModelAndView mav = new ModelAndView("players/playerDetails");
 		mav.addObject(this.playerService.findPlayerByUsername(username));
@@ -116,7 +116,7 @@ public class PlayerController {
 		}
 	}
 
-	@GetMapping(value = "/players/{playerId}/edit")
+	@GetMapping(value = "/players/list/{playerId}/edit")
 	public String initUpdatePlayerForm(@PathVariable("playerId") int playerId, Model model) {
 		Player player = this.playerService.findPlayerById(playerId).get();
 		model.addAttribute(player);
@@ -124,7 +124,7 @@ public class PlayerController {
 		return VIEWS_PLAYER_CREATE_OR_UPDATE_FORM;
 	}
 
-	@PostMapping(value = "/players/{playerId}/edit")
+	@PostMapping(value = "/players/list/{playerId}/edit")
 	public String processUpdatePlayerForm(@Valid Player player, BindingResult result,
 			@PathVariable("playerId") int playerId) {
 		if (result.hasErrors()) {
@@ -133,7 +133,7 @@ public class PlayerController {
 			player.setId(playerId);
 			this.playerService.savePlayer(player);
 
-			return "redirect:/players/" + player.getUser().getUsername();
+			return "redirect:/players/list/" + player.getUser().getUsername();
 		}
 	}
 
