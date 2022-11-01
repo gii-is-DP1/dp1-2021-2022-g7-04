@@ -132,12 +132,12 @@ VALUES (16,'2024-06-28 20:14:57','2024-06-28 20:26:10','jugador8','WON','MEDIUM'
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
 VALUES (17,'2024-06-28 20:19:27','2024-06-28 11:19:30','jugador8','CANCELLED','MEDIUM',TRUE,4);
 
--- ADMIN STATS
-INSERT INTO admin_stats(id,level_achievement,games) 
+-- ACHIEVEMENTS
+INSERT INTO achievements(id,level_achievement,games) 
 VALUES (1,'BRONZE',10);
-INSERT INTO admin_stats(id,level_achievement,games)
+INSERT INTO achievements(id,level_achievement,games)
 VALUES (2,'SILVER',25);
-INSERT INTO admin_stats(id,level_achievement,games)
+INSERT INTO achievements(id,level_achievement,games)
 VALUES (3,'GOLD',50);
 
 -- PLAYER STATS

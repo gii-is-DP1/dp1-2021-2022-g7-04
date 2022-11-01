@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.minesweeper.audit.Audit;
 import org.springframework.samples.minesweeper.audit.AuditService;
-import org.springframework.samples.minesweeper.configuration.AdminStats;
-import org.springframework.samples.minesweeper.configuration.AdminStatsService;
+import org.springframework.samples.minesweeper.configuration.Achievements;
+import org.springframework.samples.minesweeper.configuration.AchievementsService;
 import org.springframework.samples.minesweeper.model.BoardRequest;
 import org.springframework.samples.minesweeper.model.BoardRequestService;
 import org.springframework.samples.minesweeper.player.Player;
@@ -50,7 +50,7 @@ public class GameController {
 	@Autowired
 	private PlayerService playerService;
 	@Autowired
-	private AdminStatsService adminStatsService;
+	private AchievementsService achievementsService;
 	@Autowired
 	private PlayerStatsService playerStatsService;
 	
@@ -58,9 +58,9 @@ public class GameController {
 	@GetMapping(value = "/configAchievements")
 	public String configAchievements(Map<String, Object> model, HttpServletRequest request) {
 		
-		Integer bronzeMinimumGames = this.adminStatsService.getMinimumGamesByLevel("BRONZE");
-		Integer silverMinimumGames = this.adminStatsService.getMinimumGamesByLevel("SILVER");
-		Integer goldMinimumGames = this.adminStatsService.getMinimumGamesByLevel("GOLD");
+		Integer bronzeMinimumGames = this.achievementsService.getMinimumGamesByLevel("BRONZE");
+		Integer silverMinimumGames = this.achievementsService.getMinimumGamesByLevel("SILVER");
+		Integer goldMinimumGames = this.achievementsService.getMinimumGamesByLevel("GOLD");
 		
 		model.put("bronzeMinimumGames", bronzeMinimumGames);
 		model.put("silverMinimumGames", silverMinimumGames);
@@ -75,18 +75,18 @@ public class GameController {
 			@RequestParam("silverGames") int silverGames,
 			@RequestParam("goldGames") int goldGames) {
 		
-		AdminStats bronzeStats = this.adminStatsService.getStatsByLevel("BRONZE");
+		Achievements bronzeStats = this.achievementsService.getStatsByLevel("BRONZE");
 		bronzeStats.setGames(bronzeGames);
 		
-		AdminStats silverStats = this.adminStatsService.getStatsByLevel("SILVER");
+		Achievements silverStats = this.achievementsService.getStatsByLevel("SILVER");
 		silverStats.setGames(silverGames);
 		
-		AdminStats goldStats = this.adminStatsService.getStatsByLevel("GOLD");
+		Achievements goldStats = this.achievementsService.getStatsByLevel("GOLD");
 		goldStats.setGames(goldGames);
 		
-		this.adminStatsService.saveAdminStats(bronzeStats);
-		this.adminStatsService.saveAdminStats(silverStats);
-		this.adminStatsService.saveAdminStats(goldStats);
+		this.achievementsService.saveAchievements(bronzeStats);
+		this.achievementsService.saveAchievements(silverStats);
+		this.achievementsService.saveAchievements(goldStats);
 		
 		model.put("bronzeMinimumGames", bronzeGames);
 		model.put("silverMinimumGames", silverGames);
@@ -273,9 +273,9 @@ public class GameController {
 			}
 			
 			// PLAYER STATS - Achievements
-			Integer bronzeMinimumGames = this.adminStatsService.getMinimumGamesByLevel("BRONZE");
-			Integer silverMinimumGames = this.adminStatsService.getMinimumGamesByLevel("SILVER");
-			Integer goldMinimumGames = this.adminStatsService.getMinimumGamesByLevel("GOLD");
+			Integer bronzeMinimumGames = this.achievementsService.getMinimumGamesByLevel("BRONZE");
+			Integer silverMinimumGames = this.achievementsService.getMinimumGamesByLevel("SILVER");
+			Integer goldMinimumGames = this.achievementsService.getMinimumGamesByLevel("GOLD");
 			
 			model.put("bronzeMinimumGames", bronzeMinimumGames);
 			model.put("silverMinimumGames", silverMinimumGames);

@@ -15,15 +15,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "admin_stats")
-public class AdminStats extends BaseEntity {
+@Table(name = "achievements")
+public class Achievements extends BaseEntity {
 	
 	@Column(name = "level_achievement") 
 	@NotBlank
 	private String levelAchievement;
 
 	@Digits(fraction = 0, integer = 10)
-	@Min(0)
+	@Min(1)
 	private Integer games;
 
 }

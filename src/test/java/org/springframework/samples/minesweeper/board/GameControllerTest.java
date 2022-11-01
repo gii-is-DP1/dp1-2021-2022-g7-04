@@ -20,8 +20,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.minesweeper.audit.Audit;
 import org.springframework.samples.minesweeper.audit.AuditService;
-import org.springframework.samples.minesweeper.configuration.AdminStats;
-import org.springframework.samples.minesweeper.configuration.AdminStatsService;
+import org.springframework.samples.minesweeper.configuration.Achievements;
+import org.springframework.samples.minesweeper.configuration.AchievementsService;
 import org.springframework.samples.minesweeper.configuration.SecurityConfiguration;
 import org.springframework.samples.minesweeper.model.BoardRequestService;
 import org.springframework.samples.minesweeper.player.PlayerService;
@@ -68,7 +68,7 @@ public class GameControllerTest {
 	@MockBean
 	private PlayerService playerService;
 	@MockBean
-	private AdminStatsService adminStatsService;
+	private AchievementsService achievementsService;
 	@MockBean
 	private PlayerStatsService playerStatsService;
 	
@@ -77,7 +77,7 @@ public class GameControllerTest {
 	private MockMvc mockMvc;
 	
 	@Mock
-	private AdminStats adminStats;
+	private Achievements achievements;
 	
 	@Mock
 	private Audit audit;
@@ -115,7 +115,7 @@ public class GameControllerTest {
 	@Test
 	@WithMockUser(username="admin",authorities={"admin"})
 	void testUpdateAchievements() throws Exception {
-		when(this.adminStatsService.getStatsByLevel(anyString())).thenReturn(adminStats);
+		when(this.achievementsService.getStatsByLevel(anyString())).thenReturn(achievements);
 		mockMvc.perform(get("/updateAchievements")
 				.param(TEST_BRONZE_GAMES_TITLE, String.valueOf(TEST_BRONZE_GAMES_VALUE))
 				.param(TEST_SILVER_GAMES_TITLE, String.valueOf(TEST_SILVER_GAMES_VALUE))
