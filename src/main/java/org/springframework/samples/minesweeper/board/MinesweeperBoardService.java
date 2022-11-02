@@ -199,7 +199,7 @@ public class MinesweeperBoardService {
 	public Date getFormattedDate() {
 		Calendar date = Calendar.getInstance();
 		String y = String.valueOf(date.get(Calendar.YEAR));
-		String m = String.valueOf(date.get(Calendar.MONTH + 1));
+		String m = String.valueOf(date.get(Calendar.MONTH) + 1);
 		String d = String.valueOf(date.get(Calendar.DAY_OF_MONTH));
 
 		String hh = String.valueOf(date.get(Calendar.HOUR_OF_DAY));

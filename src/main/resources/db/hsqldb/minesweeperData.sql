@@ -92,45 +92,45 @@ VALUES (4,'jugador8',null,800,400);
 -- AUDITS
 -- Jugador 1
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (1,'2024-06-27 10:11:37','2024-06-27 10:11:47','jugador1','CANCELLED','BEGINNER',TRUE,1);
+VALUES (1,'2022-06-27 10:11:37','2022-06-27 10:11:47','jugador1','CANCELLED','BEGINNER',TRUE,1);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (2,'2024-06-28 11:11:48','2024-06-28 11:12:15','jugador1','LOST','BEGINNER',TRUE,1);
+VALUES (2,'2022-06-28 11:11:48','2022-06-28 11:12:15','jugador1','LOST','BEGINNER',TRUE,1);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (3,'2024-06-28 11:11:59','2024-06-28 11:14:57','jugador1','WON','BEGINNER',TRUE,1);
+VALUES (3,'2022-06-28 11:11:59','2022-06-28 11:14:57','jugador1','WON','BEGINNER',TRUE,1);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (4,'2024-06-28 11:14:57','2024-06-28 11:15:06','jugador1','CANCELLED','BEGINNER',TRUE,1);
+VALUES (4,'2022-06-28 11:14:57','2022-06-28 11:15:06','jugador1','CANCELLED','BEGINNER',TRUE,1);
 
 -- Jugador 5
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (5,'2024-06-27 10:11:37','2024-06-27 10:11:47','jugador5','CANCELLED','MEDIUM',TRUE,2);
+VALUES (5,'2022-06-27 10:11:37','2022-06-27 10:11:47','jugador5','CANCELLED','MEDIUM',TRUE,2);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (6,'2024-06-28 11:11:48','2024-06-28 11:12:15','jugador5','LOST','BEGINNER',TRUE,2);
+VALUES (6,'2022-06-28 11:11:48','2022-06-28 11:12:15','jugador5','LOST','BEGINNER',TRUE,2);
 
 -- Jugador 7
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (7,'2024-06-27 10:11:37','2024-06-27 10:11:47','jugador7','CANCELLED','ACE',TRUE,3);
+VALUES (7,'2022-06-27 10:11:37','2022-06-27 10:11:47','jugador7','CANCELLED','ACE',TRUE,3);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (8,'2024-06-28 11:11:48','2024-06-28 11:12:15','jugador7','LOST','BEGINNER',TRUE,3);
+VALUES (8,'2022-06-28 11:11:48','2022-06-28 11:12:15','jugador7','LOST','BEGINNER',TRUE,3);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (9,'2024-06-28 11:12:21','2024-06-28 11:14:57','jugador7','WON','BEGINNER',TRUE,3);
+VALUES (9,'2022-06-28 11:12:21','2022-06-28 11:14:57','jugador7','WON','BEGINNER',TRUE,3);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (10,'2024-06-28 11:14:59','2024-06-28 11:19:09','jugador7','WON','BEGINNER',TRUE,3);
+VALUES (10,'2022-06-28 11:14:59','2022-06-28 11:19:09','jugador7','WON','BEGINNER',TRUE,3);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (11,'2024-06-28 11:19:19','2024-06-28 11:21:47','jugador7','WON','BEGINNER',TRUE,3);
+VALUES (11,'2022-06-28 11:19:19','2022-06-28 11:21:47','jugador7','WON','BEGINNER',TRUE,3);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (12,'2024-06-28 11:21:57','2024-06-28 11:33:04','jugador7','WON','MEDIUM',TRUE,3);
+VALUES (12,'2022-06-28 11:21:57','2022-06-28 11:33:04','jugador7','WON','MEDIUM',TRUE,3);
 
 -- Jugador 8
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (13,'2024-06-27 14:11:37','2024-06-27 14:11:56','jugador8','CANCELLED','BEGINNER',TRUE,4);
+VALUES (13,'2022-06-27 14:11:37','2022-06-27 14:11:56','jugador8','CANCELLED','BEGINNER',TRUE,4);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (14,'2024-06-28 15:11:48','2024-06-28 15:12:15','jugador8','LOST','BEGINNER',TRUE,4);
+VALUES (14,'2022-06-28 15:11:48','2022-06-28 15:12:15','jugador8','LOST','BEGINNER',TRUE,4);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (15,'2024-06-28 16:11:59','2024-06-28 16:23:57','jugador8','WON','ACE',TRUE,4);
+VALUES (15,'2022-06-28 16:11:59','2022-06-28 16:23:57','jugador8','WON','ACE',TRUE,4);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (16,'2024-06-28 20:14:57','2024-06-28 20:26:10','jugador8','WON','MEDIUM',TRUE,4);
+VALUES (16,'2022-06-28 20:14:57','2022-06-28 20:26:10','jugador8','WON','MEDIUM',TRUE,4);
 INSERT INTO audits(id,start_date,end_date,player,game_status,difficulty,is_finished,minesweeper_board_id)
-VALUES (17,'2024-06-28 20:19:27','2024-06-28 11:19:30','jugador8','CANCELLED','MEDIUM',TRUE,4);
+VALUES (17,'2022-06-28 20:19:27','2022-06-28 20:19:30','jugador8','CANCELLED','MEDIUM',TRUE,4);
 
 -- ACHIEVEMENTS
 INSERT INTO achievements(id,level_achievement,games) 

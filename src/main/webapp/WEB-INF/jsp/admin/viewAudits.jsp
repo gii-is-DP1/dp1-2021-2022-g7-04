@@ -23,11 +23,11 @@
 		<tbody>
 			<c:forEach items="${audits}" var="audit">
 				<tr>
-					<td><c:out value="${audit.startDate}" /></td>
+					<td><fmt:formatDate type = "both" value = "${audit.startDate}" pattern = "dd-MM-yyyy HH:mm:ss" /></td>
 					
 					<c:choose>
 					<c:when test="${not empty audit.endDate}">
-						<td><c:out value="${audit.endDate}" /></td>
+						<td><fmt:formatDate type = "both" value = "${audit.endDate}" pattern = "dd-MM-yyyy HH:mm:ss" /></td>
 					</c:when>
 					<c:otherwise>
 						<td><c:out value="NOT FINISHED" /></td>

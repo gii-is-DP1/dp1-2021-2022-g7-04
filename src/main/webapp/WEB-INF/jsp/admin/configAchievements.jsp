@@ -20,13 +20,13 @@
 			
 		<div class="form-horizontal has-feedback">
 			<label for="bronze">BRONZE</label><br>
-			<input type="number" value="${bronzeMinimumGames}" type="number" size="5" name="bronzeGames" /> <br/><br/>
+			<input type="number" value="${bronzeMinimumGames}" type="number" min="1" size="5" name="bronzeGames" /> <br/><br/>
 			
 			<label for="silver">SILVER</label><br>
-			<input type="number" value="${silverMinimumGames}" type="number" size="5" name="silverGames" /> <br/><br/>
+			<input type="number" value="${silverMinimumGames}" type="number" min="1" size="5" name="silverGames" /> <br/><br/>
 			
 			<label for="gold">GOLD</label><br>
-			<input type="number" value="${goldMinimumGames}" type="number" size="5" name="goldGames" /> <br/><br/>
+			<input type="number" value="${goldMinimumGames}" type="number" min="1" size="5" name="goldGames" /> <br/><br/>
 
 			<button class="btn btn-default" type="submit">Save changes</button>
 		</div>
