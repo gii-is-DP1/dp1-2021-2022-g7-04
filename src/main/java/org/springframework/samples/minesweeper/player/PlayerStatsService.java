@@ -20,7 +20,7 @@ public class PlayerStatsService {
 	
 	@Transactional
 	public List<PlayerStats> findAll() throws DataAccessException {
-		return playerStatsRepository.findAll();
+		return (List<PlayerStats>) playerStatsRepository.findAll();
 	}
 
 	@Transactional

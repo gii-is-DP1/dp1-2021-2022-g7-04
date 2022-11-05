@@ -25,7 +25,7 @@ public class AdminService {
 	
 	@Transactional
 	public Admin findAdmin() {
-		return this.adminRepository.findAdmin();
+		return this.adminRepository.findAll().iterator().next();
 	}
 	
 	@Transactional
