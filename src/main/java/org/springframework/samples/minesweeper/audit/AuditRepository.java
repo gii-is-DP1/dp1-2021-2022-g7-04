@@ -9,12 +9,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface AuditRepository extends CrudRepository<Audit, Integer> {
 	
-	@Query("SELECT audit FROM Audit audit")
-	public List<Audit> findAll();
-
-	@Query("SELECT audit FROM Audit audit WHERE audit.id =:id")
-	public Audit findById(@Param("id") int id);
-	
 	@Query("SELECT audit FROM Audit audit ORDER BY audit.startDate DESC")
 	public List<Audit> findAudits(Pageable pageable);
 
