@@ -1,6 +1,7 @@
 package org.springframework.samples.minesweeper.audit;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -15,7 +16,7 @@ public class AuditService {
 
 	@Transactional
 	public List<Audit> findAll() throws DataAccessException {
-		return auditRepository.findAll();
+		return (List<Audit>) auditRepository.findAll();
 	}
 	
 	@Transactional(readOnly = true)
@@ -24,7 +25,7 @@ public class AuditService {
 	}
 
 	@Transactional(readOnly = true)
-	public Audit findAuditById(int id) throws DataAccessException {
+	public Optional<Audit> findAuditById(int id) throws DataAccessException {
 		return auditRepository.findById(id);
 	}
 
