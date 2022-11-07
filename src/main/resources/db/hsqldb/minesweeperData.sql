@@ -163,3 +163,29 @@ INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cel
 VALUES (10,'jugador10',0,0,0,0);
 INSERT INTO player_stats(id,player,activated_mines,guessed_mines,total_flags,cells_clicked) 
 VALUES (11,'player',0,0,0,0);
+
+-- TUTORIAL
+INSERT INTO tutorial(goal,players,levels,concepts,how_to_play) 
+VALUES (
+'The goal of the game is to discover all those squares on the board that do not contain mines.',
+'Only one player can participate in this game.',
+'Beginner: the board consists of 8 rows and 8 columns and contains 10 mines.;
+Medium: the board consists of 16 rows and 16 columns and contains 40 mines.;
+Ace: the board consists of 16 rows and 30 columns and contains 99 mines.;
+Custom: the player chooses the size of the board and the number of mines it will contain. 
+		According to the following conditions:;
+The minimum number of rows must be 8 and the maximum 24.;
+The minimum number of columns must be 8 and the maximum 32.;
+The minimum number of mines is 1 and the maximum number is 1/3 of the total number of cells.',
+'At the beginning of the game, we will see a board with all the boxes unmarked. As we progress through the game,
+    we will find the following elements:;
+The boxes in which a number appear, indicate the number of mines that are around them.;
+Empty boxes.;
+The flag, we will place it on those boxes in which we believe there is a mine.;
+If when discovering a box in which a mine is found, the game will be over.',
+'As explained in the goal, we must clear the boxes without detonating any mines.
+    To do this, you have to look at the boxes that contain a number and place the flags where it is believed that there may be a mine, 
+    so as not to discover those boxes. Once we have discovered all those boxes
+    that do not contain mines, the game is over and the player has won. By the time it is
+    uncover a space with a mine, the game will be over and the player will have lost.');
+    
